@@ -1,0 +1,14 @@
+{
+  "python.linting.mypyEnabled": true,
+  "python.linting.enabled": true,
+  "python.linting.flake8Path": "/usr/src/app/.local/bin/flake8",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/usr/src/app/.local/bin/black",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "python.linting.flake8Enabled": true,
+  "python.linting.mypyPath": "/usr/src/app/.local/bin/mypy",
+  "autoDocstring.docstringFormat": "numpy",
+}
