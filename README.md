@@ -43,8 +43,9 @@ Pythonのコードの品質を確保するために `black`，`isort`，`flake8`
 
 ### VSCode
 
-拡張機能は `.vscode/extensions.json`
-設定は `.vscode/settings.json.default`
+拡張機能は [.vscode/extensions.json](.vscode/extensions.json)
+
+設定は [.vscode/settings.json.default](.vscode/settings.json.default)
 
 ### IntelliJ IDEA
 
