@@ -1,0 +1,6 @@
+fastapi[all]
+jsonschema
+black
+flake8
+isort
+mypy

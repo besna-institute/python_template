@@ -1,0 +1,33 @@
+name: Python application
+
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Lint
+      run: |
+        python -m black --check tests src
+        python -m isort -c tests src
+        python -m flake8 tests src
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    - name: Test
+      run: |
+        python -m unittest discover -p test_*.py -s tests
