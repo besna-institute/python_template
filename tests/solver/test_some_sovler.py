@@ -1,14 +1,15 @@
 import unittest
 
-from src.solver import some_solver
+from src.api import Result
+from src.solver.some_solver import SomeSolver
 
 
 class SomeSolverTest(unittest.TestCase):
     def test_analyze(self):
         tests = [
-            ("Taro", some_solver.Result(text="Hello, Taro")),
-            ("Jiro", some_solver.Result(text="Hello, Jiro")),
+            ("Taro", Result(text="Hello, Taro")),
+            ("Jiro", Result(text="Hello, Jiro")),
         ]
         for name, expected in tests:
             with self.subTest(name=name):
-                self.assertEqual(some_solver.analyze(name), expected)
+                self.assertEqual(SomeSolver().analyze(name), expected)

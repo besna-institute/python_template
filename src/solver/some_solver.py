@@ -1,11 +1,10 @@
-from dataclasses import dataclass
+from src.api import BaseSolverAPI, Result
 
 
-@dataclass
-class Result:
-    text: str
+class SomeSolver(BaseSolverAPI):
+    def __init__(self):
+        super().__init__("Solver", "1.0.0")
 
-
-def analyze(name: str) -> Result:
-    text = f"Hello, {name}"
-    return Result(text=text)
+    def analyze(self, name: str) -> Result:
+        text = f"Hello, {name}"
+        return Result(text=text)
