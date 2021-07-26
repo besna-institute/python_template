@@ -1,0 +1,6 @@
+{
+  "apiName": "Solver",
+  "apiVersion": "1.0.0",
+  "errorId": "error:uncaught_syntax_error",
+  "errorMessage": "Unexpected token :"
+}
