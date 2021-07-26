@@ -6,8 +6,8 @@ RUN apt-get update && apt-get install -y \
   build-essential \
   && rm -rf /var/lib/apt/lists/*
 USER python
-COPY --chown=python:python requirements.txt ./
-RUN pip install --upgrade pip && pip install -r requirements.txt
+COPY --chown=python:python requirements.lock ./
+RUN pip install --upgrade pip && pip install -r requirements.lock
 
 FROM python:3.8-slim-buster
 RUN apt-get update && apt-get install -y tini && rm -rf /var/lib/apt/lists/*
