@@ -35,19 +35,20 @@ docker build . -t python-template
 docker run -p 80:80 -it python-template
 ```
 
-## エディタ・IDEの設定
+## エディタ・IDE の設定
 
-Pythonのコードの品質を確保するために `black`，`isort`，`flake8`，`mypy` を採用している．
+Python のコードの品質を確保するために `black`，`isort`，`flake8`，`mypy` を採用している．
 また，`editorconfig`も採用している．
 各種エディタ・IDE で設定が必要なので，以下に示す．
 
 ### VSCode
 
-拡張機能は [.vscode/extensions.json](.vscode/extensions.json)
+[Visual Studio Code Remote Containers](https://code.visualstudio.com/docs/remote/containers) を使うと便利．
 
-設定は [.vscode/settings.json.default](.vscode/settings.json.default)
+拡張機能は [.vscode/extensions.json](.vscode/extensions.json) にある．
+
+設定は [.vscode/settings.json.default](.vscode/settings.json.default) にある．
 
 ### IntelliJ IDEA
 
 ???
-
