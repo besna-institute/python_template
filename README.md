@@ -43,7 +43,7 @@ Python のコードの品質を確保するために `black`，`isort`，`flake8
 
 ### VSCode
 
-[Visual Studio Code Remote Containers](https://code.visualstudio.com/docs/remote/containers) を使うと便利．
+[Visual Studio Code Remote Containers](https://code.visualstudio.com/docs/remote/containers) の設定は [.devcontainer/devcontainer.json](.devcontainer/devcontainer.json) にある．
 
 拡張機能は [.vscode/extensions.json](.vscode/extensions.json) にある．
 
