@@ -3,8 +3,8 @@ import unittest
 from src.solver import some_solver
 
 
-class SomeResovlerTest(unittest.TestCase):
-    def test_extract_referrer(self):
+class SomeSovlerTest(unittest.TestCase):
+    def test_analyze(self):
         tests = [
             ("Taro", some_solver.Result(text="Hello, Taro")),
             ("Jiro", some_solver.Result(text="Hello, Jiro")),
