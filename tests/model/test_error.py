@@ -7,6 +7,7 @@ from jsonschema import Draft7Validator, RefResolver
 path_to_dir = Path(__file__).parent
 path_to_schema = path_to_dir.parent.parent / "src" / "model" / "schema"
 path_to_error = path_to_schema / "error.json"
+path_to_metadata = path_to_schema / "metadata.json"
 path_to_data = path_to_dir.parent / "data"
 
 
@@ -16,8 +17,12 @@ class InputTest(unittest.TestCase):
         with open(path_to_error) as fp:
             cls.input_schema = json.load(fp)
 
+        with open(path_to_metadata) as fp:
+            metadata_schema = json.load(fp)
+
         schema_store = {
             cls.input_schema["$id"]: cls.input_schema,
+            metadata_schema["$id"]: metadata_schema,
         }
 
         cls.resolver = RefResolver.from_schema(cls.input_schema, store=schema_store)
