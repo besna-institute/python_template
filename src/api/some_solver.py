@@ -1,4 +1,4 @@
-from src.api.model import input, output
+from src.model import input, output
 from src.solver import some_solver
 
 apiName = "Solver"
