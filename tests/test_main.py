@@ -9,7 +9,7 @@ from src.main import app
 
 client = TestClient(app)
 path_to_dir = Path(__file__).parent
-path_to_data = path_to_dir / "api" / "data"
+path_to_data = path_to_dir / "data"
 
 
 class MainTest(unittest.TestCase):
