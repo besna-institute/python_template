@@ -5,7 +5,7 @@ from pathlib import Path
 from jsonschema import Draft7Validator, RefResolver
 
 path_to_dir = Path(__file__).parent
-path_to_schema = path_to_dir.parent.parent.parent / "src" / "api" / "model" / "schema"
+path_to_schema = path_to_dir.parent.parent / "src" / "api" / "model" / "schema"
 path_to_input = path_to_schema / "input.json"
 path_to_metadata = path_to_schema / "metadata.json"
 path_to_data = path_to_dir.parent / "data"
