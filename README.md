@@ -28,6 +28,20 @@ http://localhost:8000 に対してリクエストを送ることができるよ�
 docker run -p 8000:8000 -it python-template /usr/local/bin/python -m unittest discover
 ```
 
+## API の定義について
+
+JSON Schema を用いて定義する．
+[src/model/schema/](src/model/schema) に JSON Schema を置く．
+
+以下を実行することで Python の [pydantic](https://pydantic-docs.helpmanual.io/) を利用した表現に変換したものを [src/model/](src/model) を置く．
+
+```bash
+./scripts/convert_jsonschema_to_pydantic.sh
+```
+
+ここで自動生成したコードを直接編集するのは避ける．
+また，[scripts/convert_jsonschema_to_pydantic.sh](scripts/convert_jsonschema_to_pydantic.sh) は Docker コンテナ内で実行する想定であることに注意！
+
 ## Docker によるアプリケーションの起動
 
 ```bash
