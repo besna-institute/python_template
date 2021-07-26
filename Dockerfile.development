@@ -15,11 +15,11 @@ ENTRYPOINT ["/usr/bin/tini", "--"]
 WORKDIR /usr/src/app
 RUN useradd -d /usr/src/app -U python
 RUN chown python:python /usr/src/app
-EXPOSE 80
+EXPOSE 8000
 USER python
 COPY --from=0 /usr/src/app ./
 COPY src src
 COPY tests tests
 
 # dev
-CMD ["/usr/local/bin/uvicorn", "src.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["/usr/src/app/.local/bin/uvicorn", "src.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
