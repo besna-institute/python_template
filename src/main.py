@@ -13,7 +13,7 @@ async def root(
         examples={
             "normal": {
                 "summary": "A normal example",
-                "value": {"apiName": "PythonTemplate", "name": "Taro"},
+                "value": {"apiName": "Solver", "name": "Taro"},
             }
         },
     )
