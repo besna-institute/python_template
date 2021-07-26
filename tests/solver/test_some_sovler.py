@@ -3,7 +3,7 @@ import unittest
 from src.solver import some_solver
 
 
-class SomeSovlerTest(unittest.TestCase):
+class SomeSolverTest(unittest.TestCase):
     def test_analyze(self):
         tests = [
             ("Taro", some_solver.Result(text="Hello, Taro")),
