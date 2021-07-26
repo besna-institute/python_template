@@ -1,6 +1,6 @@
 from fastapi import Body, FastAPI
 
-from src.api import model, some_resolver
+from src.api import model, some_solver
 
 app = FastAPI()
 
@@ -17,4 +17,4 @@ async def root(
         },
     )
 ):
-    return some_resolver.process(input)
+    return some_solver.process(input)
