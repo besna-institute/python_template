@@ -1,0 +1,11 @@
+{
+  "name": "Existing Dockerfile",
+  "context": "..",
+  "dockerFile": "../Dockerfile.development",
+  "settings": {},
+  "extensions": [
+    "editorconfig.editorconfig",
+    "ms-python.python",
+    "njpwerner.autodocstring"
+  ]
+}
