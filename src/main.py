@@ -1,13 +1,14 @@
 from fastapi import Body, FastAPI
 
-from src.api import model, some_solver
+from src.api import some_solver
+from src.api.model import input, output
 
 app = FastAPI()
 
 
-@app.post("/", response_model=model.Output)
+@app.post("/", response_model=output.SchemaOfSolverOutput)
 async def root(
-    input: model.Input = Body(
+    input: input.SchemaOfSolverInput = Body(
         ...,
         examples={
             "normal": {

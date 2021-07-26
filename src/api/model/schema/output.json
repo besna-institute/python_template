@@ -1,0 +1,26 @@
+{
+  "title": "Schema of Solver output",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "output.json",
+  "type": "object",
+  "properties": {
+    "apiName": {
+      "$ref": "metadata.json#definitions/apiName"
+    },
+    "apiVersion": {
+      "$ref": "metadata.json#definitions/apiVersion"
+    },
+    "text": {
+      "title": "Text",
+      "description": "text",
+      "$id": "output/text",
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "apiName",
+    "apiVersion",
+    "text"
+  ]
+}

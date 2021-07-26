@@ -1,4 +1,5 @@
 fastapi[all]
+datamodel-code-generator
 jsonschema
 black
 flake8
