@@ -1,7 +1,7 @@
 from src.api.model import input, output
 from src.solver import some_sovler
 
-apiName = "PythonTemplate"
+apiName = "Solver"
 apiVersion = "1.0.0"
 
 
