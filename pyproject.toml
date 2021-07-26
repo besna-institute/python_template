@@ -1,7 +1,7 @@
 [tool.black]
 line-length = 120
 target-version = ["py38"]
-extend-exclude = "src/api/model/"
+extend-exclude = "src/model/"
 
 [tool.isort]
 profile = "black"
