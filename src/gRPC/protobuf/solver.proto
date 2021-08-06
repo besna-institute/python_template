@@ -1,0 +1,37 @@
+  syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "institute.besna.solver";
+option java_outer_classname = "SolverProto";
+
+service SolverService {
+    rpc AnalyzeOnUnaryRPC (SolverRequest) returns (SolverResponse) {}
+    rpc AnalyzeOnServerStreamingRPC (SolverRequest) returns (stream SolverResponse) {}
+    rpc AnalyzeOnClientStreamingRPC (stream SolverRequest) returns (SolverResponse) {}
+    rpc AnalyzeOnBidirectionalStreamingRPC (stream SolverRequest) returns (stream SolverResponse) {}
+}
+
+message SolverRequest {
+    string apiName = 1;
+    string name = 2;
+}
+
+message SolverReply {
+    string apiName = 1;
+    string apiVersion = 2;
+    string text = 3;
+}
+
+message SolverError {
+    string apiName = 1;
+    string apiVersion = 2;
+    string errorId = 3;
+    string errorMessage = 4;
+}
+
+message SolverResponse {
+    oneof response {
+        SolverReply reply = 1;
+        SolverError error = 2;
+    }
+}
