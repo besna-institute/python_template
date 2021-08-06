@@ -7,82 +7,92 @@ import grpc
 import solver_pb2
 import solver_pb2_grpc
 
-# ユーザー情報の読み込み
-with open("../users.json") as fp:
-    users = json.load(fp)
-
 # サービス定義から生成されたクラスを継承して、定義したリモートプロシージャに対応するメソッドを実装する
 class SolverService(solver_pb2_grpc.SolverServiceServicer):
     def AnalyzeOnUnaryRPC(self, request, context):
-        # クライアントが送信した引数はrequest引数に格納され、
-        # このオブジェクトに対しては一般的なPythonオブジェクトと
-        # 同様の形でプロパティにアクセスできる
-        user_id = request.id
+        # requestで受け取るのはこの形式
+        # message SolverRequest {
+        #     string apiName = 1;
+        #     string name = 2;
+        # }
 
-        # ユーザー情報はユーザーIDを文字列に変換したものをキーとする辞書型データ
-        # なので、適宜文字列型に変換して使用している
-        if str(user_id) not in users:
-            # 該当するユーザーが存在しない場合エラーを返す
-            return solver_pb2.UserResponse(error=True,
-                                         message="not found")
-        user = users[str(user_id)]
+        # エラー対応をするんだったらここでやる。
+        # apiNameとnameがないときはerror=Trueにする
+        apiName = request.apiName
+        name = request.name
+        text = "hello {}".format(name)
 
-        # 戻り値として返すUserオブジェクトを作成する
-        result = solver_pb2.User()
-        result.id = user["id"]
-        result.nickname = user["nickname"]
-        result.mail_address = user["mail_address"]
-        result.user_type = solver_pb2.User.UserType.Value(user["user_type"])
+        # 正しいものじゃなかったら
+        if apiName==None or name==None:
+            return solver_pb2.SolverError(
+                    apiName = apiName,
+                    apiVersion = "apiVersion",
+                    errorId = 200,
+                    errorMessage = "error"
+            )
 
-        # UserResponseオブジェクトを返す
-        return solver_pb2.UserResponse(error=False,
-                                     user=result)
+        # 戻り値として返すSolverReplyオブジェクトを作成する
+        reply = solver_pb2.SolverReply()
+        reply.apiName = apiName
+        reply.name = name
+        reply.text = text
+
+        # SolverResponseオブジェクトを返す
+        return solver_pb2.SolverResponse(reply)
 
     def AnalyzeOnServerStreamingRPC(self, request, context):
-        pass
+        apiName = request.apiName
+        name = request.name
+        text = "hello {}".format(name)
 
-    def AnalyzeOnClientStreamingRPC(self, request_iterator, context):
-        pass
-
-    def AnalyzeOnBidirectionalStreamingRPC(self, request_iterator, context):
-        pass
-
-    def get(self, request, context):
-        """ユーザー情報を取得する
-        """
-        # クライアントが送信した引数はrequest引数に格納され、
-        # このオブジェクトに対しては一般的なPythonオブジェクトと
-        # 同様の形でプロパティにアクセスできる
-        user_id = request.id
-
-        # ユーザー情報はユーザーIDを文字列に変換したものをキーとする辞書型データ
-        # なので、適宜文字列型に変換して使用している
-        if str(user_id) not in users:
-            # 該当するユーザーが存在しない場合エラーを返す
-            return solver_pb2.UserResponse(error=True,
-                                         message="not found")
-        user = users[str(user_id)]
-
-        # 戻り値として返すUserオブジェクトを作成する
-        result = solver_pb2.User()
-        result.id = user["id"]
-        result.nickname = user["nickname"]
-        result.mail_address = user["mail_address"]
-        result.user_type = solver_pb2.User.UserType.Value(user["user_type"])
+        # 戻り値として返すSolverReplyオブジェクトを作成する
+        reply = solver_pb2.SolverReply()
+        reply.apiName = apiName
+        reply.name = name
+        reply.text = text
 
         # UserResponseオブジェクトを返す
-        return solver_pb2.UserResponse(error=False,
-                                     user=result)
+        return solver_pb2.SolverResponse(reply=reply,error=False)
+
+    def AnalyzeOnClientStreamingRPC(self, request_iterator, context):
+        for request in request_iterator:
+            apiName = request.apiName
+            name = request.name
+            text = "hello {}".format(name)
+
+            # 戻り値として返すSolverReplyオブジェクトを作成する
+            reply = solver_pb2.SolverReply()
+            reply.apiName = apiName
+            reply.name = name
+            reply.text = text
+
+        # UserResponseオブジェクトを返す
+        return solver_pb2.SolverResponse(reply=reply,error=False)
+
+    def AnalyzeOnBidirectionalStreamingRPC(self, request_iterator, context):
+        for request in request_iterator:
+            apiName = request.apiName
+            name = request.name
+            text = "hello {}".format(name)
+
+            # 戻り値として返すSolverReplyオブジェクトを作成する
+            reply = solver_pb2.SolverReply()
+            reply.apiName = apiName
+            reply.name = name
+            reply.text = text
+
+        # UserResponseオブジェクトを返す
+        return solver_pb2.SolverResponse(reply=reply,error=False)
 
 def main():
     # Serverオブジェクトを作成する
     server = grpc.server(ThreadPoolExecutor(max_workers=2))
 
     # Serverオブジェクトに定義したServicerクラスを登録する
-    solver_pb2_grpc.add_UserManagerServicer_to_server(UserManager(), server)
+    solver_pb2_grpc.add_SolverServiceServicer_to_server(SolverService(), server)
 
-    # 1234番ポートで待ち受けするよう指定する
-    server.add_insecure_port('[::]:1234')
+    # 8000番ポートで待ち受けするよう指定する
+    server.add_insecure_port('[::]:8000')
 
     # 待ち受けを開始する
     server.start()

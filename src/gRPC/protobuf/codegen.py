@@ -1,6 +1,6 @@
-from grpc.tools import protoc
+import grpc_tools.protoc
 
-protoc.main(
+grpc_tools.protoc.main(
     (
         '',
         '-I.',
