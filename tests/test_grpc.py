@@ -1,9 +1,6 @@
 import json
 import unittest
 from pathlib import Path
-
-# from src.main import app
-
 from src.gRPC.main.sampleclient import SolverClient
 from src.gRPC.main import solver_pb2
 

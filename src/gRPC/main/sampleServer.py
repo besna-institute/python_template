@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 import json
 
 # 「grpc」パッケージと、grpc_tools.protocによって生成したパッケージをimportする
+
 import grpc
 import solver_pb2
 import solver_pb2_grpc
