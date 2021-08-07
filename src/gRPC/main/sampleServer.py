@@ -20,7 +20,7 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
         # apiNameとnameがないときはerror=Trueにする
         apiName = request.apiName
         name = request.name
-        text = "hello {}".format(name)
+        text = "Hello, {}".format(name)
 
         # 正しいものじゃなかったら
         if apiName==None or name==None:
@@ -34,7 +34,7 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
         # 戻り値として返すSolverReplyオブジェクトを作成する
         reply = solver_pb2.SolverReply()
         reply.apiName = apiName
-        reply.name = name
+        reply.apiVersion = "2"
         reply.text = text
 
         # SolverResponseオブジェクトを返す
@@ -43,12 +43,12 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
     def AnalyzeOnServerStreamingRPC(self, request, context):
         apiName = request.apiName
         name = request.name
-        text = "hello {}".format(name)
+        text = "Hello, {}".format(name)
 
         # 戻り値として返すSolverReplyオブジェクトを作成する
         reply = solver_pb2.SolverReply()
         reply.apiName = apiName
-        reply.name = name
+        reply.apiVersion = "2"
         reply.text = text
 
         # UserResponseオブジェクトを返す
@@ -58,12 +58,12 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
         for request in request_iterator:
             apiName = request.apiName
             name = request.name
-            text = "hello {}".format(name)
+            text = "Hello, {}".format(name)
 
             # 戻り値として返すSolverReplyオブジェクトを作成する
             reply = solver_pb2.SolverReply()
             reply.apiName = apiName
-            reply.name = name
+            reply.apiVersion = "2"
             reply.text = text
 
         # UserResponseオブジェクトを返す
@@ -73,12 +73,12 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
         for request in request_iterator:
             apiName = request.apiName
             name = request.name
-            text = "hello {}".format(name)
+            text = "Hello, {}".format(name)
 
             # 戻り値として返すSolverReplyオブジェクトを作成する
             reply = solver_pb2.SolverReply()
             reply.apiName = apiName
-            reply.name = name
+            reply.apiVersion = "2"
             reply.text = text
 
         # UserResponseオブジェクトを返す
