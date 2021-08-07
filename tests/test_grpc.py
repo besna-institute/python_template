@@ -4,8 +4,8 @@ from pathlib import Path
 
 # from src.main import app
 
+from gRPC.main.sampleclient import SolverClient
 from gRPC.main.solver_pb2 import solver_pb2
-from gRPC.main.samplecliemt import SolverClient
 # テスト用のクライアント
 client = SolverClient()
 
@@ -45,7 +45,9 @@ class MainTest(unittest.TestCase):
             text = json_output1["text"],
         )
 
-        solver_response = solver_pb2.SolverResponse(solver_reply)
+        solver_response = solver_pb2.SolverResponse(
+            reply = solver_reply
+        )
 
         self.assertEqual(response, solver_response)
 
