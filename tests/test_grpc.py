@@ -4,8 +4,7 @@ from pathlib import Path
 
 # from src.main import app
 
-# パスがわからん
-from gRPC.main import solver_pb2
+from gRPC.main.solver_pb2 import solver_pb2
 from gRPC.main.samplecliemt import SolverClient
 # テスト用のクライアント
 client = SolverClient()
@@ -19,7 +18,7 @@ path_to_data = path_to_dir / "data"
 class MainTest(unittest.TestCase):
 
     # AnalyzeOnUnaryRPCのテスト
-    def AnalyzeOnUnaryRPCSpec(self):
+    def test_AnalyzeOnUnaryRPC(self):
 
         # 入力データ(input.json)
         with open(path_to_data / "input1.json") as fp:
@@ -51,25 +50,25 @@ class MainTest(unittest.TestCase):
         self.assertEqual(response, solver_response)
 
     # AnalyzeOnServerStreamingRPCのテスト
-    def AnalyzeOnServerStreamingRPCSpec(self):
-        # with open(path_to_data / "input1.json") as fp:
-        #     json_input1 = json.load(fp)
+    # def test_AnalyzeOnServerStreamingRPC(self):
+    #     with open(path_to_data / "input1.json") as fp:
+    #         json_input1 = json.load(fp)
 
-        # response = client.post("/", json=json_input1)
-        # status_code = response.status_code
+    #     response = client.post("/", json=json_input1)
+    #     status_code = response.status_code
 
-        # with open(path_to_data / "output1.json") as fp:
-        #     json_output1 = json.load(fp)
+    #     with open(path_to_data / "output1.json") as fp:
+    #         json_output1 = json.load(fp)
 
-        # self.maxDiff = None
-        # self.assertEqual(status_code, status.HTTP_200_OK)
-        # self.assertEqual(response.json(), json_output1)
-        pass
+    #     self.maxDiff = None
+    #     self.assertEqual(status_code, status.HTTP_200_OK)
+    #     self.assertEqual(response.json(), json_output1)
+    #     pass
 
     # AnalyzeOnClientStreamingRPCのテスト
-    def AnalyzeOnClientStreamingRPCSpec(self):
-        pass
+    # def test_AnalyzeOnClientStreamingRPC(self):
+    #     pass
 
     # AnalyzeOnBidirectionalStreamingRPCのテスト
-    def AnalyzeOnBidirectionalStreamingRPCSpec(self):
-        pass
+    # def test_AnalyzeOnBidirectionalStreamingRPC(self):
+    #     pass
