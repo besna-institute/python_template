@@ -4,21 +4,21 @@ from pathlib import Path
 
 # from src.main import app
 
-from gRPC.main.sampleclient import SolverClient
-from gRPC.main.solver_pb2 import solver_pb2
-# テスト用のクライアント
-client = SolverClient()
+from src.gRPC.main.sampleclient import SolverClient
+from src.gRPC.main import solver_pb2
 
-# テストデータのjsonまでのパス
-# 上手く行ったことを確認できれば前のやつを使う
-path_to_dir = Path(__file__).parent
-path_to_data = path_to_dir / "data"
 
 
 class MainTest(unittest.TestCase):
 
+
     # AnalyzeOnUnaryRPCのテスト
     def test_AnalyzeOnUnaryRPC(self):
+        print("これは？")
+        client = SolverClient()
+        # テストデータのjsonまでのパス
+        path_to_dir = Path(__file__).parent
+        path_to_data = path_to_dir / "data"
 
         # 入力データ(input.json)
         with open(path_to_data / "input1.json") as fp:
@@ -28,6 +28,7 @@ class MainTest(unittest.TestCase):
             apiName = json_input1["apiName"],
             name = json_input1["name"],
         )
+        print("ここまではok")
 
         # レスポンスを取得
         response = client.analyzeOnUnaryRPC(request,3)

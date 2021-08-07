@@ -3,9 +3,8 @@ import sys
 
 # 「grpc」パッケージと、protocによって生成したパッケージをimportする
 import grpc
-import solver_pb2
-import solver_pb2_grpc
-
+from src.gRPC.main import solver_pb2
+from src.gRPC.main import solver_pb2_grpc
 class SolverClient:
 
     def __init__(self):
