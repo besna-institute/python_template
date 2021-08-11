@@ -11,14 +11,9 @@ from generated import solver_pb2,solver_pb2_grpc
 class SolverService(solver_pb2_grpc.SolverServiceServicer):
     def AnalyzeOnUnaryRPC(self, request, context):
 
-        # エラー対応をするんだったらここでやる。
-        # apiNameとnameがないときはerror=Trueにする
         apiName = request.apiName
         name = request.name
-
-        # 正しいものじゃなかったらエラーを返す
         if apiName=="" or name=="":
-
             error = solver_pb2.SolverError(
                 apiName = apiName,
                 apiVersion = "1.0.0",
@@ -28,64 +23,63 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
             return solver_pb2.SolverResponse(error = error)
 
         else:
-
-            text = "Hello, {}".format(name)
-            # 戻り値として返すSolverReplyオブジェクトを作成する
             reply = solver_pb2.SolverReply(
                 apiName = apiName,
                 apiVersion = "1.0.0",
-                text = text
+                text = "Hello, {}".format(name)
             )
-
-            # SolverResponseオブジェクトを返す
             return solver_pb2.SolverResponse(reply = reply)
 
-    # def AnalyzeOnServerStreamingRPC(self, request, context):
-    #     apiName = request.apiName
-    #     name = request.name
-    #     text = "Hello, {}".format(name)
+    def AnalyzeOnServerStreamingRPC(self, request, context):
 
-    #     # 戻り値として返すSolverReplyオブジェクトを作成する
-    #     reply = solver_pb2.SolverReply()
-    #     reply.apiName = apiName
-    #     reply.apiVersion = "2"
-    #     reply.text = text
+        apiName = request.apiName
+        name = request.name
 
-    #     # UserResponseオブジェクトを返す
-    #     return solver_pb2.SolverResponse(reply,False)
+        if apiName=="" or name=="":
+            error = solver_pb2.SolverError(
+                apiName = apiName,
+                apiVersion = "1.0.0",
+                errorId = "200",
+                errorMessage = "error"
+            )
+            return solver_pb2.SolverResponse(error = error)
 
-    # def AnalyzeOnClientStreamingRPC(self, request_iterator, context):
-    #     for request in request_iterator:
-    #         apiName = request.apiName
-    #         name = request.name
-    #         text = "Hello, {}".format(name)
+        else:
+            returnList = []
+            textList = list(name)
+            for word in textList:
+                # 戻り値として返すSolverReplyオブジェクトを作成する
+                reply = solver_pb2.SolverReply(
+                    apiName = apiName,
+                    apiVersion = "1.0.0",
+                    text = word
+                )
+                # SolverResponseオブジェクトを返す
+                yield solver_pb2.SolverResponse(reply = reply)
 
-    #         # 戻り値として返すSolverReplyオブジェクトを作成する
-    #         reply = solver_pb2.SolverReply()
-    #         reply.apiName = apiName
-    #         reply.apiVersion = "2"
-    #         reply.text = text
 
-    #     # UserResponseオブジェクトを返す
-    #     return solver_pb2.SolverResponse(reply=reply,error=False)
+    def AnalyzeOnClientStreamingRPC(self, request_iterator, context):
+        responseText = "Hello, "
+        for request in request_iterator:
+            apiName = request.apiName
+            responseText += request.name
+        reply = solver_pb2.SolverReply(
+                    apiName = apiName,
+                    apiVersion = "1.0.0",
+                    text = responseText
+                )
+        return solver_pb2.SolverResponse(reply = reply)
 
-    # def AnalyzeOnBidirectionalStreamingRPC(self, request_iterator, context):
-    #     for request in request_iterator:
-    #         apiName = request.apiName
-    #         name = request.name
-    #         text = "Hello, {}".format(name)
-
-    #         # 戻り値として返すSolverReplyオブジェクトを作成する
-    #         reply = solver_pb2.SolverReply()
-    #         reply.apiName = apiName
-    #         reply.apiVersion = "2"
-    #         reply.text = text
-
-    #     # UserResponseオブジェクトを返す
-    #     return solver_pb2.SolverResponse(reply=reply,error=False)
+    def AnalyzeOnBidirectionalStreamingRPC(self, request_iterator, context):
+        for request in request_iterator:
+            reply = solver_pb2.SolverReply(
+                        apiName = request.apiName,
+                        apiVersion = "1.0.0",
+                        text = request.name
+                    )
+            yield solver_pb2.SolverResponse(reply = reply)
 
 def main():
-    print("開始")
     # Serverオブジェクトを作成する
     server = grpc.server(ThreadPoolExecutor(2))
     # Serverオブジェクトに定義したServicerクラスを登録する
@@ -94,7 +88,6 @@ def main():
     server.add_insecure_port('[::]:8000')
     # 待ち受けを開始する
     server.start()
-
     # 待ち受け終了後の後処理を実行する
     server.wait_for_termination()
 if __name__ == '__main__':

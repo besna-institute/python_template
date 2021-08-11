@@ -47,25 +47,121 @@ class MainTest(unittest.TestCase):
         self.assertEqual(response, solver_response)
 
     # AnalyzeOnServerStreamingRPCのテスト
-    # def test_AnalyzeOnServerStreamingRPC(self):
-    #     with open(path_to_data / "input1.json") as fp:
-    #         json_input1 = json.load(fp)
+    def test_AnalyzeOnServerStreamingRPC(self):
+        client = SolverClient()
+        # テストデータのjsonまでのパス
+        path_to_dir = Path(__file__).parent
+        path_to_data = path_to_dir / "data"
 
-    #     response = client.post("/", json=json_input1)
-    #     status_code = response.status_code
+        # 入力データ(input.json)
+        with open(path_to_data / "input1.json") as fp:
+            json_input1 = json.load(fp)
 
-    #     with open(path_to_data / "output1.json") as fp:
-    #         json_output1 = json.load(fp)
+        request = solver_pb2.SolverRequest(
+            apiName = json_input1["apiName"],
+            name = json_input1["name"],
+        )
 
-    #     self.maxDiff = None
-    #     self.assertEqual(status_code, status.HTTP_200_OK)
-    #     self.assertEqual(response.json(), json_output1)
-    #     pass
+        # レスポンスを取得
+        response_iterator = iter(client.analyzeOnServerStreamingRPC(request,3))
+
+        # 想定される結果
+        with open(path_to_data / "output1.json") as fp:
+            json_output1 = json.load(fp)
+
+
+        solver_reply = []
+        name = list(json_input1["name"])
+        for response,word in zip(response_iterator,name):
+            solver_reply = solver_pb2.SolverReply(
+                apiName = json_output1["apiName"],
+                apiVersion = json_output1["apiVersion"],
+                text = word,
+            )
+            solver_response = solver_pb2.SolverResponse(
+                reply = solver_reply
+            )
+            self.assertEqual(response, solver_response)
 
     # AnalyzeOnClientStreamingRPCのテスト
-    # def test_AnalyzeOnClientStreamingRPC(self):
-    #     pass
+    def test_AnalyzeOnClientStreamingRPC(self):
+        client = SolverClient()
+        # テストデータのjsonまでのパス
+        path_to_dir = Path(__file__).parent
+        path_to_data = path_to_dir / "data"
+
+        # 入力データ(input.json)
+        with open(path_to_data / "input1.json") as fp:
+            json_input1 = json.load(fp)
+
+        request_list = []
+        requestName = "Taro"
+        for i in list(requestName):
+            request_s = solver_pb2.SolverRequest(
+                apiName= json_input1["apiName"],
+                name = i
+            )
+            request_list.append(request_s)
+        request_iterator = iter(request_list)
+
+        # レスポンスを取得
+        response = client.analyzeOnClientStreamingRPC(request_iterator,3)
+
+        # 想定される結果
+        with open(path_to_data / "output1.json") as fp:
+            json_output1 = json.load(fp)
+
+        solver_reply = []
+        name = list(json_input1["name"])
+        solver_reply = solver_pb2.SolverReply(
+                apiName = json_output1["apiName"],
+                apiVersion = json_output1["apiVersion"],
+                text = json_output1["text"],
+            )
+        solver_response = solver_pb2.SolverResponse(
+            reply = solver_reply
+        )
+
+        self.assertEqual(response, solver_response)
+
 
     # AnalyzeOnBidirectionalStreamingRPCのテスト
-    # def test_AnalyzeOnBidirectionalStreamingRPC(self):
-    #     pass
+    def test_AnalyzeOnBidirectionalStreamingRPC(self):
+        client = SolverClient()
+        # テストデータのjsonまでのパス
+        path_to_dir = Path(__file__).parent
+        path_to_data = path_to_dir / "data"
+
+        # 入力データ(input.json)
+        with open(path_to_data / "input1.json") as fp:
+            json_input1 = json.load(fp)
+
+        request_list = []
+        requestName = "Taro"
+        for i in list(requestName):
+            request_s = solver_pb2.SolverRequest(
+                apiName= json_input1["apiName"],
+                name = i
+            )
+            request_list.append(request_s)
+        request_iterator = iter(request_list)
+
+        # レスポンスを取得
+        response_iterator = iter(client.analyzeOnBidirectionalStreamingRPC(request_iterator,3))
+
+        # 想定される結果
+        with open(path_to_data / "output1.json") as fp:
+            json_output1 = json.load(fp)
+
+        solver_reply = []
+        name = list(json_input1["name"])
+        for response,word in zip(response_iterator,name):
+            solver_reply = solver_pb2.SolverReply(
+                apiName = json_output1["apiName"],
+                apiVersion = json_output1["apiVersion"],
+                text = word,
+            )
+            solver_response = solver_pb2.SolverResponse(
+                reply = solver_reply
+            )
+            self.assertEqual(response, solver_response)
