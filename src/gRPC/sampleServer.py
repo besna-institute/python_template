@@ -17,8 +17,8 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
             error = solver_pb2.SolverError(
                 apiName = apiName,
                 apiVersion = "1.0.0",
-                errorId = "200",
-                errorMessage = "error"
+                errorId = "error:uncaught_syntax_error",
+                errorMessage = "Unexpected token :"
             )
             return solver_pb2.SolverResponse(error = error)
 
@@ -39,8 +39,8 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
             error = solver_pb2.SolverError(
                 apiName = apiName,
                 apiVersion = "1.0.0",
-                errorId = "200",
-                errorMessage = "error"
+                errorId = "error:uncaught_syntax_error",
+                errorMessage = "Unexpected token :"
             )
             return solver_pb2.SolverResponse(error = error)
 

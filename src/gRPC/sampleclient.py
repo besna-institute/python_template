@@ -32,10 +32,8 @@ class SolverClient:
         response = stub.AnalyzeOnBidirectionalStreamingRPC(request,context)
         return response
 
-if __name__ == '__main__':
+def main():
     solverClient = SolverClient()
-    channel = grpc.insecure_channel("localhost:8000")
-
     # 単一のリクエスト
     request_u = solver_pb2.SolverRequest(
                 apiName = "apiName",
@@ -77,4 +75,5 @@ if __name__ == '__main__':
     for response in response_iterator_SS:
         pprint.pprint(response)
 
-    channel.close()
+if __name__ == '__main__':
+    main()
