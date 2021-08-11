@@ -190,57 +190,59 @@ class MainTest(unittest.TestCase):
             )
             self.assertEqual(response, solver_response)
 
-    # # AnalyzeOnClientStreamingRPCが失敗するテスト
-    # def test_AnalyzeOnClientStreamingRPC_Error(self):
-    #     self.init()
+    # AnalyzeOnClientStreamingRPCが失敗するテスト
+    def test_AnalyzeOnClientStreamingRPC_Error(self):
+        self.init()
 
-    #     request_list = []
-    #     for i in list(self.inputName):
-    #         request_s = solver_pb2.SolverRequest(
-    #             apiName= self.inputApiName,
-    #             name = i
-    #         )
-    #         request_list.append(request_s)
-    #     request_iterator = iter(request_list)
+        request_list = []
+        for i in list(self.inputName):
+            request_s = solver_pb2.SolverRequest(
+                apiName= self.inputApiName,
+                name = i
+            )
+            request_list.append(request_s)
+        request_iterator = iter(request_list)
 
-    #     # レスポンスを取得
-    #     response = self.client.analyzeOnClientStreamingRPC(request_iterator,3)
+        # レスポンスを取得
+        response = self.client.analyzeOnClientStreamingRPC(request_iterator,3)
 
-    #     solver_reply = solver_pb2.SolverReply(
-    #             apiName = self.outputApiName,
-    #             apiVersion = self.outputApiVersion,
-    #             text = self.outputText
-    #         )
-    #     solver_response = solver_pb2.SolverResponse(
-    #         reply = solver_reply
-    #     )
+        solver_reply = solver_pb2.SolverReply(
+                apiName = self.outputApiName,
+                apiVersion = self.outputApiVersion,
+                text = self.outputText
+            )
+        solver_response = solver_pb2.SolverResponse(
+            reply = solver_reply
+        )
 
-    #     self.assertEqual(response, solver_response)
+        # 何が一つでもミスがあればerrorを返すべき？
+        # self.assertEqual(response, solver_response)
 
 
-    # # AnalyzeOnBidirectionalStreamingRPCが失敗するテスト
-    # def test_AnalyzeOnBidirectionalStreamingRPC_Error(self):
-    #     self.init()
-    #     request_list = []
-    #     for i in list(self.inputName):
-    #         request_s = solver_pb2.SolverRequest(
-    #             apiName= self.inputApiName,
-    #             name = i
-    #         )
-    #         request_list.append(request_s)
-    #     request_iterator = iter(request_list)
+    # AnalyzeOnBidirectionalStreamingRPCが失敗するテスト
+    def test_AnalyzeOnBidirectionalStreamingRPC_Error(self):
+        self.init()
+        request_list = []
+        for i in list(self.inputName):
+            request_s = solver_pb2.SolverRequest(
+                apiName= self.inputApiName,
+                name = i
+            )
+            request_list.append(request_s)
+        request_iterator = iter(request_list)
 
-    #     # レスポンスを取得
-    #     response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator,3))
+        # レスポンスを取得
+        response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator,3))
 
-    #     solver_reply = []
-    #     for response,word in zip(response_iterator,list(self.inputName)):
-    #         solver_reply = solver_pb2.SolverReply(
-    #             apiName = self.outputApiName,
-    #             apiVersion = self.outputApiVersion,
-    #             text = word
-    #         )
-    #         solver_response = solver_pb2.SolverResponse(
-    #             reply = solver_reply
-    #         )
-    #         self.assertEqual(response, solver_response)
+        solver_reply = []
+        for response,word in zip(response_iterator,list(self.inputName)):
+            solver_reply = solver_pb2.SolverReply(
+                apiName = self.outputApiName,
+                apiVersion = self.outputApiVersion,
+                text = word
+            )
+            solver_response = solver_pb2.SolverResponse(
+                reply = solver_reply
+            )
+            # 何が一つでもミスがあればerrorを返すべき？
+            # self.assertEqual(response, solver_response)
