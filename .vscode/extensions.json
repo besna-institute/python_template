@@ -2,6 +2,7 @@
   "recommendations": [
     "editorconfig.editorconfig",
     "ms-python.python",
-    "njpwerner.autodocstring"
+    "njpwerner.autodocstring",
+    "ms-vscode-remote.remote-containers"
   ]
 }
