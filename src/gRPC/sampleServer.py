@@ -5,8 +5,7 @@ import json
 # 「grpc」パッケージと、grpc_tools.protocによって生成したパッケージをimportする
 
 import grpc
-import solver_pb2
-import solver_pb2_grpc
+from generated import solver_pb2,solver_pb2_grpc
 
 # サービス定義から生成されたクラスを継承して、定義したリモートプロシージャに対応するメソッドを実装する
 class SolverService(solver_pb2_grpc.SolverServiceServicer):
@@ -22,7 +21,7 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
 
             error = solver_pb2.SolverError(
                 apiName = apiName,
-                apiVersion = "2",
+                apiVersion = "1.0.0",
                 errorId = "200",
                 errorMessage = "error"
             )
@@ -34,7 +33,7 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
             # 戻り値として返すSolverReplyオブジェクトを作成する
             reply = solver_pb2.SolverReply(
                 apiName = apiName,
-                apiVersion = "2",
+                apiVersion = "1.0.0",
                 text = text
             )
 
@@ -86,6 +85,7 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
     #     return solver_pb2.SolverResponse(reply=reply,error=False)
 
 def main():
+    print("開始")
     # Serverオブジェクトを作成する
     server = grpc.server(ThreadPoolExecutor(2))
     # Serverオブジェクトに定義したServicerクラスを登録する
@@ -97,6 +97,5 @@ def main():
 
     # 待ち受け終了後の後処理を実行する
     server.wait_for_termination()
-
 if __name__ == '__main__':
     main()

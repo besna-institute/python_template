@@ -1,8 +1,7 @@
 import pprint
 import sys
 import grpc
-import solver_pb2_grpc
-import solver_pb2
+from generated import solver_pb2_grpc,solver_pb2
 
 class SolverClient:
 

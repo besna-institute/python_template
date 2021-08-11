@@ -6,5 +6,5 @@ flake8
 isort
 mypy
 # 以下島森が追加
-grpcio[all]
-grpcio-tools[all]
+grpcio
+grpcio-tools

@@ -1,9 +1,9 @@
 import json
 import unittest
 from pathlib import Path
-from src.gRPC.main.sampleclient import SolverClient
-from src.gRPC.main import solver_pb2
-
+from src.gRPC.sampleclient import SolverClient
+from src.gRPC.generated import solver_pb2
+import subprocess
 
 
 class MainTest(unittest.TestCase):
@@ -11,7 +11,6 @@ class MainTest(unittest.TestCase):
 
     # AnalyzeOnUnaryRPCのテスト
     def test_AnalyzeOnUnaryRPC(self):
-        print("これは？")
         client = SolverClient()
         # テストデータのjsonまでのパス
         path_to_dir = Path(__file__).parent
@@ -25,7 +24,6 @@ class MainTest(unittest.TestCase):
             apiName = json_input1["apiName"],
             name = json_input1["name"],
         )
-        print("ここまではok")
 
         # レスポンスを取得
         response = client.analyzeOnUnaryRPC(request,3)
@@ -39,10 +37,9 @@ class MainTest(unittest.TestCase):
 
         solver_reply = solver_pb2.SolverReply(
             apiName = json_output1["apiName"],
-            name = json_output1["name"],
+            apiVersion = json_output1["apiVersion"],
             text = json_output1["text"],
         )
-
         solver_response = solver_pb2.SolverResponse(
             reply = solver_reply
         )

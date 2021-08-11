@@ -150,4 +150,4 @@ cython_debug/
 .history/
 
 # codegen.pyにより生成される.pyファイル
-src/gRPC/protobuf/generated
+src/gRPC/generated
