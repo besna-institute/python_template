@@ -11,33 +11,26 @@ from generated import solver_pb2,solver_pb2_grpc
 class SolverService(solver_pb2_grpc.SolverServiceServicer):
     def AnalyzeOnUnaryRPC(self, request, context):
 
-        apiName = request.apiName
-        name = request.name
-        if apiName=="" or name=="":
+        if request.apiName=="" or request.name=="":
             error = solver_pb2.SolverError(
-                apiName = apiName,
+                apiName = "Solver",
                 apiVersion = "1.0.0",
                 errorId = "error:uncaught_syntax_error",
                 errorMessage = "Unexpected token :"
             )
             return solver_pb2.SolverResponse(error = error)
-
         else:
             reply = solver_pb2.SolverReply(
-                apiName = apiName,
+                apiName = request.apiName,
                 apiVersion = "1.0.0",
-                text = "Hello, {}".format(name)
+                text = "Hello, {}".format(request.name)
             )
             return solver_pb2.SolverResponse(reply = reply)
 
     def AnalyzeOnServerStreamingRPC(self, request, context):
-
-        apiName = request.apiName
-        name = request.name
-
-        if apiName=="" or name=="":
+        if request.apiName=="" or request.name=="":
             error = solver_pb2.SolverError(
-                apiName = apiName,
+                apiName = "Solver",
                 apiVersion = "1.0.0",
                 errorId = "error:uncaught_syntax_error",
                 errorMessage = "Unexpected token :"
@@ -46,11 +39,11 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
 
         else:
             returnList = []
-            textList = list(name)
+            textList = list(request.name)
             for word in textList:
                 # 戻り値として返すSolverReplyオブジェクトを作成する
                 reply = solver_pb2.SolverReply(
-                    apiName = apiName,
+                    apiName = request.apiName,
                     apiVersion = "1.0.0",
                     text = word
                 )
@@ -63,6 +56,15 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
         for request in request_iterator:
             apiName = request.apiName
             responseText += request.name
+            if request.apiName=="" or request.name=="":
+                error = solver_pb2.SolverError(
+                apiName = "Solver",
+                apiVersion = "1.0.0",
+                errorId = "error:uncaught_syntax_error",
+                errorMessage = "Unexpected token :"
+            )
+                return solver_pb2.SolverResponse(error = error)
+
         reply = solver_pb2.SolverReply(
                     apiName = apiName,
                     apiVersion = "1.0.0",
@@ -72,12 +74,21 @@ class SolverService(solver_pb2_grpc.SolverServiceServicer):
 
     def AnalyzeOnBidirectionalStreamingRPC(self, request_iterator, context):
         for request in request_iterator:
-            reply = solver_pb2.SolverReply(
-                        apiName = request.apiName,
-                        apiVersion = "1.0.0",
-                        text = request.name
-                    )
-            yield solver_pb2.SolverResponse(reply = reply)
+            if request.apiName=="" or request.name=="":
+                error = solver_pb2.SolverError(
+                apiName = "Solver",
+                apiVersion = "1.0.0",
+                errorId = "error:uncaught_syntax_error",
+                errorMessage = "Unexpected token :"
+            )
+                return solver_pb2.SolverResponse(error = error)
+            else:
+                reply = solver_pb2.SolverReply(
+                            apiName = request.apiName,
+                            apiVersion = "1.0.0",
+                            text = request.name
+                        )
+                yield solver_pb2.SolverResponse(reply = reply)
 
 def main():
     # Serverオブジェクトを作成する
