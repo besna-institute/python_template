@@ -1,15 +1,16 @@
 import json
 import unittest
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+
+import grpc
+
+from src.gRPC.generated import solver_pb2, solver_pb2_grpc
 from src.gRPC.sampleclient import SolverClient
 from src.gRPC.sampleServer import SolverService
-from src.gRPC.generated import solver_pb2,solver_pb2_grpc
-import grpc
-import subprocess
-from concurrent.futures import ThreadPoolExecutor
+
 
 class MainTest(unittest.TestCase):
-
     def init(self):
         self.client = SolverClient()
         # テストデータのjsonまでのパス
@@ -19,11 +20,6 @@ class MainTest(unittest.TestCase):
         # 入力データ(input.json)
         with open(path_to_data / "input1.json") as fp:
             json_input1 = json.load(fp)
-
-            request = solver_pb2.SolverRequest(
-                apiName = json_input1["apiName"],
-                name = json_input1["name"],
-            )
         self.inputApiName = json_input1["apiName"]
         self.inputName = json_input1["name"]
 
@@ -46,35 +42,28 @@ class MainTest(unittest.TestCase):
 
         self.server = grpc.server(ThreadPoolExecutor(2))
         # Serverオブジェクトに定義したServicerクラスを登録する
-        solver_pb2_grpc.add_SolverServiceServicer_to_server(SolverService(),self.server)
+        solver_pb2_grpc.add_SolverServiceServicer_to_server(SolverService(), self.server)
         # 8000番ポートで待ち受けするよう指定する
-        self.server.add_insecure_port('[::]:8000')
+        self.server.add_insecure_port("[::]:8000")
 
     # AnalyzeOnUnaryRPCのテスト
     # @ unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnUnaryRPC(self):
         self.init()
         self.server.start()
-        request = solver_pb2.SolverRequest(
-            apiName = self.inputApiName,
-            name = self.inputName
-        )
+        request = solver_pb2.SolverRequest(apiName=self.inputApiName, name=self.inputName)
 
         # レスポンスを取得
-        response = self.client.analyzeOnUnaryRPC(request,3)
+        response = self.client.analyzeOnUnaryRPC(request, 3)
 
         solver_reply = solver_pb2.SolverReply(
-            apiName = self.outputApiName,
-            apiVersion = self.outputApiVersion,
-            text = self.outputText
+            apiName=self.outputApiName, apiVersion=self.outputApiVersion, text=self.outputText
         )
-        solver_response = solver_pb2.SolverResponse(
-            reply = solver_reply
-        )
+        solver_response = solver_pb2.SolverResponse(reply=solver_reply)
         self.assertEqual(response, solver_response)
 
         # graceはサーバを止めるまで何秒 or msec待つか
-        self.server.stop(grace = 0)
+        self.server.stop(grace=0)
 
         # 待ち受け終了後の後処理を実行する
         self.server.wait_for_termination()
@@ -84,24 +73,19 @@ class MainTest(unittest.TestCase):
     def test_AnalyzeOnServerStreamingRPC(self):
         self.init()
         self.server.start()
-        request = solver_pb2.SolverRequest(
-            apiName = self.inputApiName,
-            name = self.inputName
-        )
+        request = solver_pb2.SolverRequest(apiName=self.inputApiName, name=self.inputName)
 
         # レスポンスを取得
-        response_iterator = iter(self.client.analyzeOnServerStreamingRPC(request,3))
+        response_iterator = iter(self.client.analyzeOnServerStreamingRPC(request, 3))
 
         solver_reply = []
-        for response,word in zip(response_iterator,list(self.inputName)):
+        for response, word in zip(response_iterator, list(self.inputName)):
             solver_reply = solver_pb2.SolverReply(
-                apiName = self.outputApiName,
-                apiVersion = self.outputApiVersion,
-                text = word,
+                apiName=self.outputApiName,
+                apiVersion=self.outputApiVersion,
+                text=word,
             )
-            solver_response = solver_pb2.SolverResponse(
-                reply = solver_reply
-            )
+            solver_response = solver_pb2.SolverResponse(reply=solver_reply)
             self.assertEqual(response, solver_response)
         # 待ち受け終了後の後処理を実行する
         self.server.stop(0)
@@ -114,24 +98,17 @@ class MainTest(unittest.TestCase):
         self.server.start()
         request_list = []
         for i in list(self.inputName):
-            request_s = solver_pb2.SolverRequest(
-                apiName= self.inputApiName,
-                name = i
-            )
+            request_s = solver_pb2.SolverRequest(apiName=self.inputApiName, name=i)
             request_list.append(request_s)
         request_iterator = iter(request_list)
 
         # レスポンスを取得
-        response = self.client.analyzeOnClientStreamingRPC(request_iterator,3)
+        response = self.client.analyzeOnClientStreamingRPC(request_iterator, 3)
 
         solver_reply = solver_pb2.SolverReply(
-                apiName = self.outputApiName,
-                apiVersion = self.outputApiVersion,
-                text = self.outputText
-            )
-        solver_response = solver_pb2.SolverResponse(
-            reply = solver_reply
+            apiName=self.outputApiName, apiVersion=self.outputApiVersion, text=self.outputText
         )
+        solver_response = solver_pb2.SolverResponse(reply=solver_reply)
 
         self.assertEqual(response, solver_response)
         # 待ち受け終了後の後処理を実行する
@@ -145,26 +122,19 @@ class MainTest(unittest.TestCase):
         self.server.start()
         request_list = []
         for i in list(self.inputName):
-            request_s = solver_pb2.SolverRequest(
-                apiName= self.inputApiName,
-                name = i
-            )
+            request_s = solver_pb2.SolverRequest(apiName=self.inputApiName, name=i)
             request_list.append(request_s)
         request_iterator = iter(request_list)
 
         # レスポンスを取得
-        response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator,3))
+        response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator, 3))
 
         solver_reply = []
-        for response,word in zip(response_iterator,list(self.inputName)):
+        for response, word in zip(response_iterator, list(self.inputName)):
             solver_reply = solver_pb2.SolverReply(
-                apiName = self.outputApiName,
-                apiVersion = self.outputApiVersion,
-                text = word
+                apiName=self.outputApiName, apiVersion=self.outputApiVersion, text=word
             )
-            solver_response = solver_pb2.SolverResponse(
-                reply = solver_reply
-            )
+            solver_response = solver_pb2.SolverResponse(reply=solver_reply)
             self.assertEqual(response, solver_response)
 
         self.server.stop(0)
@@ -179,11 +149,11 @@ class MainTest(unittest.TestCase):
 
         request1 = solver_pb2.SolverRequest(
             # inputApiNameフィールドを持たない/* apiName = self.inputApiName,*/
-            name = self.inputName
+            name=self.inputName
         )
 
         request2 = solver_pb2.SolverRequest(
-            apiName = self.inputApiName
+            apiName=self.inputApiName
             # nameフィールドを持たない/* name = self.inputName*/
         )
 
@@ -201,19 +171,17 @@ class MainTest(unittest.TestCase):
         # )
 
         # レスポンスを取得
-        response1 = self.client.analyzeOnUnaryRPC(request1,3)
-        response2 = self.client.analyzeOnUnaryRPC(request2,3)
-        response3 = self.client.analyzeOnUnaryRPC(request3,3)
+        response1 = self.client.analyzeOnUnaryRPC(request1, 3)
+        response2 = self.client.analyzeOnUnaryRPC(request2, 3)
+        response3 = self.client.analyzeOnUnaryRPC(request3, 3)
 
         solver_error = solver_pb2.SolverError(
-            apiName = self.errorApiName,
-            apiVersion = self.errorApiVersion,
-            errorId = self.errorErrorId,
-            errorMessage = self.errorErrorMessage
+            apiName=self.errorApiName,
+            apiVersion=self.errorApiVersion,
+            errorId=self.errorErrorId,
+            errorMessage=self.errorErrorMessage,
         )
-        solver_response = solver_pb2.SolverResponse(
-            error = solver_error
-        )
+        solver_response = solver_pb2.SolverResponse(error=solver_error)
         self.assertEqual(response1, solver_response)
         self.assertEqual(response2, solver_response)
         self.assertEqual(response3, solver_response)
@@ -227,23 +195,20 @@ class MainTest(unittest.TestCase):
         self.server.start()
         request = solver_pb2.SolverRequest(
             # フィールドを持たない/* apiName = self.inputApiName,*/
-            name = self.inputName
+            name=self.inputName
         )
 
         # レスポンスを取得
-        response_iterator = iter(self.client.analyzeOnServerStreamingRPC(request,3))
+        response_iterator = iter(self.client.analyzeOnServerStreamingRPC(request, 3))
         for response in response_iterator:
             solver_error = solver_pb2.SolverError(
-                            apiName = self.errorApiName,
-                            apiVersion = self.errorApiVersion,
-                            errorId = self.errorErrorId,
-                            errorMessage = self.errorErrorMessage
-                        )
-            solver_response = solver_pb2.SolverResponse(
-                error = solver_error
+                apiName=self.errorApiName,
+                apiVersion=self.errorApiVersion,
+                errorId=self.errorErrorId,
+                errorMessage=self.errorErrorMessage,
             )
+            solver_response = solver_pb2.SolverResponse(error=solver_error)
             self.assertEqual(response, solver_response)
-
 
         self.server.stop(0)
         # 待ち受け終了後の後処理を実行する
@@ -254,30 +219,25 @@ class MainTest(unittest.TestCase):
         self.init()
         self.server.start()
         request_list = []
-        for index,i in enumerate(list(self.inputName)):
+        for index, i in enumerate(list(self.inputName)):
             if index % 2 == 1:
                 name = ""
             else:
                 name = i
-            request_s = solver_pb2.SolverRequest(
-                apiName= self.inputApiName,
-                name = name
-            )
+            request_s = solver_pb2.SolverRequest(apiName=self.inputApiName, name=name)
             request_list.append(request_s)
         request_iterator = iter(request_list)
 
         # レスポンスを取得
-        response = self.client.analyzeOnClientStreamingRPC(request_iterator,3)
+        response = self.client.analyzeOnClientStreamingRPC(request_iterator, 3)
 
         solver_error = solver_pb2.SolverError(
-            apiName = self.errorApiName,
-            apiVersion = self.errorApiVersion,
-            errorId = self.errorErrorId,
-            errorMessage = self.errorErrorMessage
+            apiName=self.errorApiName,
+            apiVersion=self.errorApiVersion,
+            errorId=self.errorErrorId,
+            errorMessage=self.errorErrorMessage,
         )
-        solver_response = solver_pb2.SolverResponse(
-            error = solver_error
-        )
+        solver_response = solver_pb2.SolverResponse(error=solver_error)
         self.assertEqual(response, solver_response)
         self.server.stop(0)
         # 待ち受け終了後の後処理を実行する
@@ -288,71 +248,55 @@ class MainTest(unittest.TestCase):
         self.init()
         self.server.start()
         request_list = []
-        for index,i in enumerate(list(self.inputName)):
+        for index, i in enumerate(list(self.inputName)):
             if index % 2 == 1:
                 name = ""
             else:
                 name = i
-            request_s = solver_pb2.SolverRequest(
-                apiName= self.inputApiName,
-                name = name
-            )
+            request_s = solver_pb2.SolverRequest(apiName=self.inputApiName, name=name)
             request_list.append(request_s)
         request_iterator = iter(request_list)
 
         # レスポンスを取得
-        response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator,3))
+        response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator, 3))
 
         indexList = [i for i in range(len(self.inputName))]
-        for index,response,word in zip(indexList,response_iterator,list(self.inputName)):
-            if index %2 == 1:
+        for index, response, word in zip(indexList, response_iterator, list(self.inputName)):
+            if index % 2 == 1:
                 solver_error = solver_pb2.SolverError(
-                    apiName = self.errorApiName,
-                    apiVersion = self.errorApiVersion,
-                    errorId = self.errorErrorId,
-                    errorMessage = self.errorErrorMessage
+                    apiName=self.errorApiName,
+                    apiVersion=self.errorApiVersion,
+                    errorId=self.errorErrorId,
+                    errorMessage=self.errorErrorMessage,
                 )
-                solver_response = solver_pb2.SolverResponse(
-                    error = solver_error
-                )
+                solver_response = solver_pb2.SolverResponse(error=solver_error)
             else:
                 solver_reply = solver_pb2.SolverReply(
-                    apiName = self.outputApiName,
-                    apiVersion = self.outputApiVersion,
-                    text = word
+                    apiName=self.outputApiName, apiVersion=self.outputApiVersion, text=word
                 )
-                solver_response = solver_pb2.SolverResponse(
-                    reply = solver_reply
-                )
+                solver_response = solver_pb2.SolverResponse(reply=solver_reply)
             self.assertEqual(response, solver_response)
         self.server.stop(0)
         # 待ち受け終了後の後処理を実行する
         self.server.wait_for_termination()
 
-    @ unittest.skip("モジュール修正中のためスキップ")
+    @unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnUnaryRPC_ssl(self):
         self.init()
         self.server.start()
-        request = solver_pb2.SolverRequest(
-            apiName = self.inputApiName,
-            name = self.inputName
-        )
+        request = solver_pb2.SolverRequest(apiName=self.inputApiName, name=self.inputName)
 
         # レスポンスを取得
-        response = self.client.analyzeOnUnaryRPC_ssl(request,3)
+        response = self.client.analyzeOnUnaryRPC_ssl(request, 3)
 
         solver_reply = solver_pb2.SolverReply(
-            apiName = self.outputApiName,
-            apiVersion = self.outputApiVersion,
-            text = self.outputText
+            apiName=self.outputApiName, apiVersion=self.outputApiVersion, text=self.outputText
         )
-        solver_response = solver_pb2.SolverResponse(
-            reply = solver_reply
-        )
+        solver_response = solver_pb2.SolverResponse(reply=solver_reply)
         self.assertEqual(response, solver_response)
 
         # graceはサーバを止めるまで何秒 or msec待つか
-        self.server.stop(grace = 0)
+        self.server.stop(grace=0)
 
         # 待ち受け終了後の後処理を実行する
         self.server.wait_for_termination()
