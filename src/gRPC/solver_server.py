@@ -144,6 +144,3 @@ def main_ssl():
 if __name__ == "__main__":
     # main()
     main_ssl()
-    # gRPC -> grpc
-    # クライアント名 -> solverClient
-    # サーバ名 -> solverServer

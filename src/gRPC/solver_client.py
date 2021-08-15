@@ -15,20 +15,6 @@ class SolverClient:
         return response
 
     def analyzeOnServerStreamingRPC(self, request, context):
-        """[summary]
-
-        Parameters
-        ----------
-        request : [type]
-            [description]
-        context : [type]
-            [description]
-
-        Returns
-        -------
-        [type]
-            [description]
-        """
         channel = grpc.insecure_channel("localhost:8000")
         stub = solver_pb2_grpc.SolverServiceStub(channel)
         response = stub.AnalyzeOnServerStreamingRPC(request, context)

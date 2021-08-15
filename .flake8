@@ -2,3 +2,4 @@
 max-line-length = 120
 extend-ignore = E203
 extend-exclude = src/api/model/
+exclude = src/gRPC/generated/
