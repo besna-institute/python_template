@@ -32,6 +32,47 @@ class SolverClient:
         response = stub.AnalyzeOnBidirectionalStreamingRPC(request,context)
         return response
 
+    # def analyzeOnUnaryRPC_ssl(self,request,context):
+    #     f = open('server1.key', 'r')
+    #     trusted_certs = f.read()
+    #     f.close()
+    #     # create credentials
+    #     credentials = grpc.ssl_channel_credentials(root_certificates=trusted_certs)
+    #     channel = grpc.secure_channel("localhost:8000", credentials)
+    #     stub = solver_pb2_grpc.SolverServiceStub(channel)
+    #     response = stub.AnalyzeOnUnaryRPC(request,context)
+    #     return response
+
+    # def analyzeOnServerStreamingRPC_ssl(self,request,context):
+    #     with open('./certs/server1.pem', 'rb') as f:
+    #         trusted_certs = f.read()
+    #     # create credentials
+    #     credentials = grpc.ssl_channel_credentials(root_certificates=trusted_certs)
+    #     channel = grpc.secure_channel("localhost:8000", credentials)
+    #     stub = solver_pb2_grpc.SolverServiceStub(channel)
+    #     response = stub.AnalyzeOnServerStreamingRPC(request,context)
+    #     return response
+
+    # def analyzeOnClientStreamingRPC_ssl(self,request,context):
+    #     with open('./certs/server1.pem', 'rb') as f:
+    #         trusted_certs = f.read()
+    #     # create credentials
+    #     credentials = grpc.ssl_channel_credentials(root_certificates=trusted_certs)
+    #     channel = grpc.secure_channel("localhost:8000", credentials)
+    #     stub = solver_pb2_grpc.SolverServiceStub(channel)
+    #     response = stub.AnalyzeOnClientStreamingRPC(request,context)
+    #     return response
+
+    # def analyzeOnBidirectionalStreamingRPC_ssl(self,request,context):
+    #     with open('./certs/server1.pem', 'rb') as f:
+    #         trusted_certs = f.read()
+    #     # create credentials
+    #     credentials = grpc.ssl_channel_credentials(root_certificates=trusted_certs)
+    #     channel = grpc.secure_channel("localhost:8000", credentials)
+    #     stub = solver_pb2_grpc.SolverServiceStub(channel)
+    #     response = stub.AnalyzeOnBidirectionalStreamingRPC(request,context)
+    #     return response
+
 def main():
     solverClient = SolverClient()
     # 単一のリクエスト

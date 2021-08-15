@@ -73,7 +73,7 @@ class MainTest(unittest.TestCase):
         )
         self.assertEqual(response, solver_response)
 
-        # graceはサーバを止めるまで何分待つか
+        # graceはサーバを止めるまで何秒 or msec待つか
         self.server.stop(grace = 0)
 
         # 待ち受け終了後の後処理を実行する
@@ -326,5 +326,33 @@ class MainTest(unittest.TestCase):
                 )
             self.assertEqual(response, solver_response)
         self.server.stop(0)
+        # 待ち受け終了後の後処理を実行する
+        self.server.wait_for_termination()
+
+    @ unittest.skip("モジュール修正中のためスキップ")
+    def test_AnalyzeOnUnaryRPC_ssl(self):
+        self.init()
+        self.server.start()
+        request = solver_pb2.SolverRequest(
+            apiName = self.inputApiName,
+            name = self.inputName
+        )
+
+        # レスポンスを取得
+        response = self.client.analyzeOnUnaryRPC_ssl(request,3)
+
+        solver_reply = solver_pb2.SolverReply(
+            apiName = self.outputApiName,
+            apiVersion = self.outputApiVersion,
+            text = self.outputText
+        )
+        solver_response = solver_pb2.SolverResponse(
+            reply = solver_reply
+        )
+        self.assertEqual(response, solver_response)
+
+        # graceはサーバを止めるまで何秒 or msec待つか
+        self.server.stop(grace = 0)
+
         # 待ち受け終了後の後処理を実行する
         self.server.wait_for_termination()
