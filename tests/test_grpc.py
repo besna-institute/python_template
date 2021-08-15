@@ -5,9 +5,9 @@ from pathlib import Path
 
 import grpc
 
+from src.gRPC.generated import solver_pb2, solver_pb2_grpc
 from src.gRPC.solver_client import SolverClient
 from src.gRPC.solver_server import SolverService
-from src.gRPC.generated import solver_pb2, solver_pb2_grpc
 
 
 class MainTest(unittest.TestCase):
