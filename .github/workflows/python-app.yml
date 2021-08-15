@@ -32,5 +32,6 @@ jobs:
         pip install -r requirements.txt
     - name: Test
       run: |
+        mkdir src/gRPC/generated
         python src/gRPC/protobuf/codegen.py
         python -m unittest discover -p test_*.py
