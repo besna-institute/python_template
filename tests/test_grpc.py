@@ -11,6 +11,34 @@ from src.gRPC.solver_server import SolverService
 
 
 class MainTest(unittest.TestCase):
+    def insecure_server(self):
+        self.server = grpc.server(ThreadPoolExecutor(2))
+        solver_pb2_grpc.add_SolverServiceServicer_to_server(SolverService(), self.server)
+        self.server.add_insecure_port("[::]:8000")
+
+    def secure_server(self):
+        self.server = grpc.server(ThreadPoolExecutor(2))
+        solver_pb2_grpc.add_SolverServiceServicer_to_server(SolverService(), self.server)
+
+        with open("src/gRPC/certs/cakey.pem", "rb") as f:
+            private_key = f.read()
+
+        with open("src/gRPC/certs/cacert.pem", "rb") as f:
+            certificate_chain = f.read()
+
+        server_credentials = grpc.ssl_server_credentials([(private_key, certificate_chain)])
+        # create server credentials
+        # server_credentials = grpc.ssl_server_credentials(
+        #     (
+        #         (
+        #             private_key,
+        #             certificate_chain,
+        #         ),
+        #     )
+        # )
+
+        self.server.add_secure_port("[::]:8000", server_credentials)
+
     def init(self):
         self.client = SolverClient()
         # テストデータのjsonまでのパス
@@ -40,21 +68,16 @@ class MainTest(unittest.TestCase):
         self.errorErrorId = json_output1["errorId"]
         self.errorErrorMessage = json_output1["errorMessage"]
 
-        self.server = grpc.server(ThreadPoolExecutor(2))
-        # Serverオブジェクトに定義したServicerクラスを登録する
-        solver_pb2_grpc.add_SolverServiceServicer_to_server(SolverService(), self.server)
-        # 8000番ポートで待ち受けするよう指定する
-        self.server.add_insecure_port("[::]:8000")
-
     # AnalyzeOnUnaryRPCのテスト
     # @ unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnUnaryRPC(self):
         self.init()
+        self.insecure_server()
         self.server.start()
         request = solver_pb2.SolverRequest(apiName=self.inputApiName, name=self.inputName)
 
         # レスポンスを取得
-        response = self.client.analyzeOnUnaryRPC(request, 3)
+        response = self.client.analyzeOnUnaryRPC(request)
 
         solver_reply = solver_pb2.SolverReply(
             apiName=self.outputApiName, apiVersion=self.outputApiVersion, text=self.outputText
@@ -72,11 +95,12 @@ class MainTest(unittest.TestCase):
     # @ unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnServerStreamingRPC(self):
         self.init()
+        self.insecure_server()
         self.server.start()
         request = solver_pb2.SolverRequest(apiName=self.inputApiName, name=self.inputName)
 
         # レスポンスを取得
-        response_iterator = iter(self.client.analyzeOnServerStreamingRPC(request, 3))
+        response_iterator = iter(self.client.analyzeOnServerStreamingRPC(request))
 
         solver_reply = []
         for response, word in zip(response_iterator, list(self.inputName)):
@@ -95,6 +119,7 @@ class MainTest(unittest.TestCase):
     # @ unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnClientStreamingRPC(self):
         self.init()
+        self.insecure_server()
         self.server.start()
         request_list = []
         for i in list(self.inputName):
@@ -103,7 +128,7 @@ class MainTest(unittest.TestCase):
         request_iterator = iter(request_list)
 
         # レスポンスを取得
-        response = self.client.analyzeOnClientStreamingRPC(request_iterator, 3)
+        response = self.client.analyzeOnClientStreamingRPC(request_iterator)
 
         solver_reply = solver_pb2.SolverReply(
             apiName=self.outputApiName, apiVersion=self.outputApiVersion, text=self.outputText
@@ -119,6 +144,7 @@ class MainTest(unittest.TestCase):
     # @ unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnBidirectionalStreamingRPC(self):
         self.init()
+        self.insecure_server()
         self.server.start()
         request_list = []
         for i in list(self.inputName):
@@ -127,7 +153,7 @@ class MainTest(unittest.TestCase):
         request_iterator = iter(request_list)
 
         # レスポンスを取得
-        response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator, 3))
+        response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator))
 
         solver_reply = []
         for response, word in zip(response_iterator, list(self.inputName)):
@@ -145,6 +171,7 @@ class MainTest(unittest.TestCase):
     # @ unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnUnaryRPC_Error(self):
         self.init()
+        self.insecure_server()
         self.server.start()
 
         request1 = solver_pb2.SolverRequest(
@@ -171,9 +198,9 @@ class MainTest(unittest.TestCase):
         # )
 
         # レスポンスを取得
-        response1 = self.client.analyzeOnUnaryRPC(request1, 3)
-        response2 = self.client.analyzeOnUnaryRPC(request2, 3)
-        response3 = self.client.analyzeOnUnaryRPC(request3, 3)
+        response1 = self.client.analyzeOnUnaryRPC(request1)
+        response2 = self.client.analyzeOnUnaryRPC(request2)
+        response3 = self.client.analyzeOnUnaryRPC(request3)
 
         solver_error = solver_pb2.SolverError(
             apiName=self.errorApiName,
@@ -192,6 +219,7 @@ class MainTest(unittest.TestCase):
     # @ unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnServerStreamingRPC_Error(self):
         self.init()
+        self.insecure_server()
         self.server.start()
         request = solver_pb2.SolverRequest(
             # フィールドを持たない/* apiName = self.inputApiName,*/
@@ -199,7 +227,7 @@ class MainTest(unittest.TestCase):
         )
 
         # レスポンスを取得
-        response_iterator = iter(self.client.analyzeOnServerStreamingRPC(request, 3))
+        response_iterator = iter(self.client.analyzeOnServerStreamingRPC(request))
         for response in response_iterator:
             solver_error = solver_pb2.SolverError(
                 apiName=self.errorApiName,
@@ -217,6 +245,7 @@ class MainTest(unittest.TestCase):
     # @ unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnClientStreamingRPC_Error(self):
         self.init()
+        self.insecure_server()
         self.server.start()
         request_list = []
         for index, i in enumerate(list(self.inputName)):
@@ -229,7 +258,7 @@ class MainTest(unittest.TestCase):
         request_iterator = iter(request_list)
 
         # レスポンスを取得
-        response = self.client.analyzeOnClientStreamingRPC(request_iterator, 3)
+        response = self.client.analyzeOnClientStreamingRPC(request_iterator)
 
         solver_error = solver_pb2.SolverError(
             apiName=self.errorApiName,
@@ -246,6 +275,7 @@ class MainTest(unittest.TestCase):
     # AnalyzeOnBidirectionalStreamingRPCが失敗するテスト
     def test_AnalyzeOnBidirectionalStreamingRPC_Error(self):
         self.init()
+        self.insecure_server()
         self.server.start()
         request_list = []
         for index, i in enumerate(list(self.inputName)):
@@ -258,7 +288,7 @@ class MainTest(unittest.TestCase):
         request_iterator = iter(request_list)
 
         # レスポンスを取得
-        response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator, 3))
+        response_iterator = iter(self.client.analyzeOnBidirectionalStreamingRPC(request_iterator))
 
         indexList = [i for i in range(len(self.inputName))]
         for index, response, word in zip(indexList, response_iterator, list(self.inputName)):
@@ -283,11 +313,12 @@ class MainTest(unittest.TestCase):
     @unittest.skip("モジュール修正中のためスキップ")
     def test_AnalyzeOnUnaryRPC_ssl(self):
         self.init()
+        self.secure_server()
         self.server.start()
         request = solver_pb2.SolverRequest(apiName=self.inputApiName, name=self.inputName)
 
         # レスポンスを取得
-        response = self.client.analyzeOnUnaryRPC_ssl(request, 3)
+        response = self.client.analyzeOnUnaryRPC_ssl(request)
 
         solver_reply = solver_pb2.SolverReply(
             apiName=self.outputApiName, apiVersion=self.outputApiVersion, text=self.outputText

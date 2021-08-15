@@ -8,40 +8,38 @@ class SolverClient:
     def __init__(self):
         pass
 
-    def analyzeOnUnaryRPC(self, request, context):
+    def analyzeOnUnaryRPC(self, request):
         channel = grpc.insecure_channel("localhost:8000")
         stub = solver_pb2_grpc.SolverServiceStub(channel)
-        response = stub.AnalyzeOnUnaryRPC(request, context)
+        response = stub.AnalyzeOnUnaryRPC(request)
         return response
 
-    def analyzeOnServerStreamingRPC(self, request, context):
+    def analyzeOnServerStreamingRPC(self, request):
         channel = grpc.insecure_channel("localhost:8000")
         stub = solver_pb2_grpc.SolverServiceStub(channel)
-        response = stub.AnalyzeOnServerStreamingRPC(request, context)
+        response = stub.AnalyzeOnServerStreamingRPC(request)
         return response
 
-    def analyzeOnClientStreamingRPC(self, request, context):
+    def analyzeOnClientStreamingRPC(self, request):
         channel = grpc.insecure_channel("localhost:8000")
         stub = solver_pb2_grpc.SolverServiceStub(channel)
-        response = stub.AnalyzeOnClientStreamingRPC(request, context)
+        response = stub.AnalyzeOnClientStreamingRPC(request)
         return response
 
-    def analyzeOnBidirectionalStreamingRPC(self, request, context):
+    def analyzeOnBidirectionalStreamingRPC(self, request):
         channel = grpc.insecure_channel("localhost:8000")
         stub = solver_pb2_grpc.SolverServiceStub(channel)
-        response = stub.AnalyzeOnBidirectionalStreamingRPC(request, context)
+        response = stub.AnalyzeOnBidirectionalStreamingRPC(request)
         return response
 
-    # def analyzeOnUnaryRPC_ssl(self,request,context):
-    #     f = open('server1.key', 'r')
-    #     trusted_certs = f.read()
-    #     f.close()
-    #     # create credentials
-    #     credentials = grpc.ssl_channel_credentials(root_certificates=trusted_certs)
-    #     channel = grpc.secure_channel("localhost:8000", credentials)
-    #     stub = solver_pb2_grpc.SolverServiceStub(channel)
-    #     response = stub.AnalyzeOnUnaryRPC(request,context)
-    #     return response
+    def analyzeOnUnaryRPC_ssl(self, request):
+        with open("src/gRPC/certs/cacert.pem", "rb") as f:
+            trusted_certs = f.read()
+        credentials = grpc.ssl_channel_credentials(root_certificates=trusted_certs)
+        channel = grpc.secure_channel("localhost:8000", credentials)
+        stub = solver_pb2_grpc.SolverServiceStub(channel)
+        response = stub.AnalyzeOnUnaryRPC(request)
+        return response
 
     # def analyzeOnServerStreamingRPC_ssl(self,request,context):
     #     with open('./certs/server1.pem', 'rb') as f:

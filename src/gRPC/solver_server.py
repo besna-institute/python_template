@@ -116,10 +116,10 @@ def main_ssl():
     # Serverオブジェクトに定義したServicerクラスを登録する
     solver_pb2_grpc.add_SolverServiceServicer_to_server(SolverService(), server)
 
-    with open("./certs/server1.key", "rb") as f:
+    with open("src/gRPC/certs/server1.key", "rb") as f:
         private_key = f.read()
 
-    with open("./certs/server1.pem", "rb") as f:
+    with open("src/gRPC/certs/ca.pem", "rb") as f:
         certificate_chain = f.read()
 
     # create server credentials

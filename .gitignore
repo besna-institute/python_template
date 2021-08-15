@@ -151,3 +151,4 @@ cython_debug/
 
 # codegen.pyにより生成される.pyファイル
 src/gRPC/generated
+.bash_history
