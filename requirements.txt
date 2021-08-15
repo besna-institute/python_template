@@ -5,3 +5,5 @@ black
 flake8
 isort
 mypy
+grpcio
+grpcio-tools
