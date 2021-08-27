@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Schema of Explanation
+  version: 1.0.0
+paths:
+  "/":
+    post:
+      description: Schema of Explanation input
+      requestBody:
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/Input"
+            examples:
+              valid:
+                value:
+                  apiName: Solver
+                  name: "Taro"
+      responses:
+        "200":
+          description: response
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Output"
+              example:
+                apiName: Solver
+                apiVersion: "1.0.0"
+                text: Hello, Taro
+        default:
+          description: error
+          content:
+            "apllication/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                apiName: Solver
+                apiVersion: "1.0.0"
+                errorId: "error:uncaught_syntax_error"
+                errorMessage: "Unexpected token :"
+components:
+  schemas:
+    ApiName:
+      title: API Name
+      description: API name
+      type: string
+      minLength: 1
+    ApiVersion:
+      title: API Version
+      description: API version
+      type: string
+      pattern: ^[0-9]+\.[0-9]+\.[0-9]+((M|RC)-[0-9]+)*$
+    Input:
+      type: object
+      required:
+        - apiName
+        - name
+      properties:
+        apiName:
+          $ref: "#/components/schemas/ApiName"
+        name:
+          title: Name
+          description: name
+          type: string
+    Output:
+      type: object
+      required:
+        - apiName
+        - apiVersion
+        - text
+      properties:
+        apiName:
+          $ref: "#/components/schemas/ApiName"
+        apiVersion:
+          $ref: "#/components/schemas/ApiVersion"
+        text:
+          title: Text
+          description: text
+          type: string
+          minLength: 1
+    Error:
+      type: object
+      required:
+        - apiName
+        - apiVersion
+        - errorId
+        - errorMessage
+      properties:
+        apiName:
+          $ref: "#/components/schemas/ApiName"
+        apiVersion:
+          $ref: "#/components/schemas/ApiVersion"
+        errorId:
+          title: Error ID
+          description: error ID
+          type: string
+          pattern: ^error:.+$
+        errorMessage:
+          title: Error Message
+          description: error message
+          type: string
