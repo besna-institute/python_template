@@ -2,6 +2,9 @@ openapi: 3.0.3
 info:
   title: Schema of Solver
   version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: local server
 paths:
   "/":
     post:
@@ -44,7 +47,7 @@ components:
       title: API Name
       description: API name
       type: string
-      minLength: 1
+      pattern: ^Solver$
     ApiVersion:
       title: API Version
       description: API version
