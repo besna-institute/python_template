@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from dataclasses import dataclass
 
-from src.model import input, output
+from src.model import Input, Output
 
 
 @dataclass
@@ -18,9 +18,9 @@ class BaseSolverAPI:
     def analyze(self, name: str) -> Result:
         pass
 
-    def process(self, input: input.SchemaOfSolverInput) -> output.SchemaOfSolverOutput:
+    def process(self, input: Input) -> Output:
         result = self.analyze(input.name)
-        response = output.SchemaOfSolverOutput(
+        response = Output(
             apiName=self.apiName,
             apiVersion=self.apiVersion,
             text=result.text,
