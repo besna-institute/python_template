@@ -1,7 +1,7 @@
 from fastapi import Body, FastAPI
 
 from src.model import Input, Output
-from src.solver.some_solver import SomeSolver
+from src.solvers import SomeSolver
 
 app = FastAPI()
 

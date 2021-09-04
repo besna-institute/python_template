@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from dataclasses import dataclass
 
 from src.model import Input, Output
@@ -9,14 +8,14 @@ class Result:
     text: str
 
 
-class BaseSolverAPI:
-    def __init__(self, apiName: str, apiVersion: str):
-        self.apiName = apiName
-        self.apiVersion = apiVersion
+class SomeSolver:
+    def __init__(self):
+        self.apiName = "Solver"
+        self.apiVersion = "1.0.0"
 
-    @abstractmethod
     def analyze(self, name: str) -> Result:
-        pass
+        text = f"Hello, {name}"
+        return Result(text=text)
 
     def process(self, input: Input) -> Output:
         result = self.analyze(input.name)
