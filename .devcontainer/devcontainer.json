@@ -11,14 +11,13 @@
     },
     "editor.formatOnSave": true,
     "python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+    "python.formatting.provider": "black",
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
     "python.linting.mypyEnabled": true,
     "python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
-    "python.linting.pylintEnabled": true,
-    "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
     "python.pythonPath": "/usr/local/bin/python",
   },
   "extensions": [
@@ -28,7 +27,8 @@
     "42crunch.vscode-openapi",
     "zoellner.openapi-preview",
     "mermade.openapi-lint",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "googlecloudtools.cloudcode"
   ],
   "postCreateCommand": "pip install --upgrade pip && pip3 install --user -r requirements.txt",
   "remoteUser": "vscode"
