@@ -1,6 +1,6 @@
 import unittest
 
-from src.solvers import Result, SomeSolver
+from src.example.solvers import Result, SomeSolver
 
 
 class SomeSolverTest(unittest.TestCase):
