@@ -21,24 +21,22 @@ Remote-Containers: Reopen in Container
 ```
 を選択する．
 
-### Docker イメージのビルド
+### ローカルでのサーバーの起動
 
 ```bash
-docker build -f Dockerfile -t python-template .
+docker build -f Dockerfile -t python-template . && docker run -p 80:80 -it python-template
 ```
 
-### Docker コンテナの実行
+http://localhost:80 に対してリクエストを送ることができるようになる．
 
 ```bash
-docker run -p 8000:8000 -it python-template
+curl -X POST -H "Content-Type: application/json" localhost:80 -d '{"apiName": "Solver", "name": "Taro"}'
 ```
-
-http://localhost:8000 に対してリクエストを送ることができるようになる．
 
 ### ローカルでのテストの実行
 
 ```bash
-docker run -p 8000:8000 -it python-template /usr/local/bin/python -m unittest discover
+docker build -f Dockerfile -t python-template . && docker run -p 80:80 -it python-template /usr/local/bin/python -m unittest
 ```
 
 ## API の定義について
@@ -54,10 +52,3 @@ OpenAPI を用いて定義する．
 
 ここで自動生成したコードを直接編集するのは避ける．
 また，[scripts/convert_open_api_to_pydantic.sh](scripts/convert_open_api_to_pydantic.sh) は Docker コンテナ内で実行する想定であることに注意！
-
-## Docker によるアプリケーションの起動
-
-```bash
-docker build . -t python-template
-docker run -p 80:80 -it python-template
-```
