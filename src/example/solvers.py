@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.model import Input, Output
+from src.models import Input, Output
 
 
 @dataclass

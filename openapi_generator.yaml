@@ -1,0 +1,11 @@
+generatorName: python-flask
+templateDir: template
+outputDir: openapi-generator-tmp
+inputSpec: schema.yaml
+additionalProperties:
+  packageName: "src"
+globalProperties:
+  apiDocs: false
+  apiTests: false
+  modelDocs: false
+  modelTests: false

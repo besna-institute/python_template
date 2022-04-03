@@ -1,8 +1,26 @@
 fastapi[all]
-datamodel-code-generator
 jsonschema
 black
-flake8
 isort
+flake8
 mypy
+autoflake
 pyyaml
+
+# ===================================================================
+# バージョン指定の方法
+#
+# ~= : Compatible release clause （推奨）
+# == : Version matching clause （非推奨）
+# != : Version exclusion clause
+# <=, >= : Inclusive ordered comparison clause
+# <, > : Exclusive ordered comparison clause
+# === : Arbitrary equality clause.
+#
+# バージョンを指定しない場合は最新安定版になる
+# 
+# 例1: 1.1.* -> ~= 1.1.0
+# 例2: 1.*.* -> ~= 1.1
+#
+# ref: https://www.python.org/dev/peps/pep-0440/#version-specifiers
+# ===================================================================

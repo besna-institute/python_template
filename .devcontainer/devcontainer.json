@@ -2,7 +2,7 @@
   "name": "Python 3",
   "build": {
     "dockerfile": "Dockerfile",
-    "context": "..",
+    "context": ".",
   },
   "settings": {
     "autoDocstring.docstringFormat": "numpy",
@@ -10,6 +10,7 @@
       "source.organizeImports": true
     },
     "editor.formatOnSave": true,
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
     "python.formatting.blackPath": "/usr/local/py-utils/bin/black",
     "python.formatting.provider": "black",
     "python.languageServer": "Pylance",
@@ -28,8 +29,8 @@
     "zoellner.openapi-preview",
     "mermade.openapi-lint",
     "redhat.vscode-yaml",
-    "googlecloudtools.cloudcode"
+    "timonwong.shellcheck"
   ],
-  "postCreateCommand": "pip install --upgrade pip && pip3 install --user -r requirements.txt",
+  "postCreateCommand": "pip install --upgrade pip && pip install --user -r requirements.txt && pip freeze > requirements.lock && npm install -g npm && npm install",
   "remoteUser": "vscode"
 }
