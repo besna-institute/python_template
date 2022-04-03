@@ -21,4 +21,4 @@ COPY --from=0 /usr/src/app ./
 COPY src src
 COPY tests tests
 
-CMD ["/usr/src/app/.local/bin/uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["/usr/src/app/.local/bin/uvicorn", "src.example.entrypoint:app", "--host", "0.0.0.0", "--port", "80"]
