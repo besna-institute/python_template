@@ -214,3 +214,4 @@ $RECYCLE.BIN/
 .nfs*
 
 .bash_history
+node_modules
