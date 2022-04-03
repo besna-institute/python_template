@@ -5,7 +5,7 @@ from pathlib import Path
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from src.main import app
+from src.example.entrypoint import app
 
 client = TestClient(app)
 path_to_dir = Path(__file__).parent
