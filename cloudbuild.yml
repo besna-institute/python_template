@@ -1,12 +1,12 @@
 steps:
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  - name: "gcr.io/google.com/cloudsdktool/gcloud"
     args:
-      - gcloud
       - functions
       - deploy
-      - save_result
+      - apply_some_solver
       - --runtime=python38
       - --region=asia-northeast1
       - --trigger-http
+      - --allow-unauthenticated
     waitFor: ["-"]
 timeout: 1200s
