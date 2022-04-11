@@ -1,6 +1,8 @@
+import functions_framework
+
 from src.example.solvers import SomeSolver
 
-
+@functions_framework.http
 def apply_some_solver(request):
     # content_type = request.headers["content-type"]
     # if "application/json" in content_type:
@@ -13,12 +15,12 @@ def apply_some_solver(request):
     # return response_data
     return "hello"
 
-
+@functions_framework.http
 def hello_world(request):
     request_json = request.get_json()
-    if request.args and 'message' in request.args:
-        return request.args.get('message')
-    elif request_json and 'message' in request_json:
-        return request_json['message']
+    if request.args and "message" in request.args:
+        return request.args.get("message")
+    elif request_json and "message" in request_json:
+        return request_json["message"]
     else:
-        return f'Hello World!'
+        return f"Hello World!"
