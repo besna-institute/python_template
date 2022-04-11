@@ -8,6 +8,7 @@ steps:
       - --runtime=python39
       - --region=asia-northeast1
       - --trigger-http
+      - --source=.
       - --allow-unauthenticated
     waitFor: ["-"]
 timeout: 1200s
