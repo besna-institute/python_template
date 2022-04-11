@@ -1,0 +1,12 @@
+steps:
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - save_result
+      - --runtime=python38
+      - --region=asia-northeast1
+      - --trigger-http
+    waitFor: ["-"]
+timeout: 1200s
