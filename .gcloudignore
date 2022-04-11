@@ -1,0 +1,15 @@
+.git
+.devcontainer
+.github
+.vscode
+scripts
+template
+tests
+.editorconfig
+.gitignore
+openapi_generator.yaml
+openapitools.json
+package-lock.json
+package.json
+README.md
+schema.yaml
