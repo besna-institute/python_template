@@ -8,6 +8,7 @@ steps:
       - --runtime=python38
       - --region=asia-northeast1
       - --trigger-http
+      - --source=.
       - --allow-unauthenticated
     waitFor: ["-"]
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
