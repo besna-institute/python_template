@@ -5,7 +5,7 @@ steps:
       - functions
       - deploy
       - apply_some_solver
-      - --runtime=python39
+      - --runtime=python38
       - --region=asia-northeast1
       - --trigger-http
       - --source=.
