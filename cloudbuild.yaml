@@ -10,4 +10,15 @@ steps:
       - --trigger-http
       - --allow-unauthenticated
     waitFor: ["-"]
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - hello_world
+      - --runtime=python38
+      - --region=asia-northeast1
+      - --trigger-http
+      - --allow-unauthenticated
+    waitFor: ["-"]
 timeout: 1200s
