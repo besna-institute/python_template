@@ -26,4 +26,4 @@ pyyaml
 # ===================================================================
 
 # Cloud Functions
-functions-framework~=3
+functions-framework~=3.0
