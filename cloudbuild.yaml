@@ -5,7 +5,7 @@ steps:
       - functions
       - deploy
       - apply_some_solver
-      - --runtime=python38
+      - --runtime=python39
       - --region=asia-northeast1
       - --trigger-http
       - --allow-unauthenticated

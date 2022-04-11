@@ -24,6 +24,3 @@ pyyaml
 #
 # ref: https://www.python.org/dev/peps/pep-0440/#version-specifiers
 # ===================================================================
-
-# Cloud functions
-functions-framework~=3.0
