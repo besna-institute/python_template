@@ -5,8 +5,9 @@ steps:
       - beta
       - functions
       - deploy
-      - apply_some_solver
+      - apply-some-solver
       - --gen2
+      - --entrypoint=apply_some_solver
       - --runtime=python38
       - --region=asia-northeast1
       - --trigger-http
