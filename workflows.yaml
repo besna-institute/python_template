@@ -10,4 +10,4 @@ main:
             type: OIDC
         result: result
     - return_result:
-        return: ${result}
+        return: ${result.body}
