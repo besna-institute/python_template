@@ -13,6 +13,7 @@ steps:
       - --trigger-http
       - --source=.
       - --allow-unauthenticated
+    waitFor: ["-"]
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
@@ -27,6 +28,7 @@ steps:
       - --trigger-http
       - --source=.
       - --allow-unauthenticated
+    waitFor: ["-"]
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
@@ -35,4 +37,5 @@ steps:
       - python-template
       - --source=workflows.yaml
       - --location=asia-southeast1
+    waitFor: ["-"]
 timeout: 1200s
