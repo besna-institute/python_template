@@ -16,6 +16,20 @@ steps:
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
+      - beta
+      - functions
+      - deploy
+      - save-result
+      - --gen2
+      - --entry-point=save_result
+      - --runtime=python38
+      - --region=asia-northeast1
+      - --trigger-http
+      - --source=.
+      - --allow-unauthenticated
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
       - workflows
       - deploy
       - python-template

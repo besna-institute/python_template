@@ -27,3 +27,4 @@ pyyaml
 
 # Cloud Functions
 functions-framework~=3.0
+google-cloud-storage
