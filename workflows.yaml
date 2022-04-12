@@ -1,6 +1,11 @@
 main:
   params: [input]
   steps:
+    - init:
+      assign:
+        - project_id: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+        - bucket_name: "result"
+        - object_name: "python-template"
     - call_function:
         call: http.post
         args:
@@ -9,5 +14,12 @@ main:
           auth:
             type: OIDC
         result: result
+    - upload_object_media:
+        call: googleapis.storage.v1.objects.insert
+        args:
+          bucket: ${bucket_name}
+          uploadType: "media"
+          name: ${object_name}
+          body: ${result.body}
     - return_result:
         return: ${result.body}
