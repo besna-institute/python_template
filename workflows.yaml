@@ -18,7 +18,6 @@ main:
         call: googleapis.storage.v1.objects.insert
         args:
           bucket: ${bucket_name}
-          uploadType: "media"
           name: ${object_name}
           body: ${result.body}
     - return_result:
