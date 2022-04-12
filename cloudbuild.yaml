@@ -1,0 +1,41 @@
+steps:
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - beta
+      - functions
+      - deploy
+      - apply-some-solver
+      - --gen2
+      - --entry-point=apply_some_solver
+      - --runtime=python38
+      - --region=asia-northeast1
+      - --trigger-http
+      - --source=.
+      - --allow-unauthenticated
+    waitFor: ["-"]
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - beta
+      - functions
+      - deploy
+      - save-result
+      - --gen2
+      - --entry-point=save_result
+      - --runtime=python38
+      - --region=asia-northeast1
+      - --trigger-http
+      - --source=.
+      - --allow-unauthenticated
+    waitFor: ["-"]
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - workflows
+      - deploy
+      - python-template
+      - --source=workflows.yaml
+      - --location=asia-southeast1
+    waitFor: ["-"]
+timeout: 1200s

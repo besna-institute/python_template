@@ -24,3 +24,7 @@ pyyaml
 #
 # ref: https://www.python.org/dev/peps/pep-0440/#version-specifiers
 # ===================================================================
+
+# Cloud Functions
+functions-framework~=3.0
+google-cloud-storage

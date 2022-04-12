@@ -1,0 +1,27 @@
+main:
+  params: [input]
+  steps:
+    - init:
+        assign:
+          - bucket_name: "python-template"
+          - object_name: "result.json"
+    - call_function:
+        call: http.post
+        args:
+          url: https://apply-some-solver-6szq67fk4a-an.a.run.app
+          body: ${input}
+          auth:
+            type: OIDC
+        result: result
+    - save_result:
+        call: http.post
+        args:
+          url: https://save-result-6szq67fk4a-an.a.run.app
+          body:
+            result: ${result.body}
+            bucket: ${bucket_name}
+            object: ${object_name}
+          auth:
+            type: OIDC
+    - return_result:
+        return: ${result.body}
