@@ -1,0 +1,14 @@
+main:
+  params: [input]
+  steps:
+    - call_function:
+        try:
+          call: http.post
+          args:
+            url: https://apply-some-solver-6szq67fk4a-an.a.run.app
+            body: ${input}
+            auth:
+              type: OIDC
+          result: result
+    - return_result:
+        return: ${result}

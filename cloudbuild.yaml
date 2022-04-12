@@ -13,4 +13,12 @@ steps:
       - --trigger-http
       - --source=.
       - --allow-unauthenticated
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - workflows
+      - deploy
+      - python-template
+      - --source=workflows.yaml
+      - --location=asia-southeast1
 timeout: 1200s
