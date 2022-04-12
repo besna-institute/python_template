@@ -1,10 +1,11 @@
 import functions_framework
+from flask import Request, jsonify
 
 from src.example.solvers import SomeSolver
 
 
 @functions_framework.http
-def apply_some_solver(request):
+def apply_some_solver(request: Request):
     content_type = request.headers["content-type"]
     if "application/json" in content_type:
         request_json = request.get_json(silent=True)
