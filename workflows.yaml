@@ -3,8 +3,8 @@ main:
   steps:
     - init:
         assign:
-          - bucket_name: "result"
-          - object_name: "python-template"
+          - bucket_name: "python-template"
+          - object_name: "result.json"
     - call_function:
         call: http.post
         args:
