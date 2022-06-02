@@ -47,8 +47,8 @@ OpenAPI を用いて定義する．
 以下を実行することで Python の [pydantic](https://pydantic-docs.helpmanual.io/) を利用した表現に変換したものを [src/model.py](src/model.py) を置く．
 
 ```bash
-./scripts/convert_open_api_to_pydantic.sh
+./scripts/convert_open_api_to_datamodel.sh
 ```
 
 ここで自動生成したコードを直接編集するのは避ける．
-また，[scripts/convert_open_api_to_pydantic.sh](scripts/convert_open_api_to_pydantic.sh) は Docker コンテナ内で実行する想定であることに注意！
+また，[scripts/convert_open_api_to_datamodel.sh](scripts/convert_open_api_to_datamodel.sh) は Docker コンテナ内で実行する想定であることに注意！
