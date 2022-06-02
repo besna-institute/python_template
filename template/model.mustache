@@ -43,7 +43,7 @@ class {{classname}}:
             {{baseName}}=[{{complexType}}.from_dict(v) for v in input["{{baseName}}"]],
             {{/isArray}}
             {{^isArray}}
-            {{baseName}}=input["{{baseName}}"],
+            {{#required}}{{baseName}}=input["{{baseName}}"]{{/required}}{{^required}}{{baseName}}=input.get("{{baseName}}", {{{defaultValue}}}){{/required}},
             {{/isArray}}
             {{/vars}}
         )
