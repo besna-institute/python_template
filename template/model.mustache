@@ -31,7 +31,7 @@ class {{classname}}:
 {{/vars}}
 {{#vars}}
     {{#defaultValue}}
-    {{baseName}}: {{#required}}{{>model_field_type}}{{/required}}{{^required}}Optional[{{>model_field_type}}]{{/required}} = {{{defaultValue}}}
+    {{baseName}}: {{#required}}{{>model_field_type}}{{/required}}{{^required}}Optional[{{>model_field_type}}]{{/required}} = {{#isContainer}}None{{/isContainer}}{{^isContainer}}{{{defaultValue}}}{{/isContainer}}
     {{/defaultValue}}
 {{/vars}}
 
@@ -39,12 +39,44 @@ class {{classname}}:
     def from_dict(cls: Type[_{{classname}}], input: Dict[str, Any]) -> _{{classname}}:
         return cls(
             {{#vars}}
-            {{#isArray}}
-            {{baseName}}=[{{complexType}}.from_dict(v) for v in input["{{baseName}}"]],
-            {{/isArray}}
-            {{^isArray}}
-            {{#required}}{{baseName}}=input["{{baseName}}"]{{/required}}{{^required}}{{baseName}}=input.get("{{baseName}}", {{{defaultValue}}}){{/required}},
-            {{/isArray}}
+              {{#isArray}}
+                {{#isPrimitiveType}}
+                  {{baseName}}=
+                    {{#required}}
+                      input["{{baseName}}"]
+                    {{/required}}
+                    {{^required}}
+                      input.get("{{baseName}}", {{{defaultValue}}})
+                    {{/required}}
+                  ,
+                {{/isPrimitiveType}}
+                {{^isPrimitiveType}}
+                  {{baseName}}=
+                    {{#required}}
+                      [{{complexType}}.from_dict(v) for v in input["{{baseName}}"]]
+                    {{/required}}
+                    {{^required}}
+                      [{{complexType}}.from_dict(v) for v in input["{{baseName}}"]] if "{{baseName}}" in input else
+                      {{#defaultValue}}
+                        {{{defaultValue}}}
+                      {{/defaultValue}}
+                      {{^defaultValue}}
+                        None
+                      {{/defaultValue}}
+                    {{/required}}
+                  ,
+                {{/isPrimitiveType}}
+              {{/isArray}}
+              {{^isArray}}
+                {{baseName}}=
+                  {{#required}}
+                    input["{{baseName}}"]
+                  {{/required}}
+                  {{^required}}
+                    input.get("{{baseName}}", {{{defaultValue}}})
+                  {{/required}}
+                ,
+              {{/isArray}}
             {{/vars}}
         )
 {{/model}}
