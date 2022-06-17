@@ -42,13 +42,13 @@ docker build -f Dockerfile -t python-template . && docker run -p 80:80 -it pytho
 ## API の定義について
 
 OpenAPI を用いて定義する．
-[src/schema.yaml](src/schema.yaml) に OpenAPI を置く．
+[schema.yaml](schema.yaml) に OpenAPI を置く．
 
-以下を実行することで Python の [pydantic](https://pydantic-docs.helpmanual.io/) を利用した表現に変換したものを [src/model.py](src/model.py) を置く．
+以下を実行することで Python の [dataclass](https://docs.python.org/ja/3.10/library/dataclasses.html#dataclasses.dataclass) を利用した表現に変換したものを [src/models/](src/models/) に置く．
 
 ```bash
-./scripts/convert_open_api_to_datamodel.sh
+./scripts/convert_open_api_to_dataclass.sh
 ```
 
 ここで自動生成したコードを直接編集するのは避ける．
-また，[scripts/convert_open_api_to_datamodel.sh](scripts/convert_open_api_to_datamodel.sh) は Docker コンテナ内で実行する想定であることに注意！
+また，[scripts/convert_open_api_to_dataclass.sh](scripts/convert_open_api_to_dataclass.sh) は Docker コンテナ内で実行する想定であることに注意！
