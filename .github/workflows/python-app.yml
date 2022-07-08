@@ -13,12 +13,30 @@ jobs:
           python-version: 3.8
       - name: Install dependencies
         run: |
-          pip install -r requirements.lock
-      - name: Lint
+          python -m pip install --upgrade pip
+          if [ -f requirements.lock ]; then
+            pip install -r requirements.lock
+          elif [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+      - name: Black
+        run: python -m black --check sansan_OneNER single_turn_crf
+      - name: isort
+        if: ${{ always() }}
+        run: python -m isort -c src
+      - name: Pylint
+        if: ${{ always() }
+        run: python -m pylint src --recursive=y --enable-all-extensions
+      - name: Flake8
+        if: ${{ always() }}
+        run: python -m flake8 src --show-source --statistics
+      - name: mypy
+        if: ${{ always() }}
         run: |
-          python -m black --check tests src
-          python -m isort -c tests src
-          python -m flake8 tests src
+          python -m mypy src
+      - name: Bandit
+        if: ${{ always() }}
+        run: python -m bandit -r src
   test:
     runs-on: ubuntu-latest
     steps:
