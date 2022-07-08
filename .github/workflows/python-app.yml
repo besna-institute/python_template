@@ -20,7 +20,7 @@ jobs:
             pip install -r requirements.txt
           fi
       - name: Black
-        run: python -m black --check sansan_OneNER single_turn_crf
+        run: python -m black --check src
       - name: isort
         if: ${{ always() }}
         run: python -m isort -c src
@@ -47,7 +47,12 @@ jobs:
           python-version: 3.8
       - name: Install dependencies
         run: |
-          pip install -r requirements.lock
+          python -m pip install --upgrade pip
+          if [ -f requirements.lock ]; then
+            pip install -r requirements.lock
+          elif [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
       - name: Test
         run: |
-          python -m unittest discover -p test_*.py -s tests
+          python -m unittest
