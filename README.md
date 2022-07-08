@@ -2,6 +2,30 @@
 
 [VSCode](https://azure.microsoft.com/ja-jp/products/visual-studio-code/) による開発を**推奨**する．
 
+## Python の依存パッケージの管理
+
+### requirements.txt の更新
+
+- 必ず手動で更新すること
+- 直接依存しているパッケージのみを書くこと
+- [PyPI](https://pypi.org/)で利用可能なパッケージのみを書くこと
+
+例) flake8 の バージョンを 1.2.X にしたい場合: `flake8~=1.2.3`
+参考： https://www.python.org/dev/peps/pep-0440/#version-specifiers
+
+以下のコマンドによる更新は禁止
+```bash
+pip freeze > requirements.txt
+pip freeze >> requirements.txt
+```
+
+### requirement.lock の更新
+
+以下のコマンドを実行
+```bash
+pip freeze > requirements.lock
+```
+
 ## 開発環境の構築
 
 以下の手順を実行することで開発環境を構築できる．

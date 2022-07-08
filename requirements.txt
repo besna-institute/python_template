@@ -1,29 +1,36 @@
-fastapi[all]
-jsonschema
-black
-isort
-flake8
-mypy
-autoflake
-pyyaml
+# ===================================================================
+# ここには pip freeze で生成された依存関係のリストは書き込まないでください
+#
+# 以下のコマンドは禁止！
+#   pip freeze > requirements.txt
+#   pip freeze >> requirements.txt
+# ===================================================================
 
-# ===================================================================
-# バージョン指定の方法
-#
-# ~= : Compatible release clause （推奨）
-# == : Version matching clause （非推奨）
-# != : Version exclusion clause
-# <=, >= : Inclusive ordered comparison clause
-# <, > : Exclusive ordered comparison clause
-# === : Arbitrary equality clause.
-#
-# バージョンを指定しない場合は最新安定版になる
-# 
-# 例1: 1.1.* -> ~= 1.1.0
-# 例2: 1.*.* -> ~= 1.1
-#
-# ref: https://www.python.org/dev/peps/pep-0440/#version-specifiers
-# ===================================================================
+fastapi[all]
+
+# Linter / Formatter
+autoflake
+bandit
+black
+flake8
+flake8-absolute-import
+flake8-bugbear
+flake8-class-attributes-order
+flake8-comprehensions
+flake8-functions-names
+flake8-implicit-str-concat
+flake8-return
+flake8-use-fstring
+flake8-use-pathlib
+flake8-variables-names
+isort
+mypy
+pep8-naming
+pylint
+
+# Test
+jsonschema
+pyyaml
 
 # Cloud Functions
 functions-framework~=3.0
