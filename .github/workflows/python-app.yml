@@ -60,7 +60,6 @@ jobs:
           python-version: "3.8"
       - name: Install dependencies
         run: pip install -r requirements.lock
-      - run: python -m flake8 src --show-source --statistics
       - run: python -m mypy src
   bandit:
     runs-on: ubuntu-latest
