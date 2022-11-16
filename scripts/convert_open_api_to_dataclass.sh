@@ -1,5 +1,5 @@
 #!/bin/bash
-npm exec -- openapi-generator-cli generate -c openapi_generator.yaml
+npm exec -y -- @openapitools/openapi-generator-cli generate -c openapi_generator.yaml
 rm openapi-generator-tmp/src/models/base_model_.py
 rm -fr src/models/*
 cp -r openapi-generator-tmp/src/models/* src/models
