@@ -1,4 +1,8 @@
 [flake8]
 max-line-length = 120
-extend-ignore = E203
+extend-ignore =
+  # E203: Whitespace before ':'
+  E203,
+  # P123: open("foo") should be replaced by Path("foo").open()
+  PL123
 max-complexity = 10
