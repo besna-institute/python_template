@@ -24,6 +24,7 @@
   "extensions": [
     "editorconfig.editorconfig",
     "ms-python.python",
+    "twixes.pypi-assistant",
     "njpwerner.autodocstring",
     "42crunch.vscode-openapi",
     "zoellner.openapi-preview",
