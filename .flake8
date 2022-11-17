@@ -5,4 +5,7 @@ extend-ignore =
   E203,
   # P123: open("foo") should be replaced by Path("foo").open()
   PL123
+per-file-ignores=
+  # N815:	mixedCase variable in class scope (constants, method namesb
+  ./src/models/*.py:N815
 max-complexity = 10
