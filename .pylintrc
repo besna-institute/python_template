@@ -131,8 +131,11 @@ disable=raw-checker-failed,
         missing-class-docstring,
         missing-function-docstring,
         
-        # flake8(E501) と重複するので無効
-        line-too-long
+        # flake8(E501) と重複するので無効．
+        line-too-long,
+
+        # エディタ・IDEでチェックすればいいので無効．
+        import-error
 
 
 # Enable the message, report, category or checker with the given id(s). You can
