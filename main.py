@@ -1,15 +1,15 @@
 import json
 
 import functions_framework
-from flask import Request, jsonify
+from flask import Request, Response, jsonify
 from google.cloud import storage
 
 from src.example.solvers import SomeSolver
 from src.models import Input
 
 
-@functions_framework.http
-def apply_some_solver(request: Request):
+@functions_framework.http  # type: ignore
+def apply_some_solver(request: Request) -> Response:
     content_type = request.headers["content-type"]
     if "application/json" in content_type:
         request_json = request.get_json(silent=True)
@@ -21,8 +21,8 @@ def apply_some_solver(request: Request):
     return response_data
 
 
-@functions_framework.http
-def save_result(request: Request):
+@functions_framework.http  # type: ignore
+def save_result(request: Request) -> Response:
     content_type = request.headers["content-type"]
     if "application/json" in content_type:
         request_json = request.get_json(silent=True)
