@@ -141,6 +141,7 @@ cython_debug/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/python.code-snippets.json
 *.code-workspace
 
 # Local History for Visual Studio Code
