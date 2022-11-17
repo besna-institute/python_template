@@ -8,7 +8,7 @@ app = FastAPI()
 
 @app.post("/", response_model=Output)
 async def root(
-    input: Input = Body(
+    input: Input = Body(  # noqa: B008
         ...,
         examples={
             "normal": {
@@ -17,5 +17,5 @@ async def root(
             }
         },
     )
-):
+) -> Output:
     return SomeSolver().process(input)
