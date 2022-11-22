@@ -23,7 +23,7 @@ pip freeze >> requirements.txt
 
 以下のコマンドを実行
 ```bash
-pip freeze > requirements.lock
+./scripts/generate_lockfile.sh
 ```
 
 ## 開発環境の構築
