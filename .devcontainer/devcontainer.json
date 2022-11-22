@@ -30,7 +30,8 @@
     "zoellner.openapi-preview",
     "mermade.openapi-lint",
     "redhat.vscode-yaml",
-    "timonwong.shellcheck"
+    "timonwong.shellcheck",
+    "mkhl.shfmt"
   ],
   "postCreateCommand": "pip install --user -r requirements.txt",
   "remoteUser": "vscode"
