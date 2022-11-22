@@ -26,6 +26,15 @@ pip freeze >> requirements.txt
 pip freeze > requirements.lock
 ```
 
+## 最新のテンプレートを適用する
+
+作業ディレクトリをきれいにした状態で以下のコマンドを実行
+```bash
+./scripts/apply_template_updates.sh
+```
+
+`requirements.txt` などに適用された変更が意図したものかを確認してからコミットする．
+
 ## 開発環境の構築
 
 以下の手順を実行することで開発環境を構築できる．
