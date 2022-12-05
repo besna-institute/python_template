@@ -1,5 +1,8 @@
+from typing import List
+
 {{#models}}{{#model}}from {{modelPackage}}.{{classFilename}} import {{classname}} # noqa: F401{{/model}}
 {{/models}}
 
 api_version = "{{appVersion}}"
-__all__ = [{{#models}}{{#model}}"{{classname}}",{{/model}}{{/models}}]
+
+__all__: List[str] = [{{#models}}{{#model}}"{{classname}}",{{/model}}{{/models}}]
