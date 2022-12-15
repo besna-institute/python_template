@@ -31,7 +31,8 @@
     "mermade.openapi-lint",
     "redhat.vscode-yaml",
     "timonwong.shellcheck",
-    "mkhl.shfmt"
+    "mkhl.shfmt",
+    "vscode-icons-team.vscode-icons"
   ],
   "postCreateCommand": "pip install --user -r requirements.txt",
   "remoteUser": "vscode"
