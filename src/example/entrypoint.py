@@ -1,12 +1,14 @@
+from typing import Final
+
 from fastapi import Body, FastAPI
 
 from src.example.solvers import SomeSolver
 from src.models import Input, Output
 
-app = FastAPI()
+APP: Final[FastAPI] = FastAPI()
 
 
-@app.post("/", response_model=Output)
+@APP.post("/", response_model=Output)
 async def root(
     input: Input = Body(  # noqa: B008
         ...,
