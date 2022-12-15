@@ -13,12 +13,12 @@ class SomeSolver:
         self.api_name = api_name
 
     def analyze(self, name: str) -> Result:
-        text = f"Hello, {name}"
+        text: str = f"Hello, {name}"
         return Result(text=text)
 
     def process(self, input: Input) -> Output:
-        result = self.analyze(input.name)
-        response = Output(
+        result: Result = self.analyze(input.name)
+        response: Output = Output(
             apiName=self.api_name,
             apiVersion=api_version,
             text=result.text,
