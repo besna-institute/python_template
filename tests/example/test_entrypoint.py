@@ -5,9 +5,9 @@ from pathlib import Path
 from fastapi import status
 from fastapi.testclient import TestClient
 
-from src.example.entrypoint import app
+from src.example.entrypoint import APP
 
-client = TestClient(app)
+client = TestClient(APP)
 path_to_dir = Path(__file__).parent
 path_to_data = path_to_dir / "data"
 
