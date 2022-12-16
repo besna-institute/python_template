@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.models import Input, Output, api_version
+from src.models import API_VERSION, Input, Output
 
 
 @dataclass
@@ -13,14 +13,14 @@ class SomeSolver:
         self.api_name = api_name
 
     def analyze(self, name: str) -> Result:
-        text = f"Hello, {name}"
+        text: str = f"Hello, {name}"
         return Result(text=text)
 
     def process(self, input: Input) -> Output:
-        result = self.analyze(input.name)
-        response = Output(
-            apiName=self.api_name,
-            apiVersion=api_version,
+        result: Result = self.analyze(input.name)
+        response: Output = Output(
+            api_name=self.api_name,
+            api_version=API_VERSION,
             text=result.text,
         )
 

@@ -2,13 +2,12 @@ steps:
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
-      - beta
       - functions
       - deploy
       - apply-some-solver
       - --gen2
       - --entry-point=apply_some_solver
-      - --runtime=python38
+      - --runtime=python310
       - --region=asia-northeast1
       - --trigger-http
       - --source=.
@@ -17,13 +16,12 @@ steps:
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
-      - beta
       - functions
       - deploy
       - save-result
       - --gen2
       - --entry-point=save_result
-      - --runtime=python38
+      - --runtime=python310
       - --region=asia-northeast1
       - --trigger-http
       - --source=.

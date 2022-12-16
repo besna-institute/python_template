@@ -17,7 +17,7 @@ paths:
             examples:
               valid:
                 value:
-                  apiName: Solver
+                  api_name: Solver
                   name: "Taro"
       responses:
         "200":
@@ -27,8 +27,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Output"
               example:
-                apiName: Solver
-                apiVersion: "1.0.0"
+                api_name: Solver
+                api_version: "1.0.0"
                 text: Hello, Taro
         default:
           description: error
@@ -37,10 +37,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
               example:
-                apiName: Solver
-                apiVersion: "1.0.0"
-                errorId: "error:uncaught_syntax_error"
-                errorMessage: "Unexpected token :"
+                api_name: Solver
+                api_version: "1.0.0"
+                error_id: "error:uncaught_syntax_error"
+                error_message: "Unexpected token :"
 components:
   schemas:
     ApiName:
@@ -56,10 +56,10 @@ components:
     Input:
       type: object
       required:
-        - apiName
+        - api_name
         - name
       properties:
-        apiName:
+        api_name:
           $ref: "#/components/schemas/ApiName"
         name:
           title: Name
@@ -68,13 +68,13 @@ components:
     Output:
       type: object
       required:
-        - apiName
-        - apiVersion
+        - api_name
+        - api_version
         - text
       properties:
-        apiName:
+        api_name:
           $ref: "#/components/schemas/ApiName"
-        apiVersion:
+        api_version:
           $ref: "#/components/schemas/ApiVersion"
         text:
           title: Text
@@ -84,21 +84,21 @@ components:
     Error:
       type: object
       required:
-        - apiName
-        - apiVersion
-        - errorId
-        - errorMessage
+        - api_name
+        - api_version
+        - error_id
+        - error_message
       properties:
-        apiName:
+        api_name:
           $ref: "#/components/schemas/ApiName"
-        apiVersion:
+        api_version:
           $ref: "#/components/schemas/ApiVersion"
-        errorId:
+        error_id:
           title: Error ID
           description: error ID
           type: string
           pattern: ^error:.+$
-        errorMessage:
+        error_message:
           title: Error Message
           description: error message
           type: string

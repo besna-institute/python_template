@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Type, TypeVar
+from typing import Any, Type, TypeVar
 
 _Output = TypeVar("_Output", bound="Output")
 
@@ -12,22 +12,22 @@ class Output:
 
     Output - a model defined in OpenAPI
 
-        apiName: The apiName of this Output.
-        apiVersion: The apiVersion of this Output.
+        api_name: The api_name of this Output.
+        api_version: The api_version of this Output.
         text: The text of this Output.
     """
 
-    apiName: str
-    apiVersion: str
+    api_name: str
+    api_version: str
     text: str
 
     @classmethod
-    def from_dict(cls: Type[_Output], input: Dict[str, Any]) -> _Output:
+    def from_dict(cls: Type[_Output], input: dict[str, Any]) -> _Output:
         return cls(
-            apiName=input["apiName"],
-            apiVersion=input["apiVersion"],
+            api_name=input["api_name"],
+            api_version=input["api_version"],
             text=input["text"],
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
