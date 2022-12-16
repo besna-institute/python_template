@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Type, TypeVar
+from typing import Any, Type, TypeVar
 
 _Error = TypeVar("_Error", bound="Error")
 
@@ -12,25 +12,25 @@ class Error:
 
     Error - a model defined in OpenAPI
 
-        apiName: The apiName of this Error.
-        apiVersion: The apiVersion of this Error.
-        errorId: The errorId of this Error.
-        errorMessage: The errorMessage of this Error.
+        api_name: The api_name of this Error.
+        api_version: The api_version of this Error.
+        error_id: The error_id of this Error.
+        error_message: The error_message of this Error.
     """
 
-    apiName: str
-    apiVersion: str
-    errorId: str
-    errorMessage: str
+    api_name: str
+    api_version: str
+    error_id: str
+    error_message: str
 
     @classmethod
-    def from_dict(cls: Type[_Error], input: Dict[str, Any]) -> _Error:
+    def from_dict(cls: Type[_Error], input: dict[str, Any]) -> _Error:
         return cls(
-            apiName=input["apiName"],
-            apiVersion=input["apiVersion"],
-            errorId=input["errorId"],
-            errorMessage=input["errorMessage"],
+            api_name=input["api_name"],
+            api_version=input["api_version"],
+            error_id=input["error_id"],
+            error_message=input["error_message"],
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
