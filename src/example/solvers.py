@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.models import Input, Output, API_VERSION
+from src.models import API_VERSION, Input, Output
 
 
 @dataclass
