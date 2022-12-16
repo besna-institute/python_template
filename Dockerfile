@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM python:3.10-slim-buster
 WORKDIR /usr/src/app
 RUN useradd -d /usr/src/app -U python
 RUN chown python:python /usr/src/app
@@ -9,7 +9,7 @@ USER python
 COPY --chown=python:python requirements.lock ./
 RUN pip install --upgrade pip && pip install -r requirements.lock
 
-FROM python:3.8-slim-buster
+FROM python:3.10-slim-buster
 RUN apt-get update && apt-get install -y tini && rm -rf /var/lib/apt/lists/*
 ENTRYPOINT ["/usr/bin/tini", "--"]
 WORKDIR /usr/src/app
