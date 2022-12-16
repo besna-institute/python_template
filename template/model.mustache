@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, List, Optional, Type, TypeVar
+from typing import Any, Optional, Type, TypeVar
 
 {{#models}}
 {{#model}}
@@ -36,7 +36,7 @@ class {{classname}}:
 {{/vars}}
 
     @classmethod
-    def from_dict(cls: Type[_{{classname}}], input: Dict[str, Any]) -> _{{classname}}:
+    def from_dict(cls: Type[_{{classname}}], input: dict[str, Any]) -> _{{classname}}:
         return cls(
             {{#vars}}
               {{#isArray}}
@@ -81,5 +81,5 @@ class {{classname}}:
         )
 {{/model}}
 {{/models}}
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)

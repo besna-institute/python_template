@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Type, TypeVar
+from typing import Any, Type, TypeVar
 
 _Input = TypeVar("_Input", bound="Input")
 
@@ -12,19 +12,19 @@ class Input:
 
     Input - a model defined in OpenAPI
 
-        apiName: The apiName of this Input.
+        api_name: The api_name of this Input.
         name: The name of this Input.
     """
 
-    apiName: str
+    api_name: str
     name: str
 
     @classmethod
-    def from_dict(cls: Type[_Input], input: Dict[str, Any]) -> _Input:
+    def from_dict(cls: Type[_Input], input: dict[str, Any]) -> _Input:
         return cls(
-            apiName=input["apiName"],
+            api_name=input["api_name"],
             name=input["name"],
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self)
