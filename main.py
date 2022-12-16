@@ -14,7 +14,7 @@ def apply_some_solver(request: Request):
     if "application/json" in content_type:
         request_json = request.get_json(silent=True)
     else:
-        raise ValueError("Unknown content type: {}".format(content_type))
+        raise ValueError(f"Unknown content type: {content_type}")
     print(request_json)
     response_data = jsonify(SomeSolver().process(Input.from_dict(request_json)))
 
@@ -27,7 +27,7 @@ def save_result(request: Request):
     if "application/json" in content_type:
         request_json = request.get_json(silent=True)
     else:
-        raise ValueError("Unknown content type: {}".format(content_type))
+        raise ValueError("Unknown content type: {content_type}")
     print(request_json)
     response_data = json.dumps(request_json["result"])
     bucket_name = request_json["bucket"]
