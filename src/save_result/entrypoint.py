@@ -1,10 +1,10 @@
-from typing import Any
-
 import json
+from typing import Any
 
 import functions_framework  # type: ignore
 from flask.wrappers import Request, Response
 from google.cloud.storage import Client  # type: ignore
+
 
 @functions_framework.http  # type: ignore
 def save_result(request: Request) -> Response:
