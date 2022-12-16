@@ -1,11 +1,10 @@
-# ===================================================================
-# ここには pip freeze で生成された依存関係のリストは書き込まないでください
 #
-# 以下のコマンドは禁止！
-#   pip freeze > requirements.txt
-#   pip freeze >> requirements.txt
-# ===================================================================
+# このファイルは手動で編集すること
+# requirements.lock の生成は次のコマンドを実行:
+#    ./scripts/generate_lockfile.sh
+#
 
+### common deps ### 
 fastapi[all]~=0.87
 
 # Linter / Formatter
@@ -31,3 +30,5 @@ pyyaml~=6.0
 # Cloud Functions
 functions-framework~=3.0
 google-cloud-storage~=2.6
+
+### additional deps ###
