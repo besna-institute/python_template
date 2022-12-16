@@ -4,7 +4,7 @@ from src.example.solvers import Result, SomeSolver
 
 
 class SomeSolverTest(unittest.TestCase):
-    def test_analyze(self):
+    def test_analyze(self) -> None:
         tests = [
             ("Taro", Result(text="Hello, Taro")),
             ("Jiro", Result(text="Hello, Jiro")),
