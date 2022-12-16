@@ -57,13 +57,13 @@ Remote-Containers: Reopen in Container
 ### ローカルでのサーバーの起動
 
 ```bash
-docker build -f Dockerfile -t python-template . && docker run -p 80:80 -it python-template
+functions-framework --target=example --debug
 ```
 
-http://localhost:80 に対してリクエストを送ることができるようになる．
+http://localhost:8080 に対してリクエストを送ることができるようになる．
 
 ```bash
-curl -X POST -H "Content-Type: application/json" localhost:80 -d '{"apiName": "Solver", "name": "Taro"}'
+curl -X POST -H "Content-Type: application/json" localhost:8080 -d '{"api_name": "Solver", "name": "Taro"}'
 ```
 
 ### ローカルでのテストの実行
