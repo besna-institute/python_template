@@ -39,7 +39,7 @@ class EntrypointTest(unittest.TestCase):
         cls._process.kill()
         cls._process.wait()
 
-    def test_input1(self) -> None:
+    def test_json_input(self) -> None:
         """JSONを使ったテスト
         test_with_jsonlと選択。
         """
@@ -53,9 +53,9 @@ class EntrypointTest(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(json.loads(res.text), json_output1)
 
-    def test_with_jsonl(self) -> None:
+    def test_json_input_with_jsonl(self) -> None:
         """JSON Linesを使ったテスト
-        test_input1と選択。
+        test_json_inputと選択。
         """
         with open(path_to_data / "input.jsonl", encoding="utf-8") as input_jsonl, open(
             path_to_data / "output.jsonl", encoding="utf-8"
@@ -66,3 +66,14 @@ class EntrypointTest(unittest.TestCase):
                 res: Response = self.session.post(self.base_url, json=input)
                 self.assertEqual(res.status_code, 200)
                 self.assertEqual(json.loads(res.text), output)
+
+    def test_jsonlines_input(self) -> None:
+        """JSON Linesを入力とするテスト"""
+        with open(path_to_data / "input.jsonl", encoding="utf-8") as input_jsonl, open(
+            path_to_data / "output.jsonl", encoding="utf-8"
+        ) as output_jsonl:
+            input = input_jsonl.read()
+            output = output_jsonl.read()
+            res: Response = self.session.post(self.base_url, data=input, headers={"Content-Type": "application/jsonl"})
+            self.assertEqual(res.status_code, 200)
+            self.assertEqual(res.text, output)

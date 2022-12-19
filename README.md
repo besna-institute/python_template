@@ -63,9 +63,17 @@ functions-framework --target=example --debug
 
 http://localhost:8080 に対してリクエストを送ることができるようになる．
 
+JSON
 ```bash
 curl -X POST -H "Content-Type: application/json" localhost:8080 -d '{"api_name": "Solver", "name": "Taro"}'
 ```
+
+JSON Lines
+```bash
+DATA='{"api_name": "Solver", "name": "Taro"}
+{"api_name": "Solver", "name": "Jiro"}
+{"api_name": "Solver", "name": "Siro"}'
+curl -X POST -H "Content-Type: application/jsonl" localhost:8080 -d "$DATA"
 
 ### ローカルでのテストの実行
 

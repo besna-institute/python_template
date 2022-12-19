@@ -1,3 +1,4 @@
+import json
 from typing import Any
 
 import functions_framework  # type: ignore
@@ -10,6 +11,23 @@ from src.models import Input, Output
 
 @functions_framework.http  # type: ignore
 def example(request: Request) -> Response:
+    """サンプル
+
+    JSON Lines を入力とする場合
+      Content-Type: application/jsonl
+
+    JSON を入力とする場合
+      Content-Type: application/json
+    """
+    if request.content_type == "application/jsonl":
+        jsonl_request_body: str = request.get_data(as_text=True)
+        result: list[str] = []
+        for json_str in jsonl_request_body.splitlines():
+            request_json = json.loads(json_str)
+            input_: Input = Input(api_name=request_json["api_name"], name=request_json["name"])
+            output_: Output = SomeSolver().process(input=input_)
+            result.append(json.dumps(output_.to_dict()))
+        return Response("\n".join(result), headers={"Content-Type": "application/jsonl"})
     request_body: Any | None = request.get_json()
     if request_body is None:
         raise ValueError("Invalid JSON.")
