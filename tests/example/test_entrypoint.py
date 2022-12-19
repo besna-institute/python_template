@@ -1,5 +1,5 @@
 import json
-import subprocess
+import subprocess  # nosec B404
 import unittest
 from pathlib import Path
 
@@ -16,7 +16,7 @@ class MainTest(unittest.TestCase):
     def setUp(self) -> None:
         """ref: https://cloud.google.com/functions/docs/testing/test-http?hl=ja#integration_tests"""
         port = 8080  # Each functions framework instance needs a unique port
-        self.process = subprocess.Popen(
+        self.process = subprocess.Popen(  # pylint: disable=consider-using-with  # nosec B603 B607
             ["functions-framework", "--target", "example", "--port", str(port)],
             cwd=path_to_function_source,
             stdout=subprocess.PIPE,
