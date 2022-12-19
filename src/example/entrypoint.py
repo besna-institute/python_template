@@ -1,23 +1,20 @@
-from typing import Final
+from typing import Any
 
-from fastapi import Body, FastAPI
+import functions_framework  # type: ignore
+from flask import jsonify
+from flask.wrappers import Request, Response
 
 from src.example.solvers import SomeSolver
 from src.models import Input, Output
 
-APP: Final[FastAPI] = FastAPI()
 
+@functions_framework.http  # type: ignore
+def example(request: Request) -> Response:
+    request_body: Any | None = request.get_json()
+    if request_body is None:
+        raise ValueError("Invalid JSON.")
+    input: Input = Input(api_name=request_body["api_name"], name=request_body["name"])
+    output: Output = SomeSolver().process(input=input)
+    response_body: Response = jsonify(output)
 
-@APP.post("/", response_model=Output)
-async def root(
-    input: Input = Body(  # noqa: B008
-        ...,
-        examples={
-            "normal": {
-                "summary": "A normal example",
-                "value": {"api_name": "Solver", "name": "Taro"},
-            }
-        },
-    )
-) -> Output:
-    return SomeSolver().process(input)
+    return response_body
