@@ -56,6 +56,7 @@ Remote-Containers: Reopen in Container
 
 ### ローカルでのサーバーの起動
 
+VSCode の Remote Container のターミナルで
 ```bash
 functions-framework --target=example --debug
 ```
@@ -68,8 +69,9 @@ curl -X POST -H "Content-Type: application/json" localhost:8080 -d '{"api_name":
 
 ### ローカルでのテストの実行
 
+VSCode の Remote Container のターミナルで
 ```bash
-docker build -f Dockerfile -t python-template . && docker run -p 80:80 -it python-template /usr/local/bin/python -m unittest
+python -m unittest
 ```
 
 ## API の定義について
