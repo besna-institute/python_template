@@ -16,6 +16,8 @@
     "python.formatting.provider": "black",
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
+    "python.linting.banditEnabled": true,
+    "python.linting.banditPath": "/home/vscode/.local/bin/bandit",
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "/home/vscode/.local/bin/flake8",
     "python.linting.mypyEnabled": true,
