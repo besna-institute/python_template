@@ -1,6 +1,6 @@
 from typing import Any
 
-import functions_framework
+import functions_framework  # type: ignore
 from flask import jsonify
 from flask.wrappers import Request, Response
 
