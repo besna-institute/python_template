@@ -3,7 +3,7 @@ import subprocess  # nosec B404
 import unittest
 from pathlib import Path
 
-from requests import Session, Response  # type: ignore
+from requests import Response, Session  # type: ignore
 from requests.adapters import HTTPAdapter  # type: ignore
 from urllib3.util.retry import Retry  # type: ignore
 
