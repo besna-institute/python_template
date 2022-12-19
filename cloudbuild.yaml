@@ -6,7 +6,7 @@ steps:
       - deploy
       - apply-some-solver
       - --gen2
-      - --entry-point=apply_some_solver
+      - --entry-point=example
       - --runtime=python310
       - --region=asia-northeast1
       - --trigger-http
