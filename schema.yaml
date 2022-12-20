@@ -19,7 +19,7 @@ paths:
                 value:
                   api_name: Solver
                   name: "Taro"
-          "apllication/jsonl":
+          "application/jsonl":
             schema:
               type: string
             example: |
@@ -37,7 +37,7 @@ paths:
                 api_name: Solver
                 api_version: "1.0.0"
                 text: Hello, Taro
-            "apllication/jsonl":
+            "application/jsonl":
               schema:
                 type: string
               example: |
@@ -47,7 +47,7 @@ paths:
         default:
           description: error
           content:
-            "apllication/json":
+            "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
               example:
