@@ -26,7 +26,7 @@ git diff --output=update.patch main "$TEMPALTE_VERSION" -- \
   openapi_generator.yaml \
   openapitools.json \
   pyproject.toml \
-  requirements.txt \
+  requirements.in \
   scripts \
   src/__init.py \
   template
