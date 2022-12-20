@@ -1,7 +1,7 @@
 generatorName: python-flask
 templateDir: template
-outputDir: openapi-generator-tmp
-inputSpec: schema.yaml
+outputDir: generated
+inputSpec: ../schema.yaml
 additionalProperties:
   packageName: "src"
 globalProperties:

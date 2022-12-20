@@ -4,7 +4,7 @@
 
 ## Python の依存パッケージの管理
 
-### requirements.txt の更新
+### requirements.in の更新
 
 - 必ず手動で更新すること
 - 直接依存しているパッケージのみを書くこと
@@ -15,8 +15,8 @@
 
 以下のコマンドによる更新は禁止
 ```bash
-pip freeze > requirements.txt
-pip freeze >> requirements.txt
+pip freeze > requirements.in
+pip freeze >> requirements.in
 ```
 
 ### requirement.lock の更新
@@ -33,7 +33,7 @@ pip freeze >> requirements.txt
 ./scripts/apply_template_updates.sh
 ```
 
-`requirements.txt` などに適用された変更が意図したものかを確認してからコミットする．
+`requirements.in` などに適用された変更が意図したものかを確認してからコミットする．
 
 ## 開発環境の構築
 
@@ -56,20 +56,32 @@ Remote-Containers: Reopen in Container
 
 ### ローカルでのサーバーの起動
 
+VSCode の Remote Container のターミナルで
 ```bash
-docker build -f Dockerfile -t python-template . && docker run -p 80:80 -it python-template
+functions-framework --target=example --debug
 ```
 
-http://localhost:80 に対してリクエストを送ることができるようになる．
+http://localhost:8080 に対してリクエストを送ることができるようになる．
 
+JSON
 ```bash
-curl -X POST -H "Content-Type: application/json" localhost:80 -d '{"apiName": "Solver", "name": "Taro"}'
+curl -X POST -H "Content-Type: application/json" localhost:8080 -d '{"api_name": "Solver", "name": "Taro"}'
 ```
+
+JSON Lines
+```bash
+DATA='
+{"api_name": "Solver", "name": "Taro"}
+{"api_name": "Solver", "name": "Jiro"}
+{"api_name": "Solver", "name": "Siro"}
+'
+curl -X POST -H "Content-Type: application/jsonl" localhost:8080 -d "$DATA"
 
 ### ローカルでのテストの実行
 
+VSCode の Remote Container のターミナルで
 ```bash
-docker build -f Dockerfile -t python-template . && docker run -p 80:80 -it python-template /usr/local/bin/python -m unittest
+python -m unittest
 ```
 
 ## API の定義について
