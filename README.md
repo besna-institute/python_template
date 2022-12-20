@@ -19,7 +19,7 @@ pip freeze > requirements.in
 pip freeze >> requirements.in
 ```
 
-### requirement.lock の更新
+### requirement.txt の更新
 
 以下のコマンドを実行
 ```bash
