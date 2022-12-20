@@ -36,6 +36,6 @@
     "mkhl.shfmt",
     "vscode-icons-team.vscode-icons"
   ],
-  "postCreateCommand": "pip install --user -r requirements.txt",
+  "postCreateCommand": "pip install --user -r requirements.in",
   "remoteUser": "vscode"
 }

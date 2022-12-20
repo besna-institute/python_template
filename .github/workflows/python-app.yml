@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install dependencies
-        run: pip install -r requirements.lock
+        run: pip install -r requirements.txt
       - run: python -m black --check src tests *.py
   isort:
     runs-on: ubuntu-latest
@@ -26,7 +26,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install dependencies
-        run: pip install -r requirements.lock
+        run: pip install -r requirements.txt
       - run: python -m isort -c src tests *.py
   pylint:
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install dependencies
-        run: pip install -r requirements.lock
+        run: pip install -r requirements.txt
       - run: python -m pylint src tests *.py --recursive=y --enable-all-extensions
   flake8:
     runs-on: ubuntu-latest
@@ -48,7 +48,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install dependencies
-        run: pip install -r requirements.lock
+        run: pip install -r requirements.txt
       - run: python -m flake8 src tests *.py --show-source --statistics
   mypy:
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install dependencies
-        run: pip install -r requirements.lock
+        run: pip install -r requirements.txt
       - run: python -m mypy src tests *.py
   bandit:
     runs-on: ubuntu-latest
@@ -70,7 +70,7 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install dependencies
-        run: pip install -r requirements.lock
+        run: pip install -r requirements.txt
       - run: python -m bandit -r src tests *.py
   test:
     runs-on: ubuntu-latest
@@ -81,5 +81,5 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install dependencies
-        run: pip install -r requirements.lock
+        run: pip install -r requirements.txt
       - run: python -m unittest

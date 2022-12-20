@@ -4,7 +4,7 @@
 
 ## Python の依存パッケージの管理
 
-### requirements.txt の更新
+### requirements.in の更新
 
 - 必ず手動で更新すること
 - 直接依存しているパッケージのみを書くこと
@@ -15,8 +15,8 @@
 
 以下のコマンドによる更新は禁止
 ```bash
-pip freeze > requirements.txt
-pip freeze >> requirements.txt
+pip freeze > requirements.in
+pip freeze >> requirements.in
 ```
 
 ### requirement.lock の更新
@@ -33,7 +33,7 @@ pip freeze >> requirements.txt
 ./scripts/apply_template_updates.sh
 ```
 
-`requirements.txt` などに適用された変更が意図したものかを確認してからコミットする．
+`requirements.in` などに適用された変更が意図したものかを確認してからコミットする．
 
 ## 開発環境の構築
 
