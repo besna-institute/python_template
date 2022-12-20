@@ -70,9 +70,11 @@ curl -X POST -H "Content-Type: application/json" localhost:8080 -d '{"api_name":
 
 JSON Lines
 ```bash
-DATA='{"api_name": "Solver", "name": "Taro"}
+DATA='
+{"api_name": "Solver", "name": "Taro"}
 {"api_name": "Solver", "name": "Jiro"}
-{"api_name": "Solver", "name": "Siro"}'
+{"api_name": "Solver", "name": "Siro"}
+'
 curl -X POST -H "Content-Type: application/jsonl" localhost:8080 -d "$DATA"
 
 ### ローカルでのテストの実行

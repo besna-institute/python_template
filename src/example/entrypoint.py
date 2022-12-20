@@ -23,6 +23,8 @@ def example(request: Request) -> Response:
         jsonl_request_body: str = request.get_data(as_text=True)
         result: list[str] = []
         for json_str in jsonl_request_body.splitlines():
+            if json_str == "":
+                continue
             request_json = json.loads(json_str)
             input_: Input = Input(api_name=request_json["api_name"], name=request_json["name"])
             output_: Output = SomeSolver().process(input=input_)
