@@ -19,6 +19,13 @@ paths:
                 value:
                   api_name: Solver
                   name: "Taro"
+          "apllication/jsonl":
+            schema:
+              type: string
+            example: |
+              {"api_name": "Solver", "name": "Taro"}
+              {"api_name": "Solver", "name": "Jiro"}
+              {"api_name": "Solver", "name": "Siro"}
       responses:
         "200":
           description: response
@@ -30,6 +37,13 @@ paths:
                 api_name: Solver
                 api_version: "1.0.0"
                 text: Hello, Taro
+            "apllication/jsonl":
+              schema:
+                type: string
+              example: |
+                {"api_name": "Solver", "api_version": "1.0.0", "text": "Hello, Taro"}
+                {"api_name": "Solver", "api_version": "1.0.0", "text": "Hello, Jiro"}
+                {"api_name": "Solver", "api_version": "1.0.0", "text": "Hello, Siro"}
         default:
           description: error
           content:
