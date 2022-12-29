@@ -135,7 +135,11 @@ disable=raw-checker-failed,
         line-too-long,
 
         # エディタ・IDEでチェックすればいいので無効．
-        import-error
+        import-error,
+
+        # メリットが少なく，指摘されるストレスが大きいため無効.
+        # https://pylint.pycqa.org/en/latest/user_guide/checkers/features.html#design-checker
+        design
 
 
 # Enable the message, report, category or checker with the given id(s). You can
@@ -243,7 +247,7 @@ argument-naming-style=snake_case
 # Regular expression matching correct argument names. Overrides argument-
 # naming-style. If left empty, argument names will be checked with the set
 # naming style.
-#argument-rgx=
+argument-rgx=(?P<snake_case>[^\W\dA-Z][^\WA-Z]*|_[^\WA-Z]*|__[^\WA-Z\d_][^\WA-Z]+__)$
 
 # Naming style matching correct attribute names.
 attr-naming-style=snake_case
@@ -251,7 +255,7 @@ attr-naming-style=snake_case
 # Regular expression matching correct attribute names. Overrides attr-naming-
 # style. If left empty, attribute names will be checked with the set naming
 # style.
-#attr-rgx=
+attr-rgx=(?P<snake_case>[^\W\dA-Z][^\WA-Z]*|_[^\WA-Z]*|__[^\WA-Z\d_][^\WA-Z]+__)$
 
 # Bad variable names which should always be refused, separated by a comma.
 bad-names=foo,
@@ -306,7 +310,7 @@ function-naming-style=snake_case
 # Regular expression matching correct function names. Overrides function-
 # naming-style. If left empty, function names will be checked with the set
 # naming style.
-#function-rgx=
+function-rgx=(?P<snake_case>[^\W\dA-Z][^\WA-Z]*|_[^\WA-Z]*|__[^\WA-Z\d_][^\WA-Z]+__)$
 
 # Good variable names which should always be accepted, separated by a comma.
 good-names=i,
@@ -336,14 +340,14 @@ method-naming-style=snake_case
 
 # Regular expression matching correct method names. Overrides method-naming-
 # style. If left empty, method names will be checked with the set naming style.
-#method-rgx=
+method-rgx=(?P<snake_case>[^\W\dA-Z][^\WA-Z]*|_[^\WA-Z]*|__[^\WA-Z\d_][^\WA-Z]+__)$
 
 # Naming style matching correct module names.
 module-naming-style=snake_case
 
 # Regular expression matching correct module names. Overrides module-naming-
 # style. If left empty, module names will be checked with the set naming style.
-#module-rgx=
+module-rgx=(?P<snake_case>[^\W\dA-Z][^\WA-Z]*|_[^\WA-Z]*|__[^\WA-Z\d_][^\WA-Z]+__)$
 
 # Colon-delimited sets of names that determine each other's naming style when
 # the name regexes allow several styles.
