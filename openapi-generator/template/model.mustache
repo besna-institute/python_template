@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import Any, Optional, Type, TypeVar
+from typing import Any, Optional, Type, TypeVar, List, Dict
 
 {{#models}}
 {{#model}}
@@ -26,12 +26,12 @@ class {{classname}}:
     """
 {{#vars}}
     {{^defaultValue}}
-    {{baseName}}: {{#required}}{{>model_field_type}}{{/required}}{{^required}}Optional[{{>model_field_type}}] = None{{/required}}
+    {{baseName}}: {{#required}}{{>model_field_type}}{{/required}}{{^required}}{{>model_field_type}} | None = None{{/required}}
     {{/defaultValue}}
 {{/vars}}
 {{#vars}}
     {{#defaultValue}}
-    {{baseName}}: {{#required}}{{>model_field_type}}{{/required}}{{^required}}Optional[{{>model_field_type}}]{{/required}} = {{#isContainer}}None{{/isContainer}}{{^isContainer}}{{{defaultValue}}}{{/isContainer}}
+    {{baseName}}: {{#required}}{{>model_field_type}}{{/required}}{{^required}}{{>model_field_type}} | None{{/required}} = {{#isContainer}}None{{/isContainer}}{{^isContainer}}{{{defaultValue}}}{{/isContainer}}
     {{/defaultValue}}
 {{/vars}}
 
