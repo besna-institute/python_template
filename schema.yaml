@@ -79,6 +79,10 @@ components:
           title: Name
           description: name
           type: string
+        items:
+          type: array
+          items:
+            type: string
     Output:
       type: object
       required:

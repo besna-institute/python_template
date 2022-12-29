@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import Any, Type, TypeVar
+from typing import Any, TypeVar
 
 _Output = TypeVar("_Output", bound="Output")
 
@@ -22,7 +22,7 @@ class Output:
     text: str
 
     @classmethod
-    def from_dict(cls: Type[_Output], input: dict[str, Any]) -> _Output:
+    def from_dict(cls: type[_Output], input: dict[str, Any]) -> _Output:
         return cls(
             api_name=input["api_name"],
             api_version=input["api_version"],
