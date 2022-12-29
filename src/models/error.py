@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import Any, Type, TypeVar
+from typing import Any, TypeVar
 
 _Error = TypeVar("_Error", bound="Error")
 
@@ -24,7 +24,7 @@ class Error:
     error_message: str
 
     @classmethod
-    def from_dict(cls: Type[_Error], input: dict[str, Any]) -> _Error:
+    def from_dict(cls: type[_Error], input: dict[str, Any]) -> _Error:
         return cls(
             api_name=input["api_name"],
             api_version=input["api_version"],
