@@ -76,6 +76,7 @@ DATA='
 {"api_name": "Solver", "name": "Siro"}
 '
 curl -X POST -H "Content-Type: application/jsonl" localhost:8080 -d "$DATA"
+```
 
 ### ローカルでのテストの実行
 
