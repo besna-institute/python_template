@@ -38,7 +38,7 @@ jobs:
           python-version: "3.10"
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - run: python -m pylint src tests *.py --recursive=y --enable-all-extensions
+      - run: python -m pylint src/* tests/* *.py --recursive=y --enable-all-extensions
   flake8:
     runs-on: ubuntu-latest
     steps:
