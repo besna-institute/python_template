@@ -21,7 +21,13 @@
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "/home/vscode/.local/bin/flake8",
     "python.linting.mypyEnabled": true,
-    "python.linting.mypyPath": "/home/vscode/.local/bin/mypy"
+    "python.linting.mypyPath": "/home/vscode/.local/bin/mypy",
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintPath": "/home/vscode/.local/bin/pylint",
+    "python.linting.pylintArgs": [
+      "--enable-all-extensions"
+    ],
+    "python.linting.pylintCategorySeverity.refactor": "Information"
   },
   "extensions": [
     "editorconfig.editorconfig",

@@ -1,5 +1,4 @@
 import json
-from typing import Any
 
 import functions_framework  # type: ignore
 from flask import jsonify
@@ -23,15 +22,14 @@ def example(request: Request) -> Response:
         jsonl_request_body: str = request.get_data(as_text=True)
         result: list[str] = []
         for json_str in jsonl_request_body.splitlines():
-            if json_str == "":
+            if not json_str:
                 continue
             request_json = json.loads(json_str)
             input_: Input = Input(api_name=request_json["api_name"], name=request_json["name"])
             output_: Output = SomeSolver().process(input=input_)
             result.append(json.dumps(output_.to_dict()))
         return Response("\n".join(result), headers={"Content-Type": "application/jsonl"})
-    request_body: Any | None = request.get_json()
-    if request_body is None:
+    if (request_body := request.get_json()) is None:
         raise ValueError("Invalid JSON.")
     input: Input = Input(api_name=request_body["api_name"], name=request_body["name"])
     output: Output = SomeSolver().process(input=input)

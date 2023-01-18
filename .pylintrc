@@ -139,7 +139,10 @@ disable=raw-checker-failed,
 
         # メリットが少なく，指摘されるストレスが大きいため無効.
         # https://pylint.pycqa.org/en/latest/user_guide/checkers/features.html#design-checker
-        design
+        design,
+
+        # 「不等式は<に統一し，>は使わない」という慣習と衝突するため無効.
+        misplaced-comparison-constant
 
 
 # Enable the message, report, category or checker with the given id(s). You can

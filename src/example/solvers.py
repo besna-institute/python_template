@@ -12,7 +12,7 @@ class SomeSolver:
     def __init__(self, api_name: str = "Solver") -> None:
         self.api_name = api_name
 
-    def analyze(self, name: str) -> Result:
+    def analyze(self, name: str) -> Result:  # pylint: disable=no-self-use
         text: str = f"Hello, {name}"
         return Result(text=text)
 
