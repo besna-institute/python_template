@@ -1,6 +1,5 @@
-const CURRENT_VERSION = require('./currentVersion.js')
-
 module.exports = async ({ github, context }, branch) => {
+  const { CURRENT_VERSION } = process.env
   const tag = await github.rest.repos.listTags({
     owner: 'besna-institute',
     repo: 'python_template',
