@@ -15,6 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const CURRENT_VERSION = require('./.github/scripts/currentVersion.js')
+            core.exportVariable('CURRENT_VERSION', CURRENT_VERSION)
       - run: |
           git checkout -b ${{ github.event.inputs.name }}
           ./scripts/apply_template_updates.sh
