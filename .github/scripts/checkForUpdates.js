@@ -1,4 +1,4 @@
-const { compareVersions } = require('compare-versions')
+const { compare } = require('compare-versions')
 const CURRENT_VERSION = require('./currentVersion.js')
 
 module.exports = async ({ github, context }) => {
@@ -7,7 +7,7 @@ module.exports = async ({ github, context }) => {
     repo: 'python_template',
   }).then(result => result.data[0].name)
 
-  if (context.repo.owner === 'besna-institute' && context.repo.repo === 'python_template' && compareVersions(tag, CURRENT_VERSION, '=')) {
+  if (context.repo.owner === 'besna-institute' && context.repo.repo === 'python_template' && compare(tag, CURRENT_VERSION, '=')) {
     return github.rest.issues.create({
       owner: context.repo.owner,
       repo: context.repo.repo,
@@ -19,7 +19,7 @@ CURRENT_VERSION: \`${CURRENT_VERSION}\`
     })
   }
 
-  if (compareVersions(tag, CURRENT_VERSION, '>')) {
+  if (compare(tag, CURRENT_VERSION, '>')) {
     await github.rest.issues.create({
       owner: context.repo.owner,
       repo: context.repo.repo,
