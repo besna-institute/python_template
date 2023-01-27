@@ -142,7 +142,10 @@ disable=raw-checker-failed,
         design,
 
         # 「不等式は<に統一し，>は使わない」という慣習と衝突するため無効.
-        misplaced-comparison-constant
+        misplaced-comparison-constant,
+
+        # コメントアノテーションを使うことを推奨するため無効
+        fixme
 
 
 # Enable the message, report, category or checker with the given id(s). You can
