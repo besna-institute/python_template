@@ -27,7 +27,7 @@ jobs:
           git config user.email github-actions@github.com
           git add ${{ github.event.inputs.pathspec }} ':!.github/workflows'
           git commit -m 'Apply python_template updates'
-          git push --set-upstream origin apply-template-updates
+          git push --set-upstream origin ${{ github.event.inputs.name }}
           git checkout .
       - uses: actions/github-script@v6
         with:
