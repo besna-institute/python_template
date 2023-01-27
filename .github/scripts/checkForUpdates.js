@@ -7,7 +7,7 @@ module.exports = async ({ github, context }) => {
     repo: 'python_template',
   }).then(result => result.data[0].name)
 
-  if (context.repo.owner === 'besna-institute' && context.repo.repo === 'python_template' && compare(tag, CURRENT_VERSION, '=')) {
+  if (context.repo.owner === 'besna-institute' && context.repo.repo === 'python_template' && !compare(tag, CURRENT_VERSION, '=')) {
     return github.rest.issues.create({
       owner: context.repo.owner,
       repo: context.repo.repo,
