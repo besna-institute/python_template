@@ -1,5 +1,8 @@
 name: "Check for python_template updates"
-on: ["push"]
+on:
+  push:
+    branches:
+      - main
 jobs:
   check:
     runs-on: "ubuntu-latest"
