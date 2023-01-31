@@ -3,12 +3,12 @@ on:
   workflow_dispatch:
     inputs:
       name:
-        description: "PR作成に使うブランチ名"
+        description: "PR作成に使うブランチ名。同名のブランチが既にある場合は失敗するので注意。"
         default: "apply-template-updates"
         required: true
       pathspec:
-        description: "変更適用対象のファイル。pathspecで指定する。" # https://git-scm.com/docs/gitignore#_pattern_format
-        default: "':/' ':!/src/models' ':!/src' ':!tests'"
+        description: "変更適用対象のファイル。pathspec（.gitignoreで使う記法）で指定する。" # https://git-scm.com/docs/gitignore#_pattern_format
+        default: "':/' ':!/src/models' ':!/src' ':!/tests'"
         required: true
 jobs:
   create_pull_request:
