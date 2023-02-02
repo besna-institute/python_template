@@ -1,3 +1,4 @@
+# pylint: disable=duplicate-code
 import unittest
 
 from src.models import Color, Document, Input
