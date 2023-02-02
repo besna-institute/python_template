@@ -1,0 +1,17 @@
+{{#required}}
+  {{#isEnumRef}}
+  {{dataType}}(
+  {{/isEnumRef}}
+  input["{{baseName}}"]
+  {{#isEnumRef}}
+  )
+  {{/isEnumRef}}
+{{/required}}
+{{^required}}
+  {{#isEnumRef}}
+  {{dataType}}(_value) if (_value := input.get("{{baseName}}")) is not None else None
+  {{/isEnumRef}}
+  {{^isEnumRef}}
+  input.get("{{baseName}}", {{{defaultValue}}})
+  {{/isEnumRef}}
+{{/required}}
