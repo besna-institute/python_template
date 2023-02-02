@@ -1,6 +1,9 @@
 from dataclasses import asdict, dataclass
 from typing import Any, TypeVar
 
+from src.models.color import Color
+from src.models.document import Document
+
 _Input = TypeVar("_Input", bound="Input")
 
 
@@ -14,21 +17,22 @@ class Input:
 
         api_name: The api_name of this Input.
         name: The name of this Input.
-        items: The items of this Input [Optional].
+        documents: The documents of this Input [Optional].
+        color: The color of this Input [Optional].
     """
 
     api_name: str
     name: str
-    items: list[str] | None = None
+    documents: list[Document] | None = None
+    color: Color | None = None
 
     @classmethod
     def from_dict(cls: type[_Input], input: dict[str, Any]) -> _Input:
         return cls(
             api_name=input["api_name"],
             name=input["name"],
-            items=input.get(
-                "items",
-            ),
+            documents=[Document.from_dict(v) for v in input["documents"]] if "documents" in input else None,
+            color=Color(_value) if (_value := input.get("color")) is not None else None,
         )
 
     def to_dict(self) -> dict[str, Any]:

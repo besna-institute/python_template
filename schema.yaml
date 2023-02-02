@@ -79,10 +79,12 @@ components:
           title: Name
           description: name
           type: string
-        items:
+        documents:
           type: array
           items:
-            type: string
+            $ref: "#/components/schemas/Document"
+        color:
+          $ref: "#/components/schemas/Color"
     Output:
       type: object
       required:
@@ -120,3 +122,20 @@ components:
           title: Error Message
           description: error message
           type: string
+    Document:
+      title: Document
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+        id:
+          type: string
+    Color:
+      title: Color
+      type: string
+      enum:
+        - RED
+        - GREEN
+        - BLUE
