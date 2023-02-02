@@ -1,6 +1,7 @@
 from dataclasses import asdict, dataclass
 from typing import Any, TypeVar
 
+from src.models._util import dict_factory
 from src.models.color import Color
 from src.models.document import Document
 
@@ -36,4 +37,4 @@ class Input:
         )
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        return asdict(self, dict_factory=dict_factory)

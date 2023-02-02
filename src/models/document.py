@@ -1,6 +1,8 @@
 from dataclasses import asdict, dataclass
 from typing import Any, TypeVar
 
+from src.models._util import dict_factory
+
 _Document = TypeVar("_Document", bound="Document")
 
 
@@ -29,4 +31,4 @@ class Document:
         )
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        return asdict(self, dict_factory=dict_factory)
