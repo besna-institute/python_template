@@ -2,6 +2,7 @@
 {{#model}}
 {{^isEnum}}
 from dataclasses import asdict, dataclass
+from {{modelPackage}}._util import dict_factory
 {{/isEnum}}
 {{#isEnum}}
 from enum import Enum, unique
@@ -93,7 +94,7 @@ class {{classname}}(Enum):
             {{/vars}}
         )
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        return asdict(self, dict_factory=dict_factory)
 {{/isEnum}}
 {{#isEnum}}
 {{#allowableValues}}
