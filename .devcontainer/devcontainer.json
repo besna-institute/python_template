@@ -47,7 +47,8 @@
         "redhat.vscode-yaml",
         "timonwong.shellcheck",
         "mkhl.shfmt",
-        "vscode-icons-team.vscode-icons"
+        "vscode-icons-team.vscode-icons",
+        "GitHub.copilot"
       ]
     }
   },
