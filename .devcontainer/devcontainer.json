@@ -1,47 +1,62 @@
 {
   "name": "Python 3",
   "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
+    "context": ".",
+    "dockerfile": "Dockerfile"
+    // If you want to run with GPU, uncomment the following line and comment the above line.
+    // "dockerfile": "gpu.Dockerfile"
   },
-  "settings": {
-    "autoDocstring.docstringFormat": "numpy",
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": true
-    },
-    "editor.formatOnSave": true,
-    "editor.renderWhitespace": "all",
-    "python.defaultInterpreterPath": "/usr/local/bin/python",
-    "python.formatting.blackPath": "/home/vscode/.local/bin/black",
-    "python.formatting.provider": "black",
-    "python.languageServer": "Pylance",
-    "python.linting.enabled": true,
-    "python.linting.banditEnabled": true,
-    "python.linting.banditPath": "/home/vscode/.local/bin/bandit",
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "/home/vscode/.local/bin/flake8",
-    "python.linting.mypyEnabled": true,
-    "python.linting.mypyPath": "/home/vscode/.local/bin/mypy",
-    "python.linting.pylintEnabled": true,
-    "python.linting.pylintPath": "/home/vscode/.local/bin/pylint",
-    "python.linting.pylintArgs": [
-      "--enable-all-extensions"
-    ],
-    "python.linting.pylintCategorySeverity.refactor": "Information"
+  // If you want to run with GPU, uncomment the following lines.
+  // "runArgs": [
+  //   "--runtime", 
+  //   "nvidia",
+  //   "--gpus",
+  //   "all"
+  // ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "autoDocstring.docstringFormat": "numpy",
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": true
+        },
+        "editor.formatOnSave": true,
+        "editor.renderWhitespace": "all",
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.formatting.blackPath": "/home/vscode/.local/bin/black",
+        "python.formatting.provider": "black",
+        "python.languageServer": "Pylance",
+        "python.linting.enabled": true,
+        "python.linting.banditEnabled": true,
+        "python.linting.banditPath": "/home/vscode/.local/bin/bandit",
+        "python.linting.flake8Enabled": true,
+        "python.linting.flake8Path": "/home/vscode/.local/bin/flake8",
+        "python.linting.mypyEnabled": true,
+        "python.linting.mypyPath": "/home/vscode/.local/bin/mypy",
+        "python.linting.pylintEnabled": true,
+        "python.linting.pylintPath": "/home/vscode/.local/bin/pylint",
+        "python.linting.pylintArgs": [
+          "--enable-all-extensions"
+        ],
+        "python.linting.pylintCategorySeverity.refactor": "Information"
+      },
+      "extensions": [
+        "editorconfig.editorconfig",
+        "ms-python.python",
+        "twixes.pypi-assistant",
+        "njpwerner.autodocstring",
+        "42crunch.vscode-openapi",
+        "zoellner.openapi-preview",
+        "mermade.openapi-lint",
+        "redhat.vscode-yaml",
+        "timonwong.shellcheck",
+        "foxundermoon.shell-format",
+        "vscode-icons-team.vscode-icons",
+        "GitHub.copilot",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
   },
-  "extensions": [
-    "editorconfig.editorconfig",
-    "ms-python.python",
-    "twixes.pypi-assistant",
-    "njpwerner.autodocstring",
-    "42crunch.vscode-openapi",
-    "zoellner.openapi-preview",
-    "mermade.openapi-lint",
-    "redhat.vscode-yaml",
-    "timonwong.shellcheck",
-    "mkhl.shfmt",
-    "vscode-icons-team.vscode-icons"
-  ],
   "postCreateCommand": "pip install --user -r requirements.in",
   "remoteUser": "vscode"
 }
