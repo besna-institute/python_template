@@ -29,6 +29,8 @@ ENV PYTHON_VERSION 3.10
 RUN apt-get update && apt-get install --no-install-recommends -yq software-properties-common \
   && add-apt-repository ppa:deadsnakes/ppa && apt-get update \
   && apt-get install -yq --no-install-recommends python3 python3-pip python${PYTHON_VERSION} \
-  && sudo update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1 \
-  && sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1 \
-  && pip3 install --no-cache-dir --upgrade pip setuptools wheel
+  && update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1 \
+  && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1 \
+  && pip3 install --no-cache-dir --upgrade pip setuptools wheel \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
