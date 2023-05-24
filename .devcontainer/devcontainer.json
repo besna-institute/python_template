@@ -40,10 +40,13 @@
         ],
         "python.linting.pylintCategorySeverity.refactor": "Information",
         "[dockerfile]": {
-          "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+          "editor.defaultFormatter": "foxundermoon.shell-format"
         },
         "shellformat.useEditorConfig": true,
-        "shellformat.flag": "-bn"
+        "hadolint.cliOptions": [
+          "--ignore",
+          "DL3008,DL3013"
+        ]
       },
       "extensions": [
         "editorconfig.editorconfig",
