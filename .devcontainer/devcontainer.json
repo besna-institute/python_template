@@ -1,11 +1,15 @@
 {
   "name": "Python 3",
   "build": {
-    "dockerfile": "Dockerfile",
-    // "dockerfile": "gpu.Dockerfile",
-    "context": "."
+    "context": ".",
+    "dockerfile": "Dockerfile"
+    // If you want to run with GPU, uncomment the following line and comment the above line.
+    // "dockerfile": "gpu.Dockerfile"
   },
+  // If you want to run with GPU, uncomment the following lines.
   // "runArgs": [
+  //   "--runtime", 
+  //   "nvidia",
   //   "--gpus",
   //   "all"
   // ],
@@ -46,9 +50,10 @@
         "mermade.openapi-lint",
         "redhat.vscode-yaml",
         "timonwong.shellcheck",
-        "mkhl.shfmt",
+        "foxundermoon.shell-format",
         "vscode-icons-team.vscode-icons",
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "ms-azuretools.vscode-docker"
       ]
     }
   },
