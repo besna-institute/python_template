@@ -1,6 +1,6 @@
 name: Run hadolint
 on:
-  push:
+  pull_request:
     paths:
       - Dockerfile
       - .devcontainer
