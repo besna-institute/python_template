@@ -42,11 +42,7 @@
         "[dockerfile]": {
           "editor.defaultFormatter": "foxundermoon.shell-format"
         },
-        "shellformat.useEditorConfig": true,
-        "hadolint.cliOptions": [
-          "--ignore",
-          "DL3008,DL3013"
-        ]
+        "shellformat.useEditorConfig": true
       },
       "extensions": [
         "editorconfig.editorconfig",
