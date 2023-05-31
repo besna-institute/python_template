@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - Dockerfile
-      - .devcontainer/*Dockerfile
+      - ".devcontainer/*Dockerfile"
 jobs:
   root:
     runs-on: "ubuntu-latest"
