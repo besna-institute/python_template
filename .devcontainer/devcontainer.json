@@ -38,7 +38,11 @@
         "python.linting.pylintArgs": [
           "--enable-all-extensions"
         ],
-        "python.linting.pylintCategorySeverity.refactor": "Information"
+        "python.linting.pylintCategorySeverity.refactor": "Information",
+        "[dockerfile]": {
+          "editor.defaultFormatter": "foxundermoon.shell-format"
+        },
+        "shellformat.useEditorConfig": true
       },
       "extensions": [
         "editorconfig.editorconfig",
@@ -53,7 +57,8 @@
         "foxundermoon.shell-format",
         "vscode-icons-team.vscode-icons",
         "GitHub.copilot",
-        "ms-azuretools.vscode-docker"
+        "ms-azuretools.vscode-docker",
+        "exiasr.hadolint"
       ]
     }
   },
