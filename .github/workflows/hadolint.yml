@@ -2,7 +2,8 @@ name: Run hadolint
 on:
   push:
     paths:
-      - *Dockerfile*
+      - Dockerfile
+      - .devcontainer/*Dockerfile
 jobs:
   root:
     runs-on: "ubuntu-latest"
