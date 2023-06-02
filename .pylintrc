@@ -145,7 +145,10 @@ disable=raw-checker-failed,
         misplaced-comparison-constant,
 
         # コメントアノテーションを使うことを推奨するため無効
-        fixme
+        fixme,
+
+        # 比較に置ける値については変数化を強制しないことにするため無効
+        magic-value-comparison
 
 
 # Enable the message, report, category or checker with the given id(s). You can
@@ -633,5 +636,5 @@ preferred-modules=
 [EXCEPTIONS]
 
 # Exceptions that will emit a warning when caught.
-overgeneral-exceptions=BaseException,
-                       Exception
+overgeneral-exceptions=builtins.BaseException,
+                       builtins.Exception
