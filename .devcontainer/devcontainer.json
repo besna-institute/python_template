@@ -58,7 +58,8 @@
         "vscode-icons-team.vscode-icons",
         "GitHub.copilot",
         "ms-azuretools.vscode-docker",
-        "exiasr.hadolint"
+        "exiasr.hadolint",
+        "streetsidesoftware.code-spell-checker"
       ]
     }
   },

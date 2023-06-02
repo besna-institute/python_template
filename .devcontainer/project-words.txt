@@ -1,0 +1,10 @@
+# See https://cspell.org/docs/dictionaries-custom/#custom-dictionaries
+autoflake
+cloudsdktool
+gcloud
+jsonify
+jsonlines
+OIDC
+openapitools
+pyupgrade
+setaf

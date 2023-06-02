@@ -1,0 +1,19 @@
+{
+  "dictionaries": [
+    "project-words",
+    "python",
+    "bash"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": "./project-words.txt",
+      "addWords": true
+    }
+  ],
+  "ignorePaths": [
+    "**__pycache__**",
+    "./project-words.txt",
+    "**/requirements.*"
+  ]
+}
