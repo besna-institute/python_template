@@ -15,7 +15,7 @@ autoflake==2.0.0
     # via -r requirements.in
 bandit==1.7.4
     # via -r requirements.in
-black==22.12.0
+black==23.3.0
     # via -r requirements.in
 cachetools==5.2.0
     # via google-auth
@@ -115,7 +115,9 @@ mypy-extensions==0.4.3
     #   black
     #   mypy
 packaging==22.0
-    # via deprecation
+    # via
+    #   black
+    #   deprecation
 pathspec==0.10.3
     # via black
 pbr==5.11.0
