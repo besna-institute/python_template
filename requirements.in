@@ -20,7 +20,7 @@ isort~=5.11
 mypy~=0.991
 pep8-naming~=0.13
 pylint~=2.15
-pyupgrade~=3.3
+pyupgrade~=3.4
 
 # Test
 jsonschema~=4.17
