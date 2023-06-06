@@ -5,13 +5,6 @@ on:
       - Dockerfile
       - .devcontainer
 jobs:
-  root:
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: Dockerfile
   devContainers:
     runs-on: "ubuntu-latest"
     steps:
