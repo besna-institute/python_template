@@ -7,10 +7,12 @@ ENV OS ubuntu2204
 # OS is debian11, ubuntu1804, ubuntu2004, or ubuntu2204
 RUN apt-get update \
   && apt-get install --no-install-recommends -yq software-properties-common \
-  && wget https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/cuda-${OS}.pin \
+  && wget --progress=dot:giga https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/cuda-${OS}.pin \
   && mv cuda-${OS}.pin /etc/apt/preferences.d/cuda-repository-pin-600 \
   && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/3bf863cc.pub \
-  && add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /"
+  && add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /" \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 # https://gitlab.com/nvidia/container-images/cuda/blob/master/dist/12.1.1/ubuntu2204/devel/cudnn8/Dockerfile
 ENV NV_CUDNN_VERSION 8.9.0.131

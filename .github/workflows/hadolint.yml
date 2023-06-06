@@ -2,16 +2,11 @@ name: Run hadolint
 on:
   push:
     paths:
-      - Dockerfile
-      - .devcontainer
+      - .devcontainer/**Dockerfile
+  pull_request_target:
+    paths:
+      - .devcontainer/**Dockerfile
 jobs:
-  root:
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: actions/checkout@v3
-      - uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: Dockerfile
   devContainers:
     runs-on: "ubuntu-latest"
     steps:
