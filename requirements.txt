@@ -74,7 +74,7 @@ google-auth==2.15.0
     #   google-cloud-storage
 google-cloud-core==2.3.2
     # via google-cloud-storage
-google-cloud-storage==2.7.0
+google-cloud-storage==2.9.0
     # via -r requirements.in
 google-crc32c==1.5.0
     # via google-resumable-media
@@ -166,12 +166,6 @@ stevedore==4.1.1
     # via bandit
 tokenize-rt==5.0.0
     # via pyupgrade
-tomli==2.0.1
-    # via
-    #   autoflake
-    #   black
-    #   mypy
-    #   pylint
 tomlkit==0.11.6
     # via pylint
 typing-extensions==4.4.0
