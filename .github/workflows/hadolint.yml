@@ -2,7 +2,10 @@ name: Run hadolint
 on:
   push:
     paths:
-      - .devcontainer/**
+      - .devcontainer/**Dockerfile
+  pull_request_target:
+    paths:
+      - .devcontainer/**Dockerfile
 jobs:
   devContainers:
     runs-on: "ubuntu-latest"
