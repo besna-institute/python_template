@@ -49,7 +49,7 @@ flake8-bugbear==22.12.6
     # via -r requirements.in
 flake8-class-attributes-order==0.1.3
     # via -r requirements.in
-flake8-comprehensions==3.10.1
+flake8-comprehensions==3.12.0
     # via -r requirements.in
 flake8-implicit-str-concat==0.3.0
     # via -r requirements.in
@@ -166,12 +166,6 @@ stevedore==4.1.1
     # via bandit
 tokenize-rt==5.0.0
     # via pyupgrade
-tomli==2.0.1
-    # via
-    #   autoflake
-    #   black
-    #   mypy
-    #   pylint
 tomlkit==0.11.6
     # via pylint
 typing-extensions==4.4.0
