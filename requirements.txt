@@ -148,7 +148,7 @@ pylint==2.15.9
     # via -r requirements.in
 pyrsistent==0.19.2
     # via jsonschema
-pyupgrade==3.3.1
+pyupgrade==3.4.0
     # via -r requirements.in
 pyyaml==6.0
     # via
