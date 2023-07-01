@@ -13,7 +13,7 @@ attrs==22.1.0
     #   jsonschema
 autoflake==2.0.0
     # via -r requirements.in
-bandit==1.7.4
+bandit==1.7.5
     # via -r requirements.in
 black==23.3.0
     # via -r requirements.in
@@ -98,6 +98,8 @@ jsonschema==4.17.3
     # via -r requirements.in
 lazy-object-proxy==1.8.0
     # via astroid
+markdown-it-py==3.0.0
+    # via rich
 markupsafe==2.1.1
     # via
     #   jinja2
@@ -106,6 +108,8 @@ mccabe==0.7.0
     # via
     #   flake8
     #   pylint
+mdurl==0.1.2
+    # via markdown-it-py
 more-itertools==8.14.0
     # via flake8-implicit-str-concat
 mypy==0.991
@@ -144,6 +148,8 @@ pyflakes==3.0.1
     # via
     #   autoflake
     #   flake8
+pygments==2.15.1
+    # via rich
 pylint==2.15.9
     # via -r requirements.in
 pyrsistent==0.19.2
@@ -158,6 +164,8 @@ requests==2.28.1
     # via
     #   google-api-core
     #   google-cloud-storage
+rich==13.4.2
+    # via bandit
 rsa==4.9
     # via google-auth
 six==1.16.0
