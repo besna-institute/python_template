@@ -19,7 +19,7 @@ flake8-use-pathlib~=0.3
 isort~=5.12
 mypy~=0.991
 pep8-naming~=0.13
-pylint~=2.15
+pylint~=2.17
 pyupgrade~=3.4
 
 # Test

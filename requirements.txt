@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements.txt --resolver=backtracking requirements.in
 #
-astroid==2.12.13
+astroid==2.15.5
     # via pylint
 attrs==22.1.0
     # via
@@ -150,7 +150,7 @@ pyflakes==3.0.1
     #   flake8
 pygments==2.15.1
     # via rich
-pylint==2.15.9
+pylint==2.17.4
     # via -r requirements.in
 pyrsistent==0.19.2
     # via jsonschema
