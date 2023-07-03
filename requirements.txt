@@ -9,7 +9,6 @@ astroid==2.15.5
 attrs==22.1.0
     # via
     #   flake8-bugbear
-    #   flake8-implicit-str-concat
     #   jsonschema
 autoflake==2.0.0
     # via -r requirements.in
@@ -51,7 +50,7 @@ flake8-class-attributes-order==0.1.3
     # via -r requirements.in
 flake8-comprehensions==3.12.0
     # via -r requirements.in
-flake8-implicit-str-concat==0.3.0
+flake8-implicit-str-concat==0.4.0
     # via -r requirements.in
 flake8-use-pathlib==0.3.0
     # via -r requirements.in
@@ -110,8 +109,6 @@ mccabe==0.7.0
     #   pylint
 mdurl==0.1.2
     # via markdown-it-py
-more-itertools==8.14.0
-    # via flake8-implicit-str-concat
 mypy==0.991
     # via -r requirements.in
 mypy-extensions==0.4.3
