@@ -153,7 +153,7 @@ pyrsistent==0.19.2
     # via jsonschema
 pyupgrade==3.4.0
     # via -r requirements.in
-pyyaml==6.0
+pyyaml==6.0.1
     # via
     #   -r requirements.in
     #   bandit
