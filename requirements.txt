@@ -14,7 +14,7 @@ autoflake==2.0.0
     # via -r requirements.in
 bandit==1.7.5
     # via -r requirements.in
-black==23.3.0
+black==23.9.1
     # via -r requirements.in
 cachetools==5.2.0
     # via google-auth
