@@ -1,6 +1,6 @@
 import json
 
-import functions_framework  # type: ignore
+import functions_framework
 from flask import jsonify
 from flask.wrappers import Request, Response
 
@@ -8,7 +8,7 @@ from src.example.solvers import SomeSolver
 from src.models import Input, Output
 
 
-@functions_framework.http  # type: ignore
+@functions_framework.http
 def example(request: Request) -> Response:
     """サンプル
 

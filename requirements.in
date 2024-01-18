@@ -6,28 +6,29 @@
 
 ### common deps ### 
 # Linter / Formatter
-autoflake~=2.0
+autoflake~=2.2
 bandit~=1.7
-black~=23.3
-flake8~=6.0
+black~=23.12
+flake8~=7.0
 flake8-absolute-import~=1.0
-flake8-bugbear~=23.6
+flake8-bandit~=4.1
+flake8-bugbear~=24.1
 flake8-class-attributes-order~=0.1
-flake8-comprehensions~=3.12
+flake8-comprehensions~=3.14
 flake8-implicit-str-concat~=0.4
 flake8-use-pathlib~=0.3
-isort~=5.12
-mypy~=0.991
+isort~=5.13
+mypy~=1.8
 pep8-naming~=0.13
-pylint~=2.17
-pyupgrade~=3.4
+pylint~=3.0
+pyupgrade~=3.15
 
 # Test
-jsonschema~=4.17
+jsonschema~=4.21
 pyyaml~=6.0
 
 # Cloud Functions
-functions-framework~=3.2
-google-cloud-storage~=2.10
+functions-framework~=3.5
+google-cloud-storage~=2.14
 
 ### additional deps ###

@@ -1,11 +1,11 @@
 import json
 
-import functions_framework  # type: ignore
+import functions_framework
 from flask.wrappers import Request, Response
-from google.cloud.storage import Client  # type: ignore
+from google.cloud.storage import Client
 
 
-@functions_framework.http  # type: ignore
+@functions_framework.http
 def save_result(request: Request) -> Response:
     if (request_body := request.get_json()) is None:
         raise ValueError("Invalid JSON.")
