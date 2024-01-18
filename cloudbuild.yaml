@@ -7,7 +7,7 @@ steps:
       - example
       - --gen2
       - --entry-point=example
-      - --runtime=python310
+      - --runtime=python311
       - --region=asia-northeast1
       - --trigger-http
       - --source=.
@@ -21,7 +21,7 @@ steps:
       - save-result
       - --gen2
       - --entry-point=save_result
-      - --runtime=python310
+      - --runtime=python311
       - --region=asia-northeast1
       - --trigger-http
       - --source=.

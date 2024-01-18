@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 # https://github.com/devcontainers/images/tree/main/src/python#optional-allowing-the-non-root-vscode-user-to-pip-install-globally-without-sudo
-ENV PYTHON_VERSION 3.10
+ENV PYTHON_VERSION 3.11
 RUN apt-get update && apt-get install --no-install-recommends -yq software-properties-common \
   && add-apt-repository ppa:deadsnakes/ppa && apt-get update \
   && apt-get install -yq --no-install-recommends python3 python3-pip python${PYTHON_VERSION} \
