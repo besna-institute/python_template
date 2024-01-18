@@ -27,3 +27,7 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "requests.*"
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "urllib3.util.retry"
+ignore_missing_imports = true
