@@ -1,5 +1,5 @@
 import json
-import subprocess  # nosec B404
+import subprocess  # noqa S404
 import unittest
 from pathlib import Path
 
@@ -21,7 +21,7 @@ class EntrypointTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         """ref: https://cloud.google.com/functions/docs/testing/test-http?hl=ja#integration_tests"""
         port: str = "8080"  # Each functions framework instance needs a unique port
-        cls._process = subprocess.Popen(  # pylint: disable=consider-using-with  # nosec B603 B607
+        cls._process = subprocess.Popen(  # pylint: disable=consider-using-with  # noqa: S603,S607
             ["functions-framework", "--target", "example", "--port", port],
             cwd=path_to_function_source,
             stdout=subprocess.PIPE,
