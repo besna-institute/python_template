@@ -1,0 +1,26 @@
+# See https://cspell.org/docs/dictionaries-custom/#custom-dictionaries
+autodocstring
+autoflake
+azcli
+azuretools
+cloudsdktool
+exiasr
+foxundermoon
+gcloud
+hadolint
+jsonify
+jsonlines
+jvmoptions
+matangover
+mermade
+mhutchie
+njpwerner
+OIDC
+openapitools
+Pylance
+pyupgrade
+setaf
+shellformat
+timonwong
+twixes
+zoellner
