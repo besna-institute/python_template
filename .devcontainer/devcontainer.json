@@ -23,43 +23,70 @@
         "editor.formatOnSave": true,
         "editor.renderWhitespace": "all",
         "python.defaultInterpreterPath": "/usr/local/bin/python",
-        "python.formatting.blackPath": "/home/vscode/.local/bin/black",
-        "python.formatting.provider": "black",
         "python.languageServer": "Pylance",
-        "python.linting.enabled": true,
-        "python.linting.banditEnabled": true,
-        "python.linting.banditPath": "/home/vscode/.local/bin/bandit",
-        "python.linting.flake8Enabled": true,
-        "python.linting.flake8Path": "/home/vscode/.local/bin/flake8",
-        "python.linting.mypyEnabled": true,
-        "python.linting.mypyPath": "/home/vscode/.local/bin/mypy",
-        "python.linting.pylintEnabled": true,
-        "python.linting.pylintPath": "/home/vscode/.local/bin/pylint",
-        "python.linting.pylintArgs": [
+        "black-formatter.path": [
+          "/home/vscode/.local/bin/black"
+        ],
+        "flake8.path": [
+          "/home/vscode/.local/bin/flake8"
+        ],
+        "mypy-type-checker.path": [
+          "/home/vscode/.local/bin/mypy"
+        ],
+        "pylint.args": [
           "--enable-all-extensions"
         ],
-        "python.linting.pylintCategorySeverity.refactor": "Information",
-        "[dockerfile]": {
-          "editor.defaultFormatter": "foxundermoon.shell-format"
+        "pylint.severity": {
+          "convention": "Information",
+          "error": "Error",
+          "fatal": "Error",
+          "refactor": "Information",
+          "warning": "Warning",
+          "info": "Information"
         },
-        "shellformat.useEditorConfig": true
+        "pylint.path": [
+          "/home/vscode/.local/bin/pylint"
+        ],
+        "shellformat.useEditorConfig": true,
+        "[dockerfile]": {
+          "editor.formatOnSave": false
+        },
+        "shellformat.effectLanguages": [
+          "shellscript",
+          "dotenv",
+          "hosts",
+          "jvmoptions",
+          "ignore",
+          "gitignore",
+          "properties",
+          "spring-boot-properties",
+          "azcli",
+          "bats"
+        ]
       },
       "extensions": [
-        "editorconfig.editorconfig",
-        "ms-python.python",
-        "twixes.pypi-assistant",
-        "njpwerner.autodocstring",
         "42crunch.vscode-openapi",
-        "zoellner.openapi-preview",
-        "mermade.openapi-lint",
-        "redhat.vscode-yaml",
-        "timonwong.shellcheck",
-        "foxundermoon.shell-format",
-        "vscode-icons-team.vscode-icons",
-        "GitHub.copilot",
-        "ms-azuretools.vscode-docker",
+        "editorconfig.editorconfig",
         "exiasr.hadolint",
-        "streetsidesoftware.code-spell-checker"
+        "foxundermoon.shell-format",
+        "GitHub.copilot",
+        "github.vscode-github-actions",
+        "matangover.mypy",
+        "mermade.openapi-lint",
+        "mhutchie.git-graph",
+        "ms-azuretools.vscode-docker",
+        "ms-python.black-formatter",
+        "ms-python.flake8",
+        "ms-python.isort",
+        "ms-python.pylint",
+        "ms-python.python",
+        "njpwerner.autodocstring",
+        "redhat.vscode-yaml",
+        "streetsidesoftware.code-spell-checker",
+        "timonwong.shellcheck",
+        "twixes.pypi-assistant",
+        "vscode-icons-team.vscode-icons",
+        "zoellner.openapi-preview"
       ]
     }
   },
