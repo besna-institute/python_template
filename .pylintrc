@@ -131,6 +131,9 @@ disable=raw-checker-failed,
         missing-class-docstring,
         missing-function-docstring,
         
+        # pydocstyle(D212) とぶつかるので無効．
+        docstring-first-line-empty,
+        
         # flake8(E501) と重複するので無効．
         line-too-long,
 
