@@ -5,13 +5,25 @@ target-version = ["py310"]
 [tool.isort]
 profile = "black"
 
+[tool.pydocstyle]
+inherit = false
+ignore = "D100,D104,D203,D212"
+match = ".*\\.py"
+
 [tool.mypy]
 python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 strict = true
 
-[tool.pydocstyle]
-inherit = false
-ignore = "D100,D104,D203,D212"
-match = ".*\\.py"
+[[tool.mypy.overrides]]
+module = "functions_framework"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "google.cloud.storage"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "requests.*"
+ignore_missing_imports = true

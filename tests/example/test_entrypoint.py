@@ -3,9 +3,9 @@ import subprocess  # noqa S404
 import unittest
 from pathlib import Path
 
-from requests import Response, Session  # type: ignore
-from requests.adapters import HTTPAdapter  # type: ignore
-from urllib3.util.retry import Retry  # type: ignore
+from requests import Response, Session
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 path_to_dir: Path = Path(__file__).parent
 path_to_data: Path = path_to_dir / "data"
