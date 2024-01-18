@@ -1,6 +1,6 @@
 [tool.black]
 line-length = 120
-target-version = ["py310"]
+target-version = ["py311"]
 
 [tool.isort]
 profile = "black"
@@ -11,7 +11,7 @@ ignore = "D100,D104,D203,D212"
 match = ".*\\.py"
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.11"
 warn_return_any = true
 warn_unused_configs = true
 strict = true
