@@ -4,7 +4,7 @@
     "context": ".",
     "dockerfile": "Dockerfile"
     // If you want to run with GPU, uncomment the following line and comment the above line.
-    // "dockerfile": "gpu.Dockerfile"
+    // "dockerfile": "nvidia-gpu.Dockerfile"
   },
   // If you want to run with GPU, uncomment the following lines.
   // "runArgs": [
@@ -16,6 +16,7 @@
   "customizations": {
     "vscode": {
       "settings": {
+        "files.autoSave": "onFocusChange",
         "autoDocstring.docstringFormat": "numpy",
         "editor.codeActionsOnSave": {
           "source.organizeImports": true
@@ -47,6 +48,10 @@
         "pylint.path": [
           "/home/vscode/.local/bin/pylint"
         ],
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true
+        },
         "shellformat.useEditorConfig": true,
         "[dockerfile]": {
           "editor.formatOnSave": false
