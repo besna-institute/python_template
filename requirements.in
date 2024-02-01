@@ -8,7 +8,7 @@
 # Linter / Formatter
 autoflake~=2.2
 bandit~=1.7
-black~=23.12
+black~=24.1
 flake8~=7.0
 flake8-absolute-import~=1.0
 flake8-bandit~=4.1
