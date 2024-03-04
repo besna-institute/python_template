@@ -39,7 +39,7 @@ class {{classname}}({{>model_field_type}}, Enum):
 
     {{^isEnum}}
     {{#vars}}
-        {{baseName}}: The {{baseName}} of this {{classname}}{{^required}} [Optional]{{/required}}. {{description}}
+        {{baseName}}: {{#description}}{{description}}{{/description}}{{^description}}The {{baseName}} of this {{classname}}.{{/description}}{{^required}} [Optional]{{/required}}
     {{/vars}}
     {{/isEnum}}
     {{#isEnum}}
