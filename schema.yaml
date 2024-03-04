@@ -59,12 +59,12 @@ components:
   schemas:
     ApiName:
       title: API Name
-      description: API name
+      description: API name.
       type: string
       pattern: ^Solver$
     ApiVersion:
       title: API Version
-      description: API version
+      description: API version.
       type: string
       pattern: ^[0-9]+\.[0-9]+\.[0-9]+((M|RC)-[0-9]+)*$
     Input:
@@ -77,7 +77,7 @@ components:
           $ref: "#/components/schemas/ApiName"
         name:
           title: Name
-          description: name
+          description: name.
           type: string
         documents:
           type: array
@@ -98,7 +98,7 @@ components:
           $ref: "#/components/schemas/ApiVersion"
         text:
           title: Text
-          description: text
+          description: text.
           type: string
           minLength: 1
     Error:
@@ -115,12 +115,12 @@ components:
           $ref: "#/components/schemas/ApiVersion"
         error_id:
           title: Error ID
-          description: error ID
+          description: error ID.
           type: string
           pattern: ^error:.+$
         error_message:
           title: Error Message
-          description: error message
+          description: error message.
           type: string
     Document:
       title: Document

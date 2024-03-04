@@ -16,10 +16,10 @@ class Input:
 
     Input - a model defined in OpenAPI
 
-        api_name: The api_name of this Input.
-        name: The name of this Input.
-        documents: The documents of this Input [Optional].
-        color: The color of this Input [Optional].
+        api_name: API name.
+        name: name.
+        documents: The documents of this Input. [Optional]
+        color: The color of this Input. [Optional]
     """
 
     api_name: str

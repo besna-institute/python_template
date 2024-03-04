@@ -15,7 +15,7 @@ class Document:
     Document - a model defined in OpenAPI
 
         text: The text of this Document.
-        id: The id of this Document [Optional].
+        id: The id of this Document. [Optional]
     """
 
     text: str
