@@ -85,6 +85,11 @@ components:
             $ref: "#/components/schemas/Document"
         color:
           $ref: "#/components/schemas/Color"
+        nullable_text:
+          description: nullable text.
+          title: string
+          type: string
+          nullable: true
     Output:
       type: object
       required:
