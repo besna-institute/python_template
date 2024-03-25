@@ -14,10 +14,10 @@ class Error:
 
     Error - a model defined in OpenAPI
 
-        api_name: The api_name of this Error.
-        api_version: The api_version of this Error.
-        error_id: The error_id of this Error.
-        error_message: The error_message of this Error.
+        api_name: API name.
+        api_version: API version.
+        error_id: error ID.
+        error_message: error message.
     """
 
     api_name: str

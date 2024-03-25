@@ -14,9 +14,9 @@ class Output:
 
     Output - a model defined in OpenAPI
 
-        api_name: The api_name of this Output.
-        api_version: The api_version of this Output.
-        text: The text of this Output.
+        api_name: API name.
+        api_version: API version.
+        text: text.
     """
 
     api_name: str

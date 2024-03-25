@@ -16,16 +16,18 @@ class Input:
 
     Input - a model defined in OpenAPI
 
-        api_name: The api_name of this Input.
-        name: The name of this Input.
-        documents: The documents of this Input [Optional].
-        color: The color of this Input [Optional].
+        api_name: API name.
+        name: name.
+        documents: The documents of this Input. [Optional]
+        color: The color of this Input. [Optional]
+        nullable_text: nullable text. [Optional]
     """
 
     api_name: str
     name: str
     documents: list[Document] | None = None
     color: Color | None = None
+    nullable_text: str | None = None
 
     @classmethod
     def from_dict(cls: type[_Input], input: dict[str, Any]) -> _Input:
@@ -34,6 +36,9 @@ class Input:
             name=input["name"],
             documents=[Document.from_dict(v) for v in input["documents"]] if "documents" in input else None,
             color=Color(_value) if (_value := input.get("color")) is not None else None,
+            nullable_text=input.get(
+                "nullable_text",
+            ),
         )
 
     def to_dict(self) -> dict[str, Any]:
