@@ -6,7 +6,7 @@
 
 ### common deps ### 
 # Linter / Formatter
-autoflake~=2.2
+autoflake~=2.3
 bandit~=1.7
 black~=23.12
 flake8~=7.0
