@@ -4,16 +4,16 @@
 #
 #    pip-compile --output-file=requirements.txt --strip-extras requirements.in
 #
-astroid==3.0.2
+astroid==3.1.0
     # via pylint
 attrs==23.2.0
     # via
     #   flake8-bugbear
     #   jsonschema
     #   referencing
-autoflake==2.2.1
+autoflake==2.3.0
     # via -r requirements.in
-bandit==1.7.6
+bandit==1.7.7
     # via
     #   -r requirements.in
     #   flake8-bandit
@@ -52,7 +52,7 @@ flake8-absolute-import==1.0.0.2
     # via -r requirements.in
 flake8-bandit==4.1.1
     # via -r requirements.in
-flake8-bugbear==24.1.17
+flake8-bugbear==24.2.6
     # via -r requirements.in
 flake8-class-attributes-order==0.1.3
     # via -r requirements.in
@@ -66,10 +66,6 @@ flask==3.0.1
     # via functions-framework
 functions-framework==3.5.0
     # via -r requirements.in
-gitdb==4.0.11
-    # via gitpython
-gitpython==3.1.41
-    # via bandit
 google-api-core==2.15.0
     # via
     #   google-cloud-core
@@ -119,7 +115,7 @@ mccabe==0.7.0
     #   pylint
 mdurl==0.1.2
     # via markdown-it-py
-mypy==1.8.0
+mypy==1.9.0
     # via -r requirements.in
 mypy-extensions==1.0.0
     # via
@@ -158,7 +154,7 @@ pyflakes==3.2.0
     #   flake8
 pygments==2.17.2
     # via rich
-pylint==3.0.3
+pylint==3.1.0
     # via -r requirements.in
 pyupgrade==3.15.0
     # via -r requirements.in
@@ -182,8 +178,6 @@ rpds-py==0.17.1
     #   referencing
 rsa==4.9
     # via google-auth
-smmap==5.0.1
-    # via gitdb
 stevedore==5.1.0
     # via bandit
 tokenize-rt==5.2.0
