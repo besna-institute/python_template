@@ -125,6 +125,8 @@ https://github.com/besna-institute/python_template/releases/new から作成す�
 
 以下のように設定し、"Generate release notes"を押す。
 
+![スクリーンショット 2024-04-22 194831](https://github.com/besna-institute/python_template/assets/13166203/77fccdea-6e67-4a44-94bf-d2e829b9c3dd)
+
 リリースノートを記入したら、"Publish release"を押す。
 
 6. プルリクエストを main ブランチにマージする。
