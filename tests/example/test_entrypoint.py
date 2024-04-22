@@ -57,9 +57,10 @@ class EntrypointTest(unittest.TestCase):
         """JSON Linesを使ったテスト
         test_json_inputと選択。
         """
-        with open(path_to_data / "input.jsonl", encoding="utf-8") as input_jsonl, open(
-            path_to_data / "output.jsonl", encoding="utf-8"
-        ) as output_jsonl:
+        with (
+            open(path_to_data / "input.jsonl", encoding="utf-8") as input_jsonl,
+            open(path_to_data / "output.jsonl", encoding="utf-8") as output_jsonl,
+        ):
             for input_json, output_json in zip(input_jsonl, output_jsonl):
                 input = json.loads(input_json)
                 output = json.loads(output_json)
@@ -69,9 +70,10 @@ class EntrypointTest(unittest.TestCase):
 
     def test_jsonlines_input(self) -> None:
         """JSON Linesを入力とするテスト"""
-        with open(path_to_data / "input.jsonl", encoding="utf-8") as input_jsonl, open(
-            path_to_data / "output.jsonl", encoding="utf-8"
-        ) as output_jsonl:
+        with (
+            open(path_to_data / "input.jsonl", encoding="utf-8") as input_jsonl,
+            open(path_to_data / "output.jsonl", encoding="utf-8") as output_jsonl,
+        ):
             input = input_jsonl.read()
             output = output_jsonl.read()
             res: Response = self.session.post(self.base_url, data=input, headers={"Content-Type": "application/jsonl"})
