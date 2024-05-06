@@ -1,0 +1,30 @@
+name: Sync template repository
+
+on:
+  # Sync monthly
+  schedule:
+    - cron: '0 0 1 * *'
+  # Sync manually
+  workflow_dispatch:
+    inputs:
+      include_patterns:
+        type: string
+      exclude_patterns:
+        type: string
+  
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: besna-institute/sync-template-repository@v1
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          target_repository: 'besna-institute/python-template'
+          # scripts/apply_template_updates.sh は v9.0.0 で消す
+          include_patterns:  ${{ inputs.include_patterns || '.devcontainer/** .vscode/** openapi-generator/** scripts/convert_open_api_to_dataclass.sh scripts/convert_open_api_to_dataclass.sh scripts/apply_template_updates.sh' }}
+          exclude_patterns: ${{ inputs.exclude_patterns || '*.md openapi-generator/openapitools.json' }}
