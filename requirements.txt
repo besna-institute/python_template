@@ -11,7 +11,7 @@ attrs==23.2.0
     #   flake8-bugbear
     #   jsonschema
     #   referencing
-autoflake==2.3.0
+autoflake==2.3.1
     # via -r requirements.in
 bandit==1.7.8
     # via
