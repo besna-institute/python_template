@@ -24,7 +24,7 @@ pylint~=3.1
 pyupgrade~=3.15
 
 # Test
-jsonschema~=4.21
+jsonschema~=4.22
 pyyaml~=6.0
 
 # Cloud Functions
