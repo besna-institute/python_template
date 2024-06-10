@@ -1,3 +1,4 @@
+# pylint: disable=duplicate-code
 import json
 import subprocess  # noqa S404
 import unittest

@@ -1,3 +1,4 @@
+# pylint: disable=duplicate-code
 import unittest
 
 from src.another_example.solvers import Result, SomeSolver

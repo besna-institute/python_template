@@ -1,3 +1,4 @@
+# pylint: disable=duplicate-code
 from dataclasses import dataclass
 
 from src.models import API_VERSION, Input, Output
