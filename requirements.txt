@@ -64,7 +64,7 @@ flake8-use-pathlib==0.3.0
     # via -r requirements.in
 flask==3.0.1
     # via functions-framework
-functions-framework==3.5.0
+functions-framework==3.7.0
     # via -r requirements.in
 google-api-core==2.15.0
     # via
@@ -193,4 +193,6 @@ urllib3==2.1.0
 watchdog==3.0.0
     # via functions-framework
 werkzeug==3.0.1
-    # via flask
+    # via
+    #   flask
+    #   functions-framework
