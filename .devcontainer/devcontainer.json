@@ -19,7 +19,7 @@
         "files.autoSave": "onFocusChange",
         "autoDocstring.docstringFormat": "numpy",
         "editor.codeActionsOnSave": {
-          "source.organizeImports": true
+          "source.organizeImports": "explicit"
         },
         "editor.formatOnSave": true,
         "editor.renderWhitespace": "all",
