@@ -19,7 +19,7 @@ flake8-implicit-str-concat~=0.4
 flake8-use-pathlib~=0.3
 isort~=5.13
 mypy~=1.10
-pep8-naming~=0.13
+pep8-naming~=0.14
 pylint~=3.2
 pyupgrade~=3.15
 
