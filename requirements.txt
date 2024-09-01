@@ -38,7 +38,7 @@ deprecation==2.1.0
     # via cloudevents
 dill==0.3.7
     # via pylint
-flake8==7.0.0
+flake8==7.1.1
     # via
     #   -r requirements.in
     #   flake8-absolute-import
@@ -146,7 +146,7 @@ pyasn1==0.5.1
     #   rsa
 pyasn1-modules==0.3.0
     # via google-auth
-pycodestyle==2.11.1
+pycodestyle==2.12.1
     # via flake8
 pyflakes==3.2.0
     # via
