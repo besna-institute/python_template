@@ -1,4 +1,4 @@
-# Python template ![Python](https://img.shields.io/badge/python-3.13-blue.svg)
+# Python template ![Python](https://img.shields.io/badge/python-3.12-blue.svg)
 
 [VSCode](https://azure.microsoft.com/ja-jp/products/visual-studio-code/) による開発を**推奨**する．
 
