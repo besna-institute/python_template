@@ -90,7 +90,7 @@ python -m unittest
 OpenAPI を用いて定義する．
 [schema.yaml](schema.yaml) に OpenAPI を置く．
 
-以下を実行することで Python の [dataclass](https://docs.python.org/ja/3.13/library/dataclasses.html#dataclasses.dataclass) を利用した表現に変換したものを [src/models/](src/models/) に置く．
+以下を実行することで Python の [dataclass](https://docs.python.org/ja/3.12/library/dataclasses.html#dataclasses.dataclass) を利用した表現に変換したものを [src/models/](src/models/) に置く．
 
 ```bash
 ./scripts/convert_open_api_to_dataclass.sh
