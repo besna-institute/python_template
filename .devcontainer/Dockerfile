@@ -1,5 +1,5 @@
 # https://github.com/devcontainers/images/tree/main/src/python
-FROM mcr.microsoft.com/vscode/devcontainers/python:3.11
+FROM mcr.microsoft.com/vscode/devcontainers/python:3.12
 RUN su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install 16 2>&1"
 
 # See https://github.com/hadolint/hadolint/releases
