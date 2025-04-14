@@ -25,8 +25,8 @@
 
 ### 開発環境のセットアップ
 
-1. VSCodeの拡張機能[Visual Studio Code Remote Containers](https://code.visualstudio.com/docs/remote/containers)をインストール
-2. コマンドパレットを開き、`Remote-Containers: Reopen in Container`を選択
+1. VSCodeの拡張機能[Visual Studio Code Remote Containers](https://code.visualstudio.com/docs/remote/containers)をインストールします。
+2. コマンドパレットを開き、`Remote-Containers: Reopen in Container`を選択します。
 
 ### ローカルでの開発
 
@@ -35,7 +35,7 @@
 functions-framework --target=example --debug
 ```
 
-http://localhost:8080 に対してリクエストを送ることができるようになる．
+http://localhost:8080 に対してリクエストを送ることができるようになります。
 
 
 #### テストの実行
@@ -80,7 +80,7 @@ OpenAPIを使用してAPIを定義します。`schema.yaml`にOpenAPIの定義�
 例) flake8 の バージョンを 1.2.X にしたい場合: `flake8~=1.2.3`
 参考： https://www.python.org/dev/peps/pep-0440/#version-specifiers
 
-以下のコマンドによる更新は禁止
+以下のコマンドによる更新は禁止します。
 ```bash
 pip freeze > requirements.in
 pip freeze >> requirements.in
@@ -88,7 +88,7 @@ pip freeze >> requirements.in
 
 ### requirements.txt の更新
 
-以下のコマンドを実行
+以下のコマンドを実行します。
 ```bash
 ./scripts/generate_lockfile.sh
 ```
@@ -98,16 +98,16 @@ pip freeze >> requirements.in
 ### よくある問題
 
 1. **コンテナが起動しない**
-   - Dockerが正しくインストールされているか確認
-   - VSCodeのRemote Containers拡張機能が最新版か確認
+   - Dockerが正しくインストールされているか確認します。
+   - VSCodeのRemote Containers拡張機能が最新版か確認します。
 
 2. **依存パッケージのインストールに失敗**
-   - `requirements.in`のバージョン指定が正しいか確認
-   - インターネット接続を確認
+   - `requirements.in`のバージョン指定が正しいか確認します。
+   - インターネット接続を確認します。
 
 3. **APIの自動生成が失敗**
-   - `schema.yaml`の構文が正しいか確認
-   - Dockerコンテナ内で実行しているか確認
+   - `schema.yaml`の構文が正しいか確認します。
+   - Dockerコンテナ内で実行しているか確認します。
 
 ## 保守運用
 
