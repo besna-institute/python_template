@@ -86,7 +86,7 @@ pip freeze > requirements.in
 pip freeze >> requirements.in
 ```
 
-### requirement.txt の更新
+### requirements.txt の更新
 
 以下のコマンドを実行
 ```bash
@@ -111,36 +111,4 @@ pip freeze >> requirements.in
 
 ## 保守運用
 
-このテンプレートリポジトリの保守運用に関する詳細は[CONTRIBUTING.md](CONTRIBUTING.md)を参照してください。
-
-## リリース手順
-
-1. mainブランチをチェックアウトし、コミットしていない変更がない状態にする。
-```bash
-git checkout main
-```
-
-2. リリース用の新しいブランチを作成する。`x.x.x`をリリースしたいバージョン番号に置き換える。
-```bash
-git checkout -b release/vx.x.x
-```
-
-3. 新しいブランチをリモートリポジトリにプッシュする。
-```bash
-git commit .
-git push origin release/vx.x.x
-```
-
-4. プルリクエストを作成し、すべてのCIが通ることを確認する。
-
-5. 新しいリリースを作成する。
-
-https://github.com/besna-institute/python_template/releases/new から作成する。
-
-以下のように設定し、"Generate release notes"を押す。
-
-![スクリーンショット 2024-04-22 194831](https://github.com/besna-institute/python_template/assets/13166203/77fccdea-6e67-4a44-94bf-d2e829b9c3dd)
-
-リリースノートを記入したら、"Publish release"を押す。
-
-6. プルリクエストを main ブランチにマージする。
+このテンプレートリポジトリの保守運用に関する詳細は[CONTRIBUTING.md](CONTRIBUTING.md)を参照してください。リリース手順についても同ファイルに記載されています。
