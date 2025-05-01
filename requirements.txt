@@ -130,7 +130,7 @@ pathspec==0.12.1
     # via black
 pbr==6.1.1
     # via stevedore
-pep8-naming==0.14.1
+pep8-naming==0.15.0
     # via -r requirements.in
 platformdirs==4.3.7
     # via
