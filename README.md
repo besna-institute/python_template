@@ -59,6 +59,32 @@ DATA='
 curl -X POST -H "Content-Type: application/jsonl" localhost:8080/example -d "$DATA"
 ```
 
+## ローカル実行方法
+
+```bash
+# exampleを実行する場合
+docker build -t python-template --build-arg ENTRYPOINT=src.example.entrypoint:app .
+docker run -p 8080:8080 python-template
+
+# another_exampleを実行する場合
+docker build -t python-template --build-arg ENTRYPOINT=src.another_example.entrypoint:app .
+docker run -p 8080:8080 python-template
+```
+
+または、Dockerなしで直接実行する場合：
+
+```bash
+# exampleを実行する場合
+python -m src.example.entrypoint
+
+# another_exampleを実行する場合
+python -m src.another_example.entrypoint
+```
+
+## エンドポイント
+
+- `/` - サンプルエンドポイント（exampleまたはanother_example）
+
 ## APIの定義
 
 OpenAPIを使用してAPIを定義します。`schema.yaml`にOpenAPIの定義を記述し、以下のコマンドでPythonの [dataclass](https://docs.python.org/ja/3.12/library/dataclasses.html#dataclasses.dataclass) に変換します：

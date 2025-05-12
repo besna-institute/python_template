@@ -1,29 +1,73 @@
 steps:
+  # example用のビルドとデプロイ
   - name: "gcr.io/cloud-builders/docker"
+    id: "build-example"
     args:
       [
         "build",
         "-t",
-        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/app:$COMMIT_SHA",
+        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/example:$COMMIT_SHA",
+        "--build-arg",
+        "ENTRYPOINT=src.example.entrypoint:app",
         ".",
       ]
   - name: "gcr.io/cloud-builders/docker"
+    id: "push-example"
     args:
       [
         "push",
-        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/app:$COMMIT_SHA",
+        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/example:$COMMIT_SHA",
       ]
+    waitFor: ["build-example"]
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    id: "deploy-example"
     args:
       - gcloud
       - run
       - deploy
       - example
-      - --image=asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/app:$COMMIT_SHA
+      - --image=asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/example:$COMMIT_SHA
       - --region=asia-northeast1
       - --platform=managed
       - --allow-unauthenticated
+    waitFor: ["push-example"]
+
+  # another_example用のビルドとデプロイ
+  - name: "gcr.io/cloud-builders/docker"
+    id: "build-another-example"
+    args:
+      [
+        "build",
+        "-t",
+        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/another-example:$COMMIT_SHA",
+        "--build-arg",
+        "ENTRYPOINT=src.another_example.entrypoint:app",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    id: "push-another-example"
+    args:
+      [
+        "push",
+        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/another-example:$COMMIT_SHA",
+      ]
+    waitFor: ["build-another-example"]
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    id: "deploy-another-example"
+    args:
+      - gcloud
+      - run
+      - deploy
+      - another-example
+      - --image=asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/another-example:$COMMIT_SHA
+      - --region=asia-northeast1
+      - --platform=managed
+      - --allow-unauthenticated
+    waitFor: ["push-another-example"]
+
+  # Workflowsのデプロイ
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    id: "deploy-workflows"
     args:
       - gcloud
       - workflows
@@ -31,7 +75,9 @@ steps:
       - python-template
       - --source=workflows.yaml
       - --location=asia-southeast1
-    waitFor: ["-"]
+    waitFor: ["deploy-example", "deploy-another-example"]
+
 timeout: 1200s
 images:
-  - asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/app:$COMMIT_SHA
+  - asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/example:$COMMIT_SHA
+  - asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/another-example:$COMMIT_SHA
