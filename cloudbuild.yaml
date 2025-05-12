@@ -1,32 +1,28 @@
 steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/app:$COMMIT_SHA",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/app:$COMMIT_SHA",
+      ]
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
-      - functions
+      - run
       - deploy
       - example
-      - --gen2
-      - --entry-point=example
-      - --runtime=python312
+      - --image=asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/app:$COMMIT_SHA
       - --region=asia-northeast1
-      - --trigger-http
-      - --source=.
+      - --platform=managed
       - --allow-unauthenticated
-    waitFor: ["-"]
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    args:
-      - gcloud
-      - functions
-      - deploy
-      - save-result
-      - --gen2
-      - --entry-point=save_result
-      - --runtime=python312
-      - --region=asia-northeast1
-      - --trigger-http
-      - --source=.
-      - --allow-unauthenticated
-    waitFor: ["-"]
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
@@ -37,3 +33,5 @@ steps:
       - --location=asia-southeast1
     waitFor: ["-"]
 timeout: 1200s
+images:
+  - asia-northeast1-docker.pkg.dev/$PROJECT_ID/python-template/app:$COMMIT_SHA
