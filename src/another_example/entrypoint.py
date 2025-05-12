@@ -1,16 +1,17 @@
 # pylint: disable=duplicate-code
 import json
+import os
 
-import functions_framework
-from flask import jsonify
-from flask.wrappers import Request, Response
+from flask import Flask, Response, jsonify, request
 
 from src.another_example.solvers import SomeSolver
 from src.models import Input, Output
 
+app = Flask(__name__)
 
-@functions_framework.http
-def another_example(request: Request) -> Response:
+
+@app.route("/", methods=["POST"])
+def another_example() -> Response:
     """サンプル
 
     JSON Lines を入力とする場合
@@ -34,6 +35,10 @@ def another_example(request: Request) -> Response:
         raise ValueError("Invalid JSON.")
     input: Input = Input(api_name=request_body["api_name"], name=request_body["name"])
     output: Output = SomeSolver().process(input=input)
-    response_body: Response = jsonify(output)
+    response_body: Response = jsonify(output.to_dict())
 
     return response_body
+
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=int(os.environ.get("PORT", 8081)))

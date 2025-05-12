@@ -23,7 +23,7 @@ class EntrypointTest(unittest.TestCase):
         """ref: https://cloud.google.com/functions/docs/testing/test-http?hl=ja#integration_tests"""
         port: str = "8081"  # Each functions framework instance needs a unique port
         cls._process = subprocess.Popen(  # pylint: disable=consider-using-with  # noqa: S603,S607
-            ["functions-framework", "--target", "another_example", "--port", port],
+            ["python", "-m", "src.another_example.entrypoint"],
             cwd=path_to_function_source,
             stdout=subprocess.PIPE,
         )
