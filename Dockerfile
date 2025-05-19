@@ -12,4 +12,4 @@ COPY . .
 
 ENV PORT=8080
 
-CMD ["gunicorn", "--bind", ":$PORT", "--workers", "1", "--threads", "8", "--timeout", "0", "${ENTRYPOINT}"] 
+CMD ["uvicorn", "${ENTRYPOINT}", "--host", "0.0.0.0", "--port", "${PORT}"] 

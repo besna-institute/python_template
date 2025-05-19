@@ -31,3 +31,6 @@ pyyaml~=6.0
 google-cloud-storage~=2.16
 
 ### additional deps ###
+fastapi~=0.110.0
+uvicorn~=0.27.1
+pydantic~=2.6.3

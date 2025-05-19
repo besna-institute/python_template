@@ -31,3 +31,15 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "urllib3.util.retry"
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "fastapi.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "pydantic.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "uvicorn.*"
+ignore_missing_imports = true
