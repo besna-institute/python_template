@@ -1,3 +1,4 @@
+# pylint: disable=duplicate-code
 import json
 import os
 
@@ -13,7 +14,7 @@ app = FastAPI()
 @app.get("/health")
 async def health() -> dict[str, str]:
     """ヘルスチェックエンドポイント
-    DBやAPIの疎通確認もここで行うといいです。
+    DBやAPIの疎通確認もここで行う。
     """
     return {"status": "ok"}
 

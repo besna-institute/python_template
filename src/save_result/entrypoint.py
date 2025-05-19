@@ -1,18 +1,9 @@
 import json
 import os
-from typing import Any, Dict
 
 from fastapi import FastAPI, Request
 from fastapi.responses import Response
 from google.cloud.storage import Client
-from pydantic import BaseModel
-
-
-class SaveResultRequest(BaseModel):
-    result: Dict[str, Any]
-    bucket: str
-    object: str
-
 
 app = FastAPI()
 
@@ -20,7 +11,7 @@ app = FastAPI()
 @app.get("/health")
 async def health() -> dict[str, str]:
     """ヘルスチェックエンドポイント
-    DBやAPIの疎通確認もここで行うといいです。
+    DBやAPIの疎通確認もここで行う。
     """
     return {"status": "ok"}
 
@@ -28,14 +19,12 @@ async def health() -> dict[str, str]:
 @app.post("/")
 async def save_result(request: Request) -> Response:
     request_json = await request.json()
-
-    save_request = SaveResultRequest(**request_json)
-    response_data = json.dumps(save_request.result)
+    response_data = json.dumps(request_json)
 
     storage_client = Client()
-    bucket = storage_client.get_bucket(save_request.bucket)
-    blob = bucket.blob(save_request.object)
-    print(f"Saving result to {save_request.object} in bucket {save_request.bucket}.")
+    bucket = storage_client.get_bucket(request_json["bucket"])
+    blob = bucket.blob(request_json["object"])
+    print(f"Saving result to {request_json['object']} in bucket {request_json['bucket']}.")
     blob.upload_from_string(response_data, content_type="application/json")
     print("File saved.")
 
