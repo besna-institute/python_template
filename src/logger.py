@@ -1,14 +1,36 @@
+"""ロギング設定とログユーティリティモジュール
+
+このモジュールはアプリケーション全体で使用されるロギング機能を提供します。
+以下の機能が含まれています：
+- ログフォーマッタ（カラー出力とGCP JSON形式）
+- ロギング設定
+- HTTPリクエスト/レスポンスのロギングミドルウェア
+
+環境変数 ENV によってログの出力形式が変わります：
+- ENV=production: Google Cloud互換のJSON形式
+- その他: カラー付きの人間が読みやすい形式
+"""
+
 import datetime
 import json
 import logging
 import os
 import sys
+from collections.abc import Callable
 from logging import LogRecord
 from typing import Any
+
+from fastapi import Request
+from starlette.middleware.base import BaseHTTPMiddleware
 
 
 # ANSIエスケープシーケンスを使用した色定義
 class Colors:
+    """ANSIエスケープシーケンスを使用した色定義
+
+    ターミナル出力の色付けに使用する定数を提供します。
+    """
+
     RESET = "\033[0m"
     RED = "\033[31m"
     GREEN = "\033[32m"
@@ -45,7 +67,7 @@ class ColoredFormatter(logging.Formatter):
         return message
 
 
-class GcpJsonFormatter(logging.Formatter):
+class GoogleCloudJsonFormatter(logging.Formatter):
     def format(self, record: LogRecord) -> str:
         # 基本フィールド
         log_record: dict[str, Any] = {
@@ -98,11 +120,19 @@ class GcpJsonFormatter(logging.Formatter):
 
 
 def configure_logging() -> None:
+    """ロギングを設定する
+
+    環境変数ENVに基づいてロギングを設定します：
+    - production環境: GCP JSON形式
+    - その他の環境: カラー付きの人間が読みやすい形式
+
+    ロガーはINFOレベル以上のメッセージを標準出力に出力します。
+    """
     env = os.getenv("ENV", "local").lower()
     handler = logging.StreamHandler(sys.stdout)
 
     if env == "production":
-        handler.setFormatter(GcpJsonFormatter())
+        handler.setFormatter(GoogleCloudJsonFormatter())
     else:
         fmt = "[%(asctime)s] %(levelname)-7s [%(filename)s:%(lineno)d] %(message)s"
         handler.setFormatter(ColoredFormatter(fmt=fmt, datefmt="%Y-%m-%dT%H:%M:%S"))
@@ -115,6 +145,45 @@ def configure_logging() -> None:
 
 configure_logging()
 logger = logging.getLogger(__name__)
+
+
+class LoggingMiddleware(BaseHTTPMiddleware):
+    """HTTPリクエストとレスポンスのロギングを行うミドルウェア
+
+    このミドルウェアは以下の情報をログに記録します：
+    - リクエストのメソッドとパス
+    - リクエストヘッダー
+    - レスポンスのステータスコード
+
+    FastAPIアプリケーションに追加して使用します：
+    ```python
+    app = FastAPI()
+    app.add_middleware(LoggingMiddleware)
+    ```
+    """
+
+    async def dispatch(self, request: Request, call_next: Callable[[Request], Any]) -> Any:
+        """HTTPリクエストを処理し、ログを記録する
+
+        Args:
+            request: 処理するHTTPリクエスト
+            call_next: 次のミドルウェアまたはエンドポイントを呼び出す関数
+
+        Returns:
+            処理されたHTTPレスポンス
+        """
+        # リクエストのログ
+        logger.info("Request: %s %s", request.method, request.url.path)
+        logger.info("Request Headers: %s", dict(request.headers))
+
+        # リクエストの処理
+        response = await call_next(request)
+
+        # レスポンスのログ
+        logger.info("Response Status: %s", response.status_code)
+
+        return response
+
 
 if __name__ == "__main__":
     # 以下のコマンドを実行することでログの出力例が確認できます。
