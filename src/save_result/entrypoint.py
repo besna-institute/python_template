@@ -5,7 +5,11 @@ from fastapi import FastAPI, Request
 from fastapi.responses import Response
 from google.cloud.storage import Client
 
+from src.logger import LoggingMiddleware, logger
+
 app = FastAPI()
+
+app.add_middleware(LoggingMiddleware)
 
 
 @app.get("/health")
@@ -24,9 +28,12 @@ async def save_result(request: Request) -> Response:
     storage_client = Client()
     bucket = storage_client.get_bucket(request_json["bucket"])
     blob = bucket.blob(request_json["object"])
-    print(f"Saving result to {request_json['object']} in bucket {request_json['bucket']}.")
+
+    logger.info("ファイル保存開始", extra={"bucket": request_json["bucket"], "object": request_json["object"]})
+
     blob.upload_from_string(response_data, content_type="application/json")
-    print("File saved.")
+
+    logger.info("ファイル保存完了", extra={"bucket": request_json["bucket"], "object": request_json["object"]})
 
     return Response(status_code=201)
 

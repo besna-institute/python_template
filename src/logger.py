@@ -172,15 +172,29 @@ class LoggingMiddleware(BaseHTTPMiddleware):
         Returns:
             処理されたHTTPレスポンス
         """
-        # リクエストのログ
-        logger.info("Request: %s %s", request.method, request.url.path)
-        logger.info("Request Headers: %s", dict(request.headers))
-
         # リクエストの処理
         response = await call_next(request)
 
-        # レスポンスのログ
-        logger.info("Response Status: %s", response.status_code)
+        # /healthエンドポイントへのリクエストはログ記録をスキップ
+        if request.url.path == "/health":
+            return response
+
+        logger.info(
+            "%s %s",
+            request.method,
+            request.url.path,
+            extra={
+                "http_request": {
+                    "requestMethod": request.method,
+                    "requestUrl": str(request.url),
+                    "requestSize": request.headers.get("content-length", ""),
+                    "userAgent": request.headers.get("user-agent", ""),
+                    "remoteIp": request.client.host if request.client else "",
+                    "serverIp": request.headers.get("host", ""),
+                    "protocol": request.scope.get("type", ""),
+                },
+            },
+        )
 
         return response
 
