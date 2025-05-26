@@ -8,10 +8,12 @@ on:
       - .devcontainer/**Dockerfile
 jobs:
   devContainers:
+    name: 標準Dockerfileのチェック（.devcontainer/Dockerfile）
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
       - id: check_dockerfile
+        name: ファイルの存在確認（.devcontainer/Dockerfile）
         run: |
           if [ -f ".devcontainer/Dockerfile" ]; then
             echo "exists=true" >> $GITHUB_OUTPUT
@@ -19,14 +21,17 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
       - uses: hadolint/hadolint-action@v3.1.0
+        name: Hadolintでの構文チェック（.devcontainer/Dockerfile）
         if: steps.check_dockerfile.outputs.exists == 'true'
         with:
           dockerfile: .devcontainer/Dockerfile
   devContainersGpu:
+    name: GPU Dockerfileのチェック（.devcontainer/nvidia-gpu.Dockerfile）
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v4
       - id: check_dockerfile
+        name: ファイルの存在確認（.devcontainer/nvidia-gpu.Dockerfile）
         run: |
           if [ -f ".devcontainer/nvidia-gpu.Dockerfile" ]; then
             echo "exists=true" >> $GITHUB_OUTPUT
@@ -34,6 +39,7 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
       - uses: hadolint/hadolint-action@v3.1.0
+        name: Hadolintでの構文チェック（.devcontainer/nvidia-gpu.Dockerfile）
         if: steps.check_dockerfile.outputs.exists == 'true'
         with:
           dockerfile: .devcontainer/nvidia-gpu.Dockerfile
