@@ -204,6 +204,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
 
 
 if __name__ == "__main__":
+    # NOTE:
     # 以下のコマンドを実行することでログの出力例が確認できます。
     # 環境別の実行方法と出力形式：
     # ローカル環境:
