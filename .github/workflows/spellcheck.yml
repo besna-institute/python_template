@@ -1,0 +1,22 @@
+name: CSpell
+
+on: push
+
+jobs:
+  spellcheck:
+    name: Check spelling
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install CSpell
+        run: npm install -g cspell@latest
+
+      - name: Run CSpell
+        run: cspell --config cspell.json "**" --dot 

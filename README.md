@@ -254,6 +254,10 @@ npx cspell --config cspell.json "**" --dot
 
 必要に応じて設定を調整してください。
 
+### GitHub Actionsでのスペルチェック
+
+このプロジェクトではGitHub Actionsを使用して、すべてのブランチへのプッシュ時に自動的にスペルチェックが実行されます。ワークフローは`.github/workflows/spellcheck.yml`で定義されています。
+
 ## 保守運用
 
 このテンプレートリポジトリの保守運用に関する詳細は[CONTRIBUTING.md](CONTRIBUTING.md)を参照してください。リリース手順についても同ファイルに記載されています。
