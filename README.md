@@ -10,6 +10,7 @@
 - Python標準ライブラリの`unittest`ですぐにテストを始められる環境
 - `flake8`、`black`、`isort`によるコード品質の自動チェックと整形
 - GitHub Actionsによる継続的インテグレーション（CI）の整備
+- Cloud Runへのデプロイ対応
 
 このテンプレートを使用することで、各案件に向けたAPIサーバー開発を迅速に開始し、一貫した開発スタイルを維持することができます。
 
@@ -32,11 +33,10 @@
 
 #### サーバーの起動
 ```bash
-functions-framework --target=example --debug
+python app.py
 ```
 
 http://localhost:8080 に対してリクエストを送ることができるようになります。
-
 
 #### テストの実行
 ```bash
@@ -46,7 +46,7 @@ python -m unittest
 #### APIのテスト
 JSONリクエスト
 ```bash
-curl -X POST -H "Content-Type: application/json" localhost:8080 -d '{"api_name": "Solver", "name": "Taro"}'
+curl -X POST -H "Content-Type: application/json" localhost:8080/example -d '{"api_name": "Solver", "name": "Taro"}'
 ```
 
 JSON Linesリクエスト
@@ -56,8 +56,34 @@ DATA='
 {"api_name": "Solver", "name": "Jiro"}
 {"api_name": "Solver", "name": "Siro"}
 '
-curl -X POST -H "Content-Type: application/jsonl" localhost:8080 -d "$DATA"
+curl -X POST -H "Content-Type: application/jsonl" localhost:8080/example -d "$DATA"
 ```
+
+## ローカル実行方法
+
+```bash
+# exampleを実行する場合
+docker build -t python-template --build-arg ENTRYPOINT=src.example.entrypoint:app .
+docker run -p 8080:8080 python-template
+
+# another_exampleを実行する場合
+docker build -t python-template --build-arg ENTRYPOINT=src.another_example.entrypoint:app .
+docker run -p 8080:8080 python-template
+```
+
+または、Dockerなしで直接実行する場合：
+
+```bash
+# exampleを実行する場合
+python -m src.example.entrypoint
+
+# another_exampleを実行する場合
+python -m src.another_example.entrypoint
+```
+
+## エンドポイント
+
+- `/` - サンプルエンドポイント（exampleまたはanother_example）
 
 ## APIの定義
 
