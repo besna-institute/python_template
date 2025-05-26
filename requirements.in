@@ -4,7 +4,10 @@
 #    ./scripts/generate_lockfile.sh
 #
 
-### common deps ### 
+### common deps ###
+fastapi~=0.115
+uvicorn~=0.34
+pydantic~=2.11
 # Linter / Formatter
 autoflake~=2.3
 bandit~=1.8
@@ -27,8 +30,7 @@ pyupgrade~=3.19
 jsonschema~=4.23
 pyyaml~=6.0
 
-# Cloud Functions
-functions-framework~=3.7
+# Google Cloud
 google-cloud-storage~=2.16
 
 ### additional deps ###
