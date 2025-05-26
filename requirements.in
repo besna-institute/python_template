@@ -4,7 +4,11 @@
 #    ./scripts/generate_lockfile.sh
 #
 
-### common deps ### 
+### common deps ###
+fastapi~=0.115
+uvicorn~=0.34
+pydantic~=2.11
+
 # Linter / Formatter
 autoflake~=2.3
 bandit~=1.8

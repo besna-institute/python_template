@@ -4,6 +4,7 @@
 
 このリポジトリは、Pythonを使用したAPIサーバー開発の効率化を目的としたテンプレートリポジトリです。以下の特徴を持っています：
 
+- FastAPIによる高速なAPIサーバー実装
 - OpenAPIによるAPI定義の自動生成
 - [DevContainer](https://containers.dev/)による開発環境のDockerコンテナ化
 - 依存パッケージの厳密なバージョン管理
@@ -33,7 +34,14 @@
 
 #### サーバーの起動
 ```bash
-python app.py
+# exampleを実行する場合
+python -m src.example.entrypoint
+
+# another_exampleを実行する場合
+python -m src.another_example.entrypoint
+
+# save_resultを実行する場合
+python -m src.save_result.entrypoint
 ```
 
 http://localhost:8080 に対してリクエストを送ることができるようになります。
@@ -46,7 +54,7 @@ python -m unittest
 #### APIのテスト
 JSONリクエスト
 ```bash
-curl -X POST -H "Content-Type: application/json" localhost:8080/example -d '{"api_name": "Solver", "name": "Taro"}'
+curl -X POST -H "Content-Type: application/json" localhost:8080/ -d '{"api_name": "Solver", "name": "Taro"}'
 ```
 
 JSON Linesリクエスト
@@ -56,34 +64,8 @@ DATA='
 {"api_name": "Solver", "name": "Jiro"}
 {"api_name": "Solver", "name": "Siro"}
 '
-curl -X POST -H "Content-Type: application/jsonl" localhost:8080/example -d "$DATA"
+curl -X POST -H "Content-Type: application/jsonl" localhost:8080/ -d "$DATA"
 ```
-
-## ローカル実行方法
-
-```bash
-# exampleを実行する場合
-docker build -t python-template --build-arg ENTRYPOINT=src.example.entrypoint:app .
-docker run -p 8080:8080 python-template
-
-# another_exampleを実行する場合
-docker build -t python-template --build-arg ENTRYPOINT=src.another_example.entrypoint:app .
-docker run -p 8080:8080 python-template
-```
-
-または、Dockerなしで直接実行する場合：
-
-```bash
-# exampleを実行する場合
-python -m src.example.entrypoint
-
-# another_exampleを実行する場合
-python -m src.another_example.entrypoint
-```
-
-## エンドポイント
-
-- `/` - サンプルエンドポイント（exampleまたはanother_example）
 
 ## APIの定義
 
