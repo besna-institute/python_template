@@ -5,6 +5,7 @@
 - ログフォーマッタ（カラー出力とGCP JSON形式）
 - ロギング設定
 - HTTPリクエスト/レスポンスのロギングミドルウェア
+- 色付きログメッセージのユーティリティ関数
 
 環境変数 ENV によってログの出力形式が変わります：
 - ENV=production: Google Cloud互換のJSON形式
@@ -32,6 +33,7 @@ class Colors:
     """
 
     RESET = "\033[0m"
+    BLACK = "\033[30m"
     RED = "\033[31m"
     GREEN = "\033[32m"
     YELLOW = "\033[33m"
@@ -39,6 +41,92 @@ class Colors:
     MAGENTA = "\033[35m"
     CYAN = "\033[36m"
     BRIGHT_RED = "\033[91m"
+    BRIGHT_GREEN = "\033[92m"
+    BRIGHT_YELLOW = "\033[93m"
+    BRIGHT_BLUE = "\033[94m"
+    BRIGHT_MAGENTA = "\033[95m"
+    BRIGHT_CYAN = "\033[96m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+    BG_RED = "\033[41m"
+    BG_GREEN = "\033[42m"
+    BG_YELLOW = "\033[43m"
+    BG_BLUE = "\033[44m"
+
+
+def colorize(text: str, color: str) -> str:
+    """テキストに色を付ける
+
+    Args:
+        text: 色を付けるテキスト
+        color: Colors クラスで定義された色コード
+
+    Returns:
+        色付きテキスト（ターミナルがカラー対応の場合のみ）
+    """
+    # 本番環境では色付けしない
+    if os.getenv("ENV", "local").lower() == "production":
+        return text
+
+    # ターミナルがカラー対応かチェック
+    if hasattr(sys.stdout, "isatty") and sys.stdout.isatty():
+        return f"{color}{text}{Colors.RESET}"
+    return text
+
+
+def red(text: str) -> str:
+    """テキストを赤色で表示する"""
+    return colorize(text, Colors.RED)
+
+
+def green(text: str) -> str:
+    """テキストを緑色で表示する"""
+    return colorize(text, Colors.GREEN)
+
+
+def yellow(text: str) -> str:
+    """テキストを黄色で表示する"""
+    return colorize(text, Colors.YELLOW)
+
+
+def blue(text: str) -> str:
+    """テキストを青色で表示する"""
+    return colorize(text, Colors.BLUE)
+
+
+def magenta(text: str) -> str:
+    """テキストを紫色で表示する"""
+    return colorize(text, Colors.MAGENTA)
+
+
+def cyan(text: str) -> str:
+    """テキストを水色で表示する"""
+    return colorize(text, Colors.CYAN)
+
+
+def bold(text: str) -> str:
+    """テキストを太字で表示する"""
+    return colorize(text, Colors.BOLD)
+
+
+def success(text: str) -> str:
+    """成功メッセージを緑色で表示する"""
+    return green(text)
+
+
+def warning(text: str) -> str:
+    """警告メッセージを黄色で表示する"""
+    return yellow(text)
+
+
+def error(text: str) -> str:
+    """エラーメッセージを赤色で表示する"""
+    return red(text)
+
+
+def highlight(text: str) -> str:
+    """テキストを目立たせる（太字+水色）"""
+    return colorize(text, f"{Colors.BOLD}{Colors.CYAN}")
 
 
 class ColoredFormatter(logging.Formatter):
@@ -219,3 +307,45 @@ if __name__ == "__main__":
         1 / 0
     except ZeroDivisionError:
         logger.error("exception_occurred", exc_info=True)
+
+    # 色付きログユーティリティの使用例
+    logger.info("----- 色付きログユーティリティの使用例 -----")
+    logger.info("通常テキスト + %s + 通常テキスト", red("赤色テキスト"))
+    logger.info("ステータス: %s / %s / %s", success("成功"), warning("警告"), error("エラー"))
+    logger.info("ユーザー %s がログインしました", highlight("admin"))
+    logger.info("青色: %s / 緑色: %s", blue("これは青色のテキスト"), green("これは緑色のテキスト"))
+    logger.info("紫色: %s / 水色: %s", magenta("これは紫色のテキスト"), cyan("これは水色のテキスト"))
+    logger.info("太字: %s", bold("これは太字のテキスト"))
+    logger.info("組み合わせ: %s", bold(red("赤色の太字テキスト")))
+    logger.info("背景色: %s", colorize("警告メッセージ", Colors.BLACK + Colors.BG_YELLOW))
+    logger.info("下線: %s", colorize("重要", Colors.UNDERLINE))
+
+    # 追加の使用例
+    logger.info("----- 実践的な使用例 -----")
+
+    # 基本的な状態表示
+    logger.info("■ 状態表示の例:")
+    logger.info("  ✓ %s: ファイルのアップロードが完了しました", success("成功"))
+    logger.warning("  ⚠ %s: ディスク容量が少なくなっています", warning("警告"))
+    logger.error("  ✗ %s: 接続がタイムアウトしました", error("エラー"))
+
+    # 強調表示
+    logger.info("■ 強調表示の例:")
+    logger.info("ユーザー %s が管理画面にログインしました", highlight("admin"))
+    logger.info("重要な設定: %s", bold("DEBUG_MODE=True"))
+
+    # 複雑な例
+    logger.info("■ 複雑な例:")
+    logger.info("ステータス: [%s] オンライン / [%s] オフライン", green("●"), red("●"))
+    logger.info("進捗状況: %s□□□□□□□□□□ 60%%", colorize("██████████", Colors.GREEN))
+    logger.info("実行時間: %s (前回: %s)", bold(green("152ms")), yellow("165ms"))
+
+    # テーブル形式の例
+    logger.info("■ テーブル形式の例:")
+    logger.info("%s    | %s      | %s", bold("サーバー名"), bold("状態"), bold("レスポンス時間"))
+    logger.info("--------------|-----------|---------------")
+    logger.info("api-server-01 | %s     | %s", green("正常"), green("24ms"))
+    logger.warning("api-server-02 | %s   | %s", yellow("不安定"), yellow("156ms"))
+    logger.error("api-server-03 | %s    | %s", red("エラー"), red("タイムアウト"))
+
+    logger.info("-----------------------------------------")
