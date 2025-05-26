@@ -6,9 +6,12 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, Response
 
 from src.example.solvers import SomeSolver
+from src.logger import LoggingMiddleware
 from src.models import Input, Output
 
 app = FastAPI()
+
+app.add_middleware(LoggingMiddleware)
 
 
 @app.get("/health")
@@ -40,13 +43,14 @@ async def example(request: Request) -> Response:
                 input_: Input = Input(api_name=request_json["api_name"], name=request_json["name"])
                 output_: Output = SomeSolver().process(input=input_)
                 result.append(json.dumps(output_.to_dict()))
-            return Response(content="\n".join(result), media_type="application/jsonl")
+            response_content = "\n".join(result)
+            return Response(content=response_content, media_type="application/jsonl")
         case _:
             request_json = await request.json()
             input__: Input = Input(api_name=request_json["api_name"], name=request_json["name"])
             output__: Output = SomeSolver().process(input=input__)
-
-            return JSONResponse(content=output__.to_dict())
+            response_dict = output__.to_dict()
+            return JSONResponse(content=response_dict)
 
 
 if __name__ == "__main__":

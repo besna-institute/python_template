@@ -1,8 +1,9 @@
-# See https://cspell.org/docs/dictionaries-custom/#custom-dictionaries
+# See https://cspell.org/docs/dictionaries-custom/
 autodocstring
 autoflake
 azcli
 azuretools
+Callsite
 cloudsdktool
 exiasr
 foxundermoon
@@ -11,9 +12,12 @@ hadolint
 jsonify
 jsonlines
 jvmoptions
+levelname
+levelno
 matangover
 mermade
 mhutchie
+msecs
 njpwerner
 OIDC
 openapitools
