@@ -117,6 +117,83 @@ pip freeze >> requirements.in
    - `schema.yaml`の構文が正しいか確認します。
    - Dockerコンテナ内で実行しているか確認します。
 
+## ログの書き方
+
+### 基本的なログ出力
+
+このプロジェクトでは、標準的なPythonの`logging`モジュールを拡張した独自のロギング機能を提供しています。`src.logger`モジュールを使用することで、統一されたフォーマットでログを出力できます。
+
+```python
+from src.logger import logger
+
+# 基本的なログ出力
+logger.debug("デバッグ情報")
+logger.info("通常の情報")
+logger.warning("警告メッセージ")
+logger.error("エラーメッセージ")
+logger.critical("致命的なエラー")
+
+# 追加情報を含むログ
+logger.info("ユーザー情報", extra={"user_id": 123, "username": "test_user"})
+
+# 例外情報を含むログ
+try:
+    1 / 0
+except ZeroDivisionError:
+    logger.error("計算エラーが発生しました", exc_info=True)
+```
+
+### 色付きログメッセージ
+
+開発環境では視認性を高めるため、色付きログメッセージを使用できます。以下のユーティリティ関数を使用して、ログメッセージに色や強調を追加できます。
+
+```python
+from src.logger import logger, red, green, yellow, blue, bold, success, warning, error, highlight
+
+# 色付きメッセージの例
+logger.info("ステータス: %s", success("成功"))
+logger.warning("注意: %s", warning("ディスク容量が少なくなっています"))
+logger.error("エラー: %s", error("データベース接続に失敗しました"))
+
+# 強調表示の例
+logger.info("ユーザー %s が管理画面にログインしました", highlight("admin"))
+logger.info("重要な設定: %s", bold("DEBUG_MODE=True"))
+
+# 複合的な使用例
+logger.info("実行時間: %s (前回: %s)", bold(green("152ms")), yellow("165ms"))
+```
+
+> [!NOTE]
+> 本番環境（`ENV=production`）では、色付けは自動的に無効になり、代わりにGoogle Cloud互換のJSON形式でログが出力されます。これにより、ログ解析システムとの互換性が確保されます。
+
+### 環境別のログ出力
+
+環境変数 `ENV` によってログの出力形式が変わります：
+
+- **開発環境（デフォルト）**: カラー付きの人間が読みやすい形式
+  ```
+  [2025-05-26T07:04:17] INFO    [logger.py:304] app_started
+  ```
+
+- **本番環境（`ENV=production`）**: Google Cloud互換のJSON形式
+  ```json
+  {"timestamp": "2025-05-26T07:03:43.566Z", "severity": "INFO", "message": "app_started", "logging.googleapis.com/sourceLocation": {"file": "logger.py", "line": 304, "function": "<module>"}, "env": "production"}
+  ```
+
+### HTTPリクエストのロギング
+
+FastAPIアプリケーションでHTTPリクエストを自動的にログに記録するには、`LoggingMiddleware`を使用します：
+
+```python
+from fastapi import FastAPI
+from src.logger import LoggingMiddleware
+
+app = FastAPI()
+app.add_middleware(LoggingMiddleware)
+```
+
+これにより、各HTTPリクエストの情報（メソッド、パス、レスポンスコードなど）が自動的にログに記録されます。ヘルスチェックリクエスト（`/health`エンドポイント）はログから除外されます。
+
 ## 保守運用
 
 このテンプレートリポジトリの保守運用に関する詳細は[CONTRIBUTING.md](CONTRIBUTING.md)を参照してください。リリース手順についても同ファイルに記載されています。
