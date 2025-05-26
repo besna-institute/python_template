@@ -5,7 +5,7 @@
 このリポジトリは、Pythonを使用したAPIサーバー開発の効率化を目的としたテンプレートリポジトリです。以下の特徴を持っています：
 
 - FastAPIによる高速なAPIサーバー実装
-- OpenAPIによるAPI定義の自動生成
+- [OpenAPI Generator](https://openapi-generator.tech/)によるコード生成
 - [DevContainer](https://containers.dev/)による開発環境のDockerコンテナ化
 - 依存パッケージの厳密なバージョン管理
 - Python標準ライブラリの`unittest`ですぐにテストを始められる環境
@@ -70,7 +70,7 @@ curl -X POST -H "Content-Type: application/jsonl" localhost:8080/ -d "$DATA"
 
 ## APIの定義
 
-OpenAPIを使用してAPIを定義します。`schema.yaml`にOpenAPIの定義を記述し、以下のコマンドでPythonの [dataclass](https://docs.python.org/ja/3.12/library/dataclasses.html#dataclasses.dataclass) に変換します：
+OpenAPI仕様でAPIを定義し、[OpenAPI Generator](https://openapi-generator.tech/)を使用してPythonコードを自動生成します。`schema.yaml`にOpenAPIの定義を記述し、以下のコマンドでPythonのデータモデルに変換します：
 
 ```bash
 ./scripts/convert_open_api_to_dataclass.sh
@@ -242,17 +242,6 @@ npx cspell --config cspell.json "**" --dot
 3. 変更を保存します。
 
 次回のスペルチェック実行時に、その単語はエラーとして報告されなくなります。
-
-### スペルチェックの設定
-
-スペルチェックの設定は`cspell.json`ファイルで管理されています。主な設定項目：
-
-- `dictionaries`: 使用する辞書のリスト
-- `ignorePaths`: スペルチェックから除外するファイル/ディレクトリ
-- `useGitignore`: `.gitignore`に記載されたパターンを無視するかどうか
-- `dot`: ドット始まりのファイルをチェック対象に含めるかどうか
-
-必要に応じて設定を調整してください。
 
 ### GitHub Actionsでのスペルチェック
 
