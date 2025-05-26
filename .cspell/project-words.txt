@@ -53,6 +53,7 @@ mhutchie
 msecs
 msix
 msvs
+myapi
 mymodule
 mypackage
 namesb
