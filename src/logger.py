@@ -188,7 +188,7 @@ class LoggingMiddleware(BaseHTTPMiddleware):
             request.method,
             request.url.path,
             extra={
-                "http_request": {
+                "httpRequest": {
                     "requestMethod": request.method,
                     "requestUrl": str(request.url),
                     "requestSize": request.headers.get("content-length", ""),
