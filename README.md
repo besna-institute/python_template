@@ -258,6 +258,28 @@ npx cspell --config cspell.json "**" --dot
 
 このプロジェクトではGitHub Actionsを使用して、すべてのブランチへのプッシュ時に自動的にスペルチェックが実行されます。ワークフローは`.github/workflows/spellcheck.yml`で定義されています。
 
+## Dockerfileの構文チェック
+
+このプロジェクトでは、[Hadolint](https://github.com/hadolint/hadolint)を使用してDockerfileの構文チェックを行っています。Hadolintは、Dockerfileのベストプラクティスに基づいたリンターで、潜在的な問題や改善点を自動的に検出します。
+
+### チェック対象のDockerfile
+
+以下のDockerfileが自動チェックの対象となっています：
+
+1. **ルートのDockerfile** - アプリケーションのコンテナ化用
+2. **DevContainer用Dockerfile** - 開発環境用（`.devcontainer/Dockerfile`）
+3. **GPU対応DevContainer用Dockerfile** - GPU開発環境用（`.devcontainer/nvidia-gpu.Dockerfile`）
+
+### GitHub Actionsでの自動チェック
+
+Dockerfileが変更された場合、GitHub Actionsによって自動的にHadolintが実行されます。ワークフローの設定は`.github/workflows/check-dockerfile.yml`で定義されています。
+
+このワークフローには以下の特徴があります：
+
+- Dockerfileが存在しない場合は自動的にチェックをスキップ
+- 各Dockerfileに対して専用のジョブが実行される
+- プッシュおよびプルリクエスト時に自動実行
+
 ## 保守運用
 
 このテンプレートリポジトリの保守運用に関する詳細は[CONTRIBUTING.md](CONTRIBUTING.md)を参照してください。リリース手順についても同ファイルに記載されています。
