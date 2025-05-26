@@ -1,0 +1,39 @@
+name: Check Dockerfile
+on:
+  push:
+    paths:
+      - .devcontainer/**Dockerfile
+  pull_request_target:
+    paths:
+      - .devcontainer/**Dockerfile
+jobs:
+  devContainers:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v4
+      - id: check_dockerfile
+        run: |
+          if [ -f ".devcontainer/Dockerfile" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+      - uses: hadolint/hadolint-action@v3.1.0
+        if: steps.check_dockerfile.outputs.exists == 'true'
+        with:
+          dockerfile: .devcontainer/Dockerfile
+  devContainersGpu:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v4
+      - id: check_dockerfile
+        run: |
+          if [ -f ".devcontainer/nvidia-gpu.Dockerfile" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+      - uses: hadolint/hadolint-action@v3.1.0
+        if: steps.check_dockerfile.outputs.exists == 'true'
+        with:
+          dockerfile: .devcontainer/nvidia-gpu.Dockerfile
