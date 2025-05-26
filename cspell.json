@@ -12,8 +12,8 @@
     }
   ],
   "ignorePaths": [
-    "**__pycache__**",
     "./project-words.txt",
-    "**/requirements.*"
-  ]
+    ".git/**"
+  ],
+  "useGitignore": true
 }
