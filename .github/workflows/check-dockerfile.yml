@@ -3,10 +3,30 @@ on:
   push:
     paths:
       - .devcontainer/**Dockerfile
+      - Dockerfile
   pull_request_target:
     paths:
       - .devcontainer/**Dockerfile
+      - Dockerfile
 jobs:
+  rootDockerfile:
+    name: ルートDockerfileのチェック（Dockerfile）
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: actions/checkout@v4
+      - id: check_dockerfile
+        name: ファイルの存在確認（Dockerfile）
+        run: |
+          if [ -f "Dockerfile" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+      - uses: hadolint/hadolint-action@v3.1.0
+        name: Hadolintでの構文チェック（Dockerfile）
+        if: steps.check_dockerfile.outputs.exists == 'true'
+        with:
+          dockerfile: Dockerfile
   devContainers:
     name: 標準Dockerfileのチェック（.devcontainer/Dockerfile）
     runs-on: "ubuntu-latest"
