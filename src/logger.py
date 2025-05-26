@@ -138,7 +138,11 @@ def configure_logging() -> None:
         handler.setFormatter(ColoredFormatter(fmt=fmt, datefmt="%Y-%m-%dT%H:%M:%S"))
 
     root = logging.getLogger()
-    root.setLevel(logging.INFO)
+    if env == "production":
+        root.setLevel(logging.INFO)
+    else:
+        # ローカル環境ではDEBUGレベル以上のログを出力
+        root.setLevel(logging.DEBUG)
     root.handlers.clear()
     root.addHandler(handler)
 
