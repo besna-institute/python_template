@@ -1,0 +1,57 @@
+---
+description: リリース作成、バージョン管理、GitHubリリース公開の手順ガイド
+globs: 
+alwaysApply: false
+---
+# リリース作成ガイド
+
+詳細な手順は [CONTRIBUTING.md](mdc:CONTRIBUTING.md) のリリース手順セクションを参照してください。
+
+## 重要な注意事項
+- リリースブランチのマージはGitHubのUIで行う
+- リリースノートはGitHubのUIで作成する
+
+## バージョンファイルの場所
+- テンプレートバージョン: `.github/scripts/currentVersion.js`
+
+## バージョニング規則
+[Semantic Versioning (semver)](mdc:https:/semver.org) を採用しています：
+
+### フォーマット: MAJOR.MINOR.PATCH
+
+バージョン番号は `v{MAJOR}.{MINOR}.{PATCH}` の形式で構成されます：
+
+#### 各数字の意味
+1. **MAJOR（メジャー）**: 最初の数字
+   - 破壊的変更（Breaking Changes）があるときにインクリメント
+   - 既存のAPIやインターフェースが変更され、後方互換性がない
+
+2. **MINOR（マイナー）**: 真ん中の数字
+   - 新機能追加時にインクリメント
+   - 後方互換性を保ちながら機能を追加
+
+3. **PATCH（パッチ）**: 最後の数字
+   - バグ修正時にインクリメント
+   - 後方互換性を保ちながらバグを修正
+
+#### リリースタイプと例
+- **パッチリリース** (v1.0.1): バグフィックスのみ
+- **マイナーリリース** (v1.1.0): 新機能追加、後方互換性あり
+- **メジャーリリース** (v2.0.0): 破壊的変更あり
+
+#### インクリメントのルール
+- MAJOR が上がるとき → MINOR と PATCH は 0 にリセット
+- MINOR が上がるとき → PATCH は 0 にリセット
+- PATCH が上がるとき → 他の数字は変更なし
+
+## リリースノート自動生成設定
+[.github/release.yml](mdc:.github/release.yml) で以下のラベル分類が設定済み：
+- ⚠ Breaking Changes (`breaking-change` ラベル)
+- 🎉 New Features (`enhancement` ラベル)  
+- 🛠 Bug Fixes (`bug` ラベル)
+- Other Changes (その他全て)
+
+## 関連ファイル
+- [CONTRIBUTING.md](mdc:CONTRIBUTING.md) - 詳細な手順
+- [.github/release.yml](mdc:.github/release.yml) - リリースノート設定
+- [.github/scripts/currentVersion.js](mdc:.github/scripts/currentVersion.js) - テンプレートバージョン
