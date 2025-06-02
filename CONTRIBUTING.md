@@ -47,9 +47,17 @@ git checkout -b release/vx.x.x
 git push origin release/vx.x.x
 ```
 
-4. プルリクエストを作成し、すべてのCIが通ることを確認します。
+4. `.github/scripts/currentVersion.js` のバージョンを更新し、コミットします。
+```bash
+# ファイルを編集してバージョンを更新
+git add .github/scripts/currentVersion.js
+git commit -m "chore: bump version to vx.x.x"
+git push origin release/vx.x.x
+```
 
-5. 新しいリリースを作成します。
+5. プルリクエストを作成し、すべてのCIが通ることを確認します。
+
+6. 新しいリリースを作成します。
 
 https://github.com/besna-institute/python_template/releases/new から作成します。
 
@@ -59,7 +67,7 @@ https://github.com/besna-institute/python_template/releases/new から作成し�
 
 リリースノートを記入したら、"Publish release"を押します。
 
-6. プルリクエストを main ブランチにマージします。
+7. プルリクエストを main ブランチにマージします。
 
 ## コントリビューションのガイドライン
 
