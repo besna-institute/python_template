@@ -118,6 +118,11 @@ pip freeze >> requirements.in
    - `schema.yaml`の構文が正しいか確認します。
    - Dockerコンテナ内で実行しているか確認します。
 
+4. **起動時にPythonに関するエラーが毎回出る**
+   - Cursor起動時に「In order to use Anysphere Python, `ms-python.vscode-pylance` must be uninstalled.」というエラーが毎回表示される場合があります。
+   - これは `ms-python.vscode-pylance` と `anysphere.cursorpyright` の拡張機能が両方インストールされていることが原因です。
+   - 解決方法：拡張機能 `anysphere.cursorpyright` をアンインストールしてください。（`anysphere.cursorpyright` は推奨する拡張機能には含まれていません）
+
 ## ログの書き方
 
 ### 基本的なログ出力

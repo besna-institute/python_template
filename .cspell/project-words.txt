@@ -4,6 +4,7 @@ alstr
 Analyse
 analysed
 anydbm
+Anysphere
 apdisk
 astextplain
 autodocstring
@@ -20,6 +21,7 @@ cloudsdktool
 Connor
 cuda
 CUDNN
+cursorpyright
 deadsnakes
 devcontainers
 dmypy
