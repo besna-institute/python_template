@@ -20,16 +20,18 @@
 
 ### 必要な環境
 
-> [!IMPORTANT]
-> [VSCode](https://azure.microsoft.com/ja-jp/products/visual-studio-code/) による開発を**推奨**します。
-
-- [VSCode](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)
+- [VSCode](https://azure.microsoft.com/ja-jp/products/visual-studio-code/) または [Cursor](https://cursor.sh/) （**推奨**）
 - [Docker](https://docs.docker.com/get-docker/)
+
+> [!NOTE]
+> **Cursor使用時の追加支援機能**
+> 
+> Cursorを使用している場合、`.cursor/rules`に定義されたプロジェクト固有のルールによって、開発プロセスに関する質問や作業において適切なガイダンスを受けることができます。これにより、プロジェクト固有の開発フローや品質基準に沿った作業を効率的に進めることができます。
 
 ### 開発環境のセットアップ
 
-1. VSCodeの拡張機能[Visual Studio Code Remote Containers](https://code.visualstudio.com/docs/remote/containers)をインストールします。
-2. コマンドパレットを開き、`Remote-Containers: Reopen in Container`を選択します。
+1. VSCode または Cursor の拡張機能[Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)をインストールします。
+2. コマンドパレットを開き、`Dev Containers: Reopen in Container`を選択します。
 
 ### ローカルでの開発
 
@@ -108,7 +110,7 @@ pip freeze >> requirements.in
 
 1. **コンテナが起動しない**
    - Dockerが正しくインストールされているか確認します。
-   - VSCodeのRemote Containers拡張機能が最新版か確認します。
+   - VSCodeまたはCursorのDev Containers拡張機能が最新版か確認します。
 
 2. **依存パッケージのインストールに失敗**
    - `requirements.in`のバージョン指定が正しいか確認します。
@@ -118,7 +120,7 @@ pip freeze >> requirements.in
    - `schema.yaml`の構文が正しいか確認します。
    - Dockerコンテナ内で実行しているか確認します。
 
-4. **起動時にPythonに関するエラーが毎回出る**
+4. **起動時にPythonに関するエラーが毎回出る（Cursor使用時）**
    - Cursor起動時に「In order to use Anysphere Python, `ms-python.vscode-pylance` must be uninstalled.」というエラーが毎回表示される場合があります。
    - これは `ms-python.vscode-pylance` と `anysphere.cursorpyright` の拡張機能が両方インストールされていることが原因です。
    - 解決方法：拡張機能 `anysphere.cursorpyright` をアンインストールしてください。（`anysphere.cursorpyright` は推奨する拡張機能には含まれていません）
