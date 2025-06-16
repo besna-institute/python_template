@@ -104,6 +104,12 @@ pip freeze >> requirements.in
 ./scripts/generate_lockfile.sh
 ```
 
+### Dependabot による自動更新
+
+このプロジェクトでは、Dependabot が月次で依存パッケージの更新を自動的に行います。Dependabot が作成したPRのマージとリリースについては、一貫性のあるガイドラインに従って実施してください。
+
+詳細は [CONTRIBUTING.md](CONTRIBUTING.md) の「Dependabot による自動更新」セクションを参照してください。
+
 ## トラブルシューティング
 
 ### よくある問題
