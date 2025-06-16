@@ -199,7 +199,7 @@ typing-inspection==0.4.0
     # via pydantic
 urllib3==2.4.0
     # via requests
-uvicorn==0.34.2
+uvicorn==0.34.3
     # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
