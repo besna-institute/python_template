@@ -21,16 +21,16 @@ flake8-comprehensions~=3.16
 flake8-implicit-str-concat~=0.5
 flake8-use-pathlib~=0.3
 isort~=6.0
-mypy~=1.15
+mypy~=1.16
 pep8-naming~=0.14
 pylint~=3.3
-pyupgrade~=3.19
+pyupgrade~=3.20
 
 # Test
 jsonschema~=4.23
 pyyaml~=6.0
 
 # Google Cloud
-google-cloud-storage~=2.16
+google-cloud-storage~=3.1
 
 ### additional deps ###
