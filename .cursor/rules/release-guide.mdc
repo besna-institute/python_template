@@ -70,6 +70,28 @@ https://github.com/[OWNER]/[REPO]/releases/tag/vx.x.x
 - 🛠 Bug Fixes (`bug` ラベル)
 - Other Changes (その他全て)
 
+## Dependabot PR処理ルール
+
+dependabotのPRマージ・リリースに関するAI支援用のルール。詳細な手順は[CONTRIBUTING.md](mdc:CONTRIBUTING.md)の「Dependabot による自動更新」セクションを参照。
+
+### 基本原則
+
+- dependabotのPRは直接mainにマージしない
+- 必ずリリースブランチ `release/vx.x.x` を経由
+- GitHub UIですべての操作を完結
+- **依存関係更新と機能リリースは分離する（強く推奨）**
+
+### ワークフロー
+
+1. リリースブランチ作成
+2. dependabot PR振り向け先変更
+3. リリースブランチにマージ
+4. バージョン更新
+5. GitHubリリース作成
+6. mainブランチにマージ
+
+詳細な手順やUI操作については必ずCONTRIBUTING.mdを参照すること。
+
 ## 関連ファイル
 - [CONTRIBUTING.md](mdc:CONTRIBUTING.md) - 詳細な手順
 - [.github/release.yml](mdc:.github/release.yml) - リリースノート設定
