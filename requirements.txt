@@ -35,7 +35,7 @@ click==8.2.0
     #   uvicorn
 dill==0.4.0
     # via pylint
-fastapi==0.115.12
+fastapi==0.115.14
     # via -r requirements.in
 flake8==7.2.0
     # via
