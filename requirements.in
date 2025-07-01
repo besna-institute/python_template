@@ -6,7 +6,7 @@
 
 ### common deps ###
 fastapi~=0.115
-uvicorn~=0.34
+uvicorn~=0.35
 pydantic~=2.11
 # Linter / Formatter
 autoflake~=2.3
