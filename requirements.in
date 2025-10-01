@@ -5,7 +5,7 @@
 #
 
 ### common deps ###
-fastapi~=0.115
+fastapi~=0.118
 uvicorn~=0.34
 pydantic~=2.11
 # Linter / Formatter
